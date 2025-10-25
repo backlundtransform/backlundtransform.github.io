@@ -3,97 +3,101 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Göran Bäcklund – Portfolio</title>
-  <link rel="icon" href="https://github.githubassets.com/favicons/favicon.png">
-  <style>
-    :root {
-      --bg: #0f1724;
-      --card: #1a2435;
-      --text: #e6eef6;
-      --muted: #9aa4b2;
-      --accent: #4f46e5;
-    }
-    body {
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      text-align: center;
-      padding: 60px 20px;
-      margin: 0;
-      line-height: 1.6;
-    }
-    img {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
-      margin-bottom: 20px;
-    }
-    h1 {
-      font-size: 2.2rem;
-      margin-bottom: 0.4em;
-    }
-    p {
-      max-width: 600px;
-      margin: 0.5em auto;
-      color: var(--muted);
-    }
-    a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    .links {
-      margin-top: 2em;
-    }
-    .button {
-      display: inline-block;
-      margin: 0.5em;
-      padding: 0.8em 1.4em;
-      border-radius: 8px;
-      background: var(--accent);
-      color: white;
-      font-weight: 500;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-    .button:hover {
-      background: #3d36c3;
-    }
-    footer {
-      margin-top: 3em;
-      font-size: 0.9em;
-      color: var(--muted);
-    }
-  </style>
+  <title>Portfolio – Backlund Transform</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <img src="img/jag.png" alt="Porträtt av Göran Bäcklund">
+<body class="bg-slate-950 text-white p-8 min-h-screen">
 
+  <header class="text-center mb-12">
+    <div class="relative w-72 h-24 mx-auto mb-4">
+      <img src="img/logo.png" alt="Logo" class="object-contain w-full h-full">
+    </div>
+    <p class="text-slate-300 text-lg max-w-2xl mx-auto">
+      Jag förvandlar komplexa idéer till tydliga insikter – från teori till kod.
+    </p>
+    <div class="mt-6 flex justify-center gap-4">
+      <a href="/cv.pdf" download class="bg-indigo-500 hover:bg-indigo-600 text-white font-medium py-2 px-4 rounded-lg transition">
+        Ladda ner CV
+      </a>
+    </div>
+  </header>
 
-  <h1>Göran Bäcklund</h1>
-  <p><strong>Systemutvecklare & Dataingenjör</strong></p>
+  <section class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
 
-  <p>
-    Jag arbetar som IT-konsult med fokus på datadrivna lösningar, 
-    systemutveckling och maskininlärning.  
-    Tidigare har jag deltagit i forskningsprojekt och utvecklat 
-    applikationer inom IoT, GIS och industriell analys.
-  </p>
+    <div class="bg-slate-900 border-slate-800 hover:shadow-xl transition p-6">
+      <h2 class="text-xl font-semibold mb-2 text-cyan-400">ExoplanetHunter</h2>
+      <p class="text-slate-300 mb-4">Ett projekt som kombinerar dataanalys och visualisering för att identifiera och simulera exoplanetsystem.</p>
+      <div class="flex flex-wrap gap-2 mb-4">
+        <span class="bg-slate-800 text-xs px-2 py-1 rounded-full text-slate-200">Python</span>
+        <span class="bg-slate-800 text-xs px-2 py-1 rounded-full text-slate-200">React</span>
+        <span class="bg-slate-800 text-xs px-2 py-1 rounded-full text-slate-200">Three.js</span>
+        <span class="bg-slate-800 text-xs px-2 py-1 rounded-full text-slate-200">Astronomi</span>
+      </div>
+      <a href="https://exoplanethunter.com/" class="text-cyan-400 hover:underline text-sm">Visa mer</a>
+    </div>
 
-  <div class="links">
-    <a href="cv.pdf" class="button">📄 Ladda ner mitt CV</a>
-    <a href="https://exoplanethunter.com" class="button" target="_blank">🔭 Exoplanet Hunter</a>
-    <a href="kvantdatorer/kvantdatorer.html" class="button">⚛️ Kvantdatorer</a>
-  </div>
+    <div class="bg-slate-900 border-slate-800 hover:shadow-xl transition p-6">
+      <h2 class="text-xl font-semibold mb-2 text-cyan-400">Grouped Time Series CV</h2>
+      <p class="text-slate-300 mb-4">Ett verktyg för validering av grupperade tidsseriemodeller, utvecklat för mer robust maskininlärning.</p>
+      <div class="flex flex-wrap gap-2 mb-4">
+        <span class="bg-slate-800 text-xs px-2 py-1 rounded-full text-slate-200">Machine Learning</span>
+        <span class="bg-slate-800 text-xs px-2 py-1 rounded-full text-slate-200">Python</span>
+        <span class="bg-slate-800 text-xs px-2 py-1 rounded-full text-slate-200">Data Science</span>
+      </div>
+      <a href="https://github.com/zenta-ab/grouped_timeserie_cv" class="text-cyan-400 hover:underline text-sm">Visa mer</a>
+    </div>
 
-  <footer>
-  
-    © 2025 Göran Bäcklund – <a href="https://github.com/backlundtransform">GitHub</a>
+    <div class="bg-slate-900 border-slate-800 hover:shadow-xl transition p-6">
+      <h2 class="text-xl font-semibold mb-2 text-cyan-400">Quantum Computing Research</h2>
+      <p class="text-slate-300 mb-4">Ett forskningsprojekt där kvantdatorers potential för optimeringsproblem utforskades.</p>
+      <div class="flex flex-wrap gap-2 mb-4">
+        <span class="bg-slate-800 text-xs px-2 py-1 rounded-full text-slate-200">Quantum Computing</span>
+        <span class="bg-slate-800 text-xs px-2 py-1 rounded-full text-slate-200">Python</span>
+        <span class="bg-slate-800 text-xs px-2 py-1 rounded-full text-slate-200">Research</span>
+      </div>
+      <a href="kvantdatorer/kvantdatorer.html" class="text-cyan-400 hover:underline text-sm">Visa mer</a>
+    </div>
+
+    <div class="bg-slate-900 border-slate-800 hover:shadow-xl transition p-6">
+      <h2 class="text-xl font-semibold mb-2 text-cyan-400">CSharpNumerics</h2>
+      <p class="text-slate-300 mb-4">Ett C#-bibliotek för numerisk analys med fokus på effektivitet och precision i vetenskapliga beräkningar.</p>
+      <div class="flex flex-wrap gap-2 mb-4">
+        <span class="bg-slate-800 text-xs px-2 py-1 rounded-full text-slate-200">C#</span>
+        <span class="bg-slate-800 text-xs px-2 py-1 rounded-full text-slate-200">Numerisk analys</span>
+        <span class="bg-slate-800 text-xs px-2 py-1 rounded-full text-slate-200">.NET</span>
+      </div>
+      <a href="https://github.com/backlundtransform/CSharpNumerics" class="text-cyan-400 hover:underline text-sm">Visa mer</a>
+    </div>
+
+    <div class="bg-slate-900 border-slate-800 hover:shadow-xl transition p-6">
+      <h2 class="text-xl font-semibold mb-2 text-cyan-400">CFD Examensarbete</h2>
+      <p class="text-slate-300 mb-4">Examensarbete inom CFD-simuleringar med fokus på fluidmekanik och numerisk modellering.</p>
+      <div class="flex flex-wrap gap-2 mb-4">
+        <span class="bg-slate-800 text-xs px-2 py-1 rounded-full text-slate-200">CFD</span>
+        <span class="bg-slate-800 text-xs px-2 py-1 rounded-full text-slate-200">Fysik</span>
+        <span class="bg-slate-800 text-xs px-2 py-1 rounded-full text-slate-200">Numerisk simulering</span>
+      </div>
+      <a href="https://www.diva-portal.org/smash/record.jsf?pid=diva2%3A401523&dswid=619" class="text-cyan-400 hover:underline text-sm">Visa mer</a>
+    </div>
+
+    <div class="bg-slate-900 border-slate-800 hover:shadow-xl transition p-6">
+      <h2 class="text-xl font-semibold mb-2 text-cyan-400">East Sweden Hack – Reseplanerare</h2>
+      <p class="text-slate-300 mb-4">Bidrag till East Sweden Hack: en intelligent reseplanerare som kombinerar öppna data med användarpreferenser.</p>
+      <div class="flex flex-wrap gap-2 mb-4">
+        <span class="bg-slate-800 text-xs px-2 py-1 rounded-full text-slate-200">Hackathon</span>
+        <span class="bg-slate-800 text-xs px-2 py-1 rounded-full text-slate-200">Open Data</span>
+        <span class="bg-slate-800 text-xs px-2 py-1 rounded-full text-slate-200">Java</span>
+      </div>
+      <a href="https://eastswedenhack.se/esh13/live" class="text-cyan-400 hover:underline text-sm">Visa mer</a>
+    </div>
+
+  </section>
+
+  <footer class="text-center text-slate-500 mt-16">
+    <p>© 2025 Backlund Transform — From theory to code.</p>
+    <p><a href="https://github.com/backlundtransform" class="hover:underline">GitHub</a></p>
+    <p><a href="https://www.linkedin.com/in/g%C3%B6ran-b%C3%A4cklund-b4343b3b/" class="hover:underline">LinkedIn</a></p>
   </footer>
+
 </body>
 </html>
