@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kompetensdag — Kvantdatorer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-white p-8 min-h-screen">
+
+  <div class="max-w-3xl mx-auto bg-slate-800 rounded-xl shadow-lg p-8">
+    
+    <a href="/" class="text-indigo-500 hover:underline mb-4 inline-block">
+      ← Tillbaka till portföljen
+    </a>
+
+    <!-- Header -->
+    <header class="mb-8">
+      <h1 class="text-3xl font-bold text-white mb-2">
+        Kompetensdag — Kvantdatorer (2021-11-26)
+      </h1>
+      <p class="text-gray-400 text-lg">
+        Föreläsning och anteckningar från Zenta AB:s kompetensdag. Klicka på videon för att spela upp inspelningen.
+      </p>
+    </header>
+
+    <!-- Video -->
+    <div class="relative pb-[56.25%] h-0 rounded-lg overflow-hidden shadow-lg mb-8">
+      <iframe
+        class="absolute top-0 left-0 w-full h-full"
+        src="https://www.youtube.com/embed/jRePA15vkHk?si=IIf11pHxPBVrf2zY"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+    <!-- Sammanfattning -->
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-2">Sammanfattning av innehåll</h2>
+      <div class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+        <ul class="list-disc list-inside text-gray-400">
+          <li>Del 1: Introduktion till kvantteori — dubbelspalt, mätproblem, Köpenhamnstolkningen, Schrödingers katt och EPR-paradoxen.</li>
+          <li>Del 2: Kvantdatorer — qubits och kvantprocessorer (ion trap, superconducting, linear optical), kvantkretsar och kvantalgoritmer (Grover, Shor).</li>
+          <li>Tekniska utmaningar: brus, decoherence och felkorrigering. Kort översikt över aktörer och aktuella kvantstorlekar.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Länkar -->
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-2">Länkar</h2>
+      <ul class="list-disc list-inside text-gray-400">
+        <li>
+          GitHub — övningar och exempel: 
+          <a href="https://github.com/backlundtransform/QuantumCircuit" target="_blank" class="text-indigo-400 hover:underline">backlundtransform/QuantumCircuit</a>
+        </li>
+        <li>
+          Hela portföljen: 
+          <a href="https://backlundtransform.github.io/" target="_blank" class="text-indigo-400 hover:underline">backlundtransform.github.io</a>
+        </li>
+        <li>
+          Föreläsningsanteckningar: 
+          <a href="Kvantdatorer.pptx" target="_blank" class="text-indigo-400 hover:underline">Kvantdatorer.pptx</a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Snabbinfo -->
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-2">Snabbinfo</h2>
+      <p><strong>Event:</strong> Kompetensdag, Zenta AB — 2021-11-26</p>
+      <p><strong>Föreläsare:</strong> Göran Bäcklund</p>
+      <div class="mt-4 flex gap-2 flex-wrap">
+        <a href="https://github.com/backlundtransform/QuantumCircuit" target="_blank" class="bg-indigo-500 hover:bg-indigo-600 text-white font-medium py-2 px-4 rounded-lg transition">Övningar på GitHub</a>
+        <a href="https://backlundtransform.github.io/" target="_blank" class="bg-indigo-500 hover:bg-indigo-600 text-white font-medium py-2 px-4 rounded-lg transition">Till portföljen</a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center text-gray-500 text-sm mt-8">
+      © 2025 Göran Bäcklund — 
+      <a href="https://github.com/backlundtransform" target="_blank" class="text-indigo-400 hover:underline">GitHub</a>
+    </footer>
+
+  </div>
+
+</body>
+</html>
