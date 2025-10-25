@@ -1,0 +1,41 @@
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  color: #222;
+}
+
+h1, h2, h3 {
+  color: #003366;
+  margin-top: 1.2em;
+}
+
+a {
+  color: #0044cc;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 1.5rem 0;
+}
+
+button, .pdf-button {
+  display: inline-block;
+  background-color: #003366;
+  color: white;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  margin-top: 1rem;
+}
+
+.pdf-button:hover {
+  background-color: #002244;
+}

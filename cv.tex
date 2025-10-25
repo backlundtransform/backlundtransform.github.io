@@ -1,0 +1,222 @@
+%!TEX TS-program = xelatex
+\documentclass[]{friggeri-cv}
+\usepackage{afterpage}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{smartdiagram}
+\usepackage{fontspec}
+% if you want to add fontawesome package
+% you need to compile the tex file with LuaLaTeX
+% References:
+%   http://texdoc.net/texmf-dist/doc/latex/fontawesome/fontawesome.pdf
+%   https://www.ctan.org/tex-archive/fonts/fontawesome?lang=en
+%\usepackage{fontawesome}
+\usepackage{metalogo}
+\usepackage{dtklogos}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{mindmap,shadows}
+\hypersetup{
+    pdftitle={},
+    pdfauthor={},
+    pdfsubject={},
+    pdfkeywords={},
+    colorlinks=false,           % no lik border color
+    allbordercolors=white       % white border color for all
+}
+\smartdiagramset{
+    bubble center node font = \footnotesize,
+    bubble node font = \footnotesize,
+    % specifies the minimum size of the bubble center node
+    bubble center node size = 0.5cm,
+    %  specifies the minimum size of the bubbles
+    bubble node size = 0.5cm,
+    % specifies which is the distance among the bubble center node and the other bubbles
+    distance center/other bubbles = 0.3cm,
+    % sets the distance from the text to the border of the bubble center node
+    distance text center bubble = 0.5cm,
+    % set center bubble color
+    bubble center node color = pblue,
+    % define the list of colors usable in the diagram
+    set color list = {lightgray, materialcyan, orange, green, materialorange, materialteal, materialamber, materialindigo, materialgreen, materiallime},
+    % sets the opacity at which the bubbles are shown
+    bubble fill opacity = 0.6,
+    % sets the opacity at which the bubble text is shown
+    bubble text opacity = 0.5,
+}
+
+\addbibresource{bibliography.bib}
+\RequirePackage{xcolor}
+\definecolor{pblue}{HTML}{0395DE}
+
+\begin{document}
+\header{Göran}{Bäcklund}
+      {Systemutvecklare / Dataingenjör}
+      
+% Fake text to add separator      
+\fcolorbox{white}{gray}{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{%
+.....
+}}
+
+% In the aside, each new line forces a line break
+\begin{aside}
+  \includegraphics[scale=0.10]{img/jag.png}
+  \section{Address}
+    Pärlagerkvistsväg 8 
+    352 43 Växjö
+    ~
+  \section{Tel}
+   076-345 03 62
+    ~
+  \section{Mail}
+    \href{mailto:gbanm06@gmail.com}{\textbf{gbanm06}}
+    ~
+  \section{Git}
+    \href{https://github.com/backlundtransform}{backlundtransform}
+    ~
+  % use  \hspace{} or \vspace{} to change bubble size, if needed
+  \section{Programmering}
+    \smartdiagram[bubble diagram]{
+        \textbf{\hspace{3ex}C\#\hspace{3ex}},
+        \textbf{PHP},
+        \textbf{Java},
+        
+       \textbf{Typescript},
+       \textbf{VB},
+        \textbf{\vspace{-3ex}Python\vspace{-1ex}}
+        
+
+    }
+    ~
+  \section{Personliga egenskaper}
+    \smartdiagram[bubble diagram]{
+          \textbf{Analytisk},
+        \textbf{Pedagogisk},
+        \textbf{Nyfikenhet},
+        \textbf{Ambitiös},
+        \textbf{Strukturerad},
+         \textbf{Kundfokus}
+    }
+\end{aside}
+~
+\section{Erfarenhet}
+\begin{entrylist}
+  \entry
+    {jun 2015 - nu}
+    {IT-konsult}
+    {Zenta AB}
+    {
+Arbetar som konsult på en digitaliseringsbyrå: \newline 
+
+ \textbf{DHI}, expertkonsult för utvecklingen av Future City Flow och dess relaterade projekt. Plattformarna analyserar regn och dess effekter på avloppssystem genom att integrera GIS-tjänster för att visualisera hydrologiska data i kartapplikationer. Jag var ansvarig för utvecklingen av ett dataanalysverktyg som utför beräkningar på tidsseriedata för att ta fram KPI-värden för tänkta åtgärder på ledningssystemen.
+Jag har även utvecklat ett hydroövervakningssystem som används av en stor aktör inom kärnkraftsindustrin\newline
+
+ \textbf{RISE},jag deltog i ett forskningsprojekt inom maskininlärning där vi samlade in data från sensorer installerade i glasbrukens smältugnar. Syftet var att använda denna data för att göra prediktioner om glaskvaliteten. För att bygga och träna modellerna använde vi oss av Scikit-learn och Keras\newline
+
+  \textbf{Bryne}, utveckling av ett analysverktyg för att beräkna fluidity index för gjutformar\newline
+  
+  \textbf{Optigrow}, utveckling av en mobilapplikation som används för att övervaka processer på maskiner\newline
+
+  \textbf{Atea logistic}, utveckling av en portal som integrerar med kundens interna säljstödssystem. En modul har utvecklats för att kunna söka i stora datamängder, som fungerar som prisjakt. Ravendb och Azure search används för att optimera sökningarna
+ }
+ \entry
+    {jan 2021 - nu}
+    {Projekt koordinator}
+    {Mattecentrum}
+    {Projekt koordinator för de fysiska räknestugorna i Växjö och styrelse ordförande för den lokala föreningen}
+  \entry
+    {mars 2015 - jun 2015}
+    {Systemutvecklare}
+    {Office IT-Partner}
+    {Jag utvecklade en hybrid-mobilapplikation för företagets ärendehanteringssystem och hjälpte till att migrera databasen till deras nya system}
+    \entry
+    {dec 2013 - dec 2014}
+    {IT pedagog}
+    {Folkuniversitetet}
+    {Deltidsanställd som IT-lärare inom Office-paketet på arbetsmarknadsutbildningen ”Korta vägen” för nyanlända akademiker. Arbetade även som cirkelledare på data-utbildning för seniorer och i kalkylering med Excel }
+    \entry
+    {jan 2010 - jan 2011}
+    {Avhandlingsarbete inom teknisk fysik}
+    {Fläktwoods AB}
+    {Datasimuleringar (FEM) utfördes med Comsol multiphysics på en tvåstegs axialfläkt med sikte på att förbättra effektiviteten och minska ljudet från fläkten}
+\end{entrylist}
+\pagebreak 
+\section{Utbildning}
+\begin{entrylist}
+   \entry
+    {2014 - 2015}
+    {Yrkesutbildning inom .Net utveckling}
+    {Lexicon}
+    {Kurser i webbutveckling .Net MVC, Entity framework SQL, Angularjs och bootstrap}
+  \entry
+    {2006 - 2011}
+    {MSc i fysik}
+    {Linnesuniversitet}
+    {Fysik 135 hp, Matematik 82.5 hp, Datavetenskap 30 hp}
+  \entry
+    {2004 - 2005}
+    {Teknisktbasår}
+    {Forum Ystad}
+    {Kurser i matematik, fysik, kemi och programmering}
+\end{entrylist}
+
+
+\begin{aside}
+~
+~
+~
+  \section{Industriell kunskap}
+    \smartdiagram[bubble diagram]{
+     \textbf{\hspace{2ex}Webb\hspace{2ex}},
+     \textbf{IoT},
+     \textbf{Industri 4.0},
+     \textbf{\hspace{1ex}AI / ML \hspace{1ex}},
+      \textbf{CAD/CFD},
+    \textbf{\hspace{2ex}Mobil\hspace{2ex}},
+ \textbf{\hspace{2ex}\vspace{-2ex}GIS\hspace{2ex}}
+       
+    }
+    ~
+  \section{Verktyg}
+    \textbf{Azure}\includegraphics[scale=0.40]{img/5stars.png}
+    \textbf{Vs}\includegraphics[scale=0.40]{img/5stars.png}
+      \textbf{MsSQL}\includegraphics[scale=0.40]{img/4stars.png}
+    \textbf{Git}\includegraphics[scale=0.40]{img/4stars.png}
+    ~
+  \section{Språk}
+    \textbf{Svenska}\includegraphics[scale=0.40]{img/5stars.png}
+    \textbf{Engelska}\includegraphics[scale=0.40]{img/4stars.png}
+    ~
+\end{aside}
+
+\section{Volontärarbete}
+\begin{entrylist}
+   \entry
+    {sep 2013 - nu}
+    {Matematik lärare}
+    {Mattecentrum}
+    {Volontärarbete med att hjälpa elever med matematik uppgifter}
+\end{entrylist}
+\section{Tävlingar}
+\begin{entrylist}
+  \entry
+    {sep 2013}
+    {Hackathon}
+    {East Sweden Hack}
+    {Android app som kan hitta närmaste busshållplatser baserat på geografisk plats}
+\end{entrylist}
+
+\section{Certifieringar}
+\begin{entrylist}
+  \entry
+    {dec 2015}
+    {Ucommerce/Umbraco Certifiering}
+    {Ucommerce}
+        {}
+\end{entrylist}
+\section{Hobby}
+{
+Jag har sedan länge ett intresse för amatör astronomi och utvecklat applikationer som används för att visualisera stjärnhimlen}
+\\
+\end{document}

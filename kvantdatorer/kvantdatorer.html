@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kompetensdag — Kvantdatorer (2021-11-26) | Göran Bäcklund</title>
+  <meta name="description" content="Föreläsningsanteckningar och inspelning från Zenta AB:s kompetensdag om kvantdatorer, 26 november 2021. Kodexempel och övningar finns på GitHub.">
+  <link rel="icon" href="https://github.githubassets.com/favicons/favicon.png">
+  <style>
+    :root {
+      --bg: #0f1724;
+      --card: #1a2435;
+      --text: #e6eef6;
+      --muted: #9aa4b2;
+      --accent: #4f46e5;
+    }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 40px 20px;
+      line-height: 1.6;
+    }
+    .wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--card);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      padding: 30px 40px;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-top: 0;
+      color: var(--text);
+    }
+    h2 {
+      margin-top: 1.8em;
+      color: var(--text);
+      font-size: 1.3rem;
+    }
+    p, li {
+      color: var(--muted);
+    }
+    .lead {
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .video-wrap {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 1em 0;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+    .video-wrap iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-top: 1.2em;
+    }
+    ul {
+      margin: 0.5em 0 1em 1.5em;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 0.6em 1.2em;
+      border-radius: 8px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn:hover {
+      background: #3d36c3;
+    }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9em;
+      margin-top: 3em;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1em;
+      color: var(--accent);
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a href="../" class="back-link">← Tillbaka till portföljen</a>
+
+    <header>
+      <h1>Kompetensdag — Kvantdatorer (2021-11-26)</h1>
+      <p class="lead">
+        Föreläsning och anteckningar från Zenta AB:s kompetensdag. Klicka på videon för att spela upp inspelningen.
+      </p>
+    </header>
+
+    <div class="video-wrap">
+     <iframe src="https://www.youtube.com/embed/jRePA15vkHk?si=IIf11pHxPBVrf2zY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> </div>
+
+    <section>
+      <h2>Sammanfattning av innehåll</h2>
+      <div class="card">
+        <ul>
+          <li>Del 1: Introduktion till kvantteori — dubbelspalt, mätproblem, Köpenhamnstolkningen, Schrödingers katt och EPR-paradoxen.</li>
+          <li>Del 2: Kvantdatorer — qubits och kvantprocessorer (ion trap, superconducting, linear optical), kvantkretsar och kvantalgoritmer (Grover, Shor).</li>
+          <li>Tekniska utmaningar: brus, decoherence och felkorrigering. Kort översikt över aktörer och aktuella kvantstorlekar.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Länkar</h2>
+      <ul>
+        <li>GitHub — övningar och exempel: <a href="https://github.com/backlundtransform/QuantumCircuit" target="_blank" rel="noopener">backlundtransform/QuantumCircuit</a></li>
+        <li>Hela portföljen: <a href="https://backlundtransform.github.io/" target="_blank" rel="noopener">backlundtransform.github.io</a></li>
+        <li>Föreläsningsanteckningar: <a href="Kvantdatorer.pptx" target="_blank" rel="noopener">Kvantdatorer.pptx</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Snabbinfo</h2>
+      <p><strong>Event:</strong> Kompetensdag, Zenta AB — 2021-11-26</p>
+      <p><strong>Föreläsare:</strong> Göran Bäcklund</p>
+      <a class="btn" href="https://github.com/backlundtransform/QuantumCircuit" target="_blank">Övningar på GitHub</a>
+      <a class="btn" href="https://backlundtransform.github.io/" style="margin-left:8px" target="_blank">Till portföljen</a>
+    </section>
+
+    <footer>
+      © 2025 Göran Bäcklund — <a href="https://github.com/backlundtransform">GitHub</a>
+    </footer>
+  </div>
+</body>
+</html>
