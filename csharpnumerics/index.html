@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>C# Numerics — Portfolio</title>
+  <meta name="description" content="C# Numerics — Numerisk bibliotek för vetenskapliga och matematiska beräkningar. Portfolio-sida på svenska.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #0f1724;
+      --card: #0b1220;
+      --muted: #9aa4b2;
+      --accent: #60a5fa;
+      --glass: rgba(255,255,255,0.03);
+      --radius: 14px;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,var(--bg) 0%, #071022 100%);color:#e6eef8;line-height:1.5}
+    .container{max-width:1100px;margin:48px auto;padding:24px}
+    .card{background:linear-gradient(180deg,var(--card), rgba(11,18,32,0.85));border-radius:var(--radius);padding:28px;box-shadow:0 8px 30px rgba(2,6,23,0.6);}
+
+    header{display:flex;gap:20px;align-items:center;justify-content:space-between}
+    .brand{display:flex;gap:16px;align-items:center}
+    .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#3b82f6);display:flex;align-items:center;justify-content:center;font-weight:800;color:#04243a}
+    h1{margin:0;font-size:28px}
+    p.lead{margin:6px 0 0;color:var(--muted)}
+
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:24px;margin-top:22px}
+    .section{background:var(--glass);padding:18px;border-radius:12px}
+
+    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .feature{padding:12px;border-radius:10px;background:rgba(255,255,255,0.02)}
+    .feature h4{margin:0 0 6px}
+    .meta{font-size:13px;color:var(--muted)}
+
+    pre{background:rgba(2,6,23,0.6);padding:12px;border-radius:8px;overflow:auto;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace;font-size:13px}
+    code{color:#c8f3ff}
+
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:600}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),#3b82f6);color:#05263b}
+    .btn-ghost{border:1px solid rgba(255,255,255,0.06);color:var(--accent);background:transparent}
+
+    .sidebar .card-short{display:flex;flex-direction:column;gap:12px}
+    .tag{display:inline-block;background:rgba(255,255,255,0.03);padding:6px 10px;border-radius:999px;font-size:13px;color:var(--muted)}
+
+    footer{margin-top:24px;color:var(--muted);font-size:13px}
+
+    @media (max-width:900px){
+      .grid{grid-template-columns:1fr}
+      .logo{width:56px;height:56px}
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <div class="card">
+      <header>
+        <div class="brand">
+          <div class="logo">CN</div>
+          <div>
+            <h1>C# Numerics</h1>
+            <p class="lead">Numeriskt bibliotek verktyg för vetenskapliga beräkningar i C#.</p>
+          </div>
+        </div>
+        <div>
+          <a class="btn btn-primary" href="https://www.nuget.org/packages/CSharpNumerics/" target="_blank" rel="noopener">Hämta från NuGet</a>
+          
+        </div>
+      </header>
+
+      <div class="grid">
+        <section>
+          <div class="section">
+            <h2 id="about">Om projektet</h2>
+            <p class="meta">C# Numerics är ett lättanvänt bibliotek med extension-metoder och datatyper för komplexa tal, vektorer, matriser, differentialekvationer, Fourier/Laplace-transformer, statistik och mycket mer.</p>
+          </div>
+
+          <div class="section" style="margin-top:16px">
+            <h3>Höjdpunkter</h3>
+            <div class="features">
+              <div class="feature">
+                <h4>Numeriska extension-metoder</h4>
+                <p class="meta">Factorial, Newton–Raphson, derivator, integraler, Monte Carlo.</p>
+              </div>
+              <div class="feature">
+                <h4>Linjära algebra</h4>
+                <p class="meta">Matrix, Vector, determinant, inverse, eigenvalues och linjära system.</p>
+              </div>
+              <div class="feature">
+                <h4>Vektorfält</h4>
+                <p class="meta">Gradient, divergence, curl, laplacian och export till CSV.</p>
+              </div>
+              <div class="feature">
+                <h4>Spectral & transform</h4>
+                <p class="meta">FFT, DFT, Laplace-transform och signalbehandling.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="section" style="margin-top:16px">
+            <h3>Kodexempel</h3>
+
+            <h4>Factorial</h4>
+            <pre><code>// 5! = 120
+int result = 5.Factorial();</code></pre>
+
+            <h4>Newton–Raphson (exempel)</h4>
+            <pre><code>Func<double,double> f = x => Math.Pow(x,2) - 4;
+double root = f.NewtonRaphson(); // 2</code></pre>
+
+            <h4>Runge–Kutta (RK4)</h4>
+            <pre><code>Func<(double t, double y), double> ode = v => Math.Tan(v.y) + 1;
+var result = ode.RungeKutta(1, 1.1, 0.025, 1);</code></pre>
+
+            <p class="meta">Fler exempel finns i README och i repository: kodexempel, enhetstester och notebooks för visualisering.</p>
+          </div>
+
+          <div class="section" style="margin-top:16px">
+            <h3 id="license">Licens & Kontakt</h3>
+            <p class="meta">MIT License © 2025 — C# Numerics</p>
+            <p class="meta">Kontakt: <a href="mailto:you@example.com">you@example.com</a></p>
+          </div>
+        </section>
+
+        <aside class="sidebar">
+          <div class="section card-short">
+            <div>
+              <strong>Snabbfakta</strong>
+              <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">
+                <span class="tag">C#</span>
+                <span class="tag">.NET</span>
+                <span class="tag">Numerics</span>
+                <span class="tag">FFT</span>
+                <span class="tag">RK4</span>
+              </div>
+            </div>
+            <div>
+              <strong>Version</strong>
+              <div class="meta">Senaste stabila: 1.0.0</div>
+            </div>
+
+            <div>
+              <strong>Snabblänkar</strong>
+              <ul style="padding-left:18px;margin:8px 0 0;color:var(--muted)">
+                <li><a href="https://www.nuget.org/packages/CSharpNumerics/" target="_blank">NuGet</a></li>
+               
+              </ul>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <footer>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap">
+          <div>© 2025 — C# Numerics</div>
+       </div>
+      </footer>
+    </div>
+  </main>
+</body>
+</html>
