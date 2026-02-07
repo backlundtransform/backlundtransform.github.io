@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  },
+  "scripts": {
+  "start": "docusaurus start",
+  "build": "docusaurus build",
+  "deploy": "GIT_USER=backlundtransform yarn build && gh-pages -d build -r https://github.com/backlundtransform/backlundtransform.github.io.git"
+}
+}

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Graph axes -->
+  <line x1="40" y1="160" x2="160" y2="160" stroke="currentColor" stroke-width="2"/>
+  <line x1="40" y1="40" x2="40" y2="160" stroke="currentColor" stroke-width="2"/>
+  
+  <!-- Curve representing numerical analysis -->
+  <path d="M 40 140 Q 70 100, 100 110 T 160 60" stroke="#2e8555" stroke-width="3" fill="none"/>
+  
+  <!-- Grid lines -->
+  <line x1="40" y1="100" x2="160" y2="100" stroke="currentColor" stroke-width="0.5" opacity="0.3" stroke-dasharray="2,2"/>
+  <line x1="100" y1="40" x2="100" y2="160" stroke="currentColor" stroke-width="0.5" opacity="0.3" stroke-dasharray="2,2"/>
+  
+  <!-- Data points -->
+  <circle cx="70" cy="115" r="3" fill="#2e8555"/>
+  <circle cx="100" cy="110" r="3" fill="#2e8555"/>
+  <circle cx="130" cy="85" r="3" fill="#2e8555"/>
+  <circle cx="160" cy="60" r="3" fill="#2e8555"/>
+  
+  <!-- Arrows on axes -->
+  <polygon points="160,160 155,157 155,163" fill="currentColor"/>
+  <polygon points="40,40 37,45 43,45" fill="currentColor"/>
+  
+  <!-- Mathematical symbols -->
+  <text x="165" y="165" font-family="serif" font-size="12" fill="currentColor">x</text>
+  <text x="30" y="35" font-family="serif" font-size="12" fill="currentColor">f(x)</text>
+</svg>
