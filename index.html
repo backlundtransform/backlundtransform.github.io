@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,17 +13,17 @@
       <img src="img/logo.png" alt="Logo" class="object-contain w-full h-full">
     </div>
     <p class="text-slate-300 text-lg max-w-2xl mx-auto">
-      Jag förvandlar komplexa idéer till tydliga insikter – från teori till kod.
+      Turning complex ideas into clear insights – from theory to code.
     </p>
     <div class="mt-6 flex justify-center gap-4">
       <a href="/cv.pdf" download class="bg-indigo-500 hover:bg-indigo-600 text-white font-medium py-2 px-4 rounded-lg transition">
-        Ladda ner CV
+        Download CV
       </a>
     </div>
   </header>
 
   <section id="projects" class="grid sm:grid-cols-2 lg:grid-cols-2 gap-6 max-w-6xl mx-auto">
-    <!-- Projekten genereras här av JavaScript -->
+    <!-- Projects are generated here by JavaScript -->
   </section>
 
   <footer class="text-center text-slate-500 mt-16">
@@ -33,37 +33,25 @@
   </footer>
 
   <script>
-    // Projektdatabas
+    // Project database
     const projects = [
       {
         title: "ExoplanetHunter",
-        description: "Ett projekt som kombinerar dataanalys och visualisering för att identifiera och simulera exoplanetsystem.",
-        tags: ["Python", "React", "Three.js", "Astronomi"],
-        link: "exoplanethunter/"
-      },
-      {
-        title: "Grouped Time Series CV",
-        description: "Ett verktyg för validering av grupperade tidsseriemodeller, utvecklat för mer robust maskininlärning.",
-        tags: ["Machine Learning", "Python", "Data Science"],
-        link: "groupedtimeseriecv/"
-      },
-      {
-        title: "Quantum Circuit",
-        description: "Ett forskningsprojekt där kvantdatorers potential för optimeringsproblem utforskades.",
-        tags: ["Quantum Computing", "Python", "Research", "Q#"],
-        link: "quantumcircuit/"
+        description: "A project combining data analysis and visualization to identify and simulate exoplanet systems.",
+        tags: ["Python", "React", "Three.js", "Astronomy"],
+        link: "https://exoplanethunter.com/"
       },
       {
         title: "CSharpNumerics",
-        description: "Ett C#-bibliotek för numerisk analys med fokus på effektivitet och precision i vetenskapliga beräkningar.",
-        tags: ["C#", "Numerisk analys", ".NET"],
+        description: "A C# library for numerical analysis with a focus on efficiency and precision in scientific computing.",
+        tags: ["C#", "Numerical Analysis", ".NET"],
         link: "csharpnumerics/"
       }
     ];
 
     const projectsContainer = document.getElementById('projects');
 
-    // Skapa HTML för varje projekt
+    // Create HTML for each project
     projects.forEach(proj => {
       const card = document.createElement('div');
       card.className = 'bg-slate-900 border-slate-800 hover:shadow-xl transition p-6';
@@ -74,13 +62,13 @@
         <div class="flex flex-wrap gap-2 mb-4">
           ${proj.tags.map(tag => `<span class="bg-slate-800 text-xs px-2 py-1 rounded-full text-slate-200">${tag}</span>`).join('')}
         </div>
-        <a href="${proj.link}" class="text-cyan-400 hover:underline text-sm">Visa mer</a>
+        <a href="${proj.link}" class="text-cyan-400 hover:underline text-sm">View more</a>
       `;
 
       projectsContainer.appendChild(card);
     });
 
-    // Visa aktuellt år i footern
+    // Display current year in footer
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 
