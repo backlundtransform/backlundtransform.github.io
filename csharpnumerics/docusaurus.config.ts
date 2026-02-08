@@ -10,7 +10,7 @@ const config: Config = {
     v4: true,
   },
 
-  url: 'https://backlundtransform.github.io',
+  url: 'https://csnumerics.com',
   baseUrl: '/csharpnumerics/',
 
   organizationName: 'backlundtransform',

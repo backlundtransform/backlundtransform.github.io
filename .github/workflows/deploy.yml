@@ -38,6 +38,8 @@ jobs:
         run: |
           mkdir -p _site
           touch _site/.nojekyll
+          # Copy CNAME for custom domain
+          cp CNAME _site/ 2>/dev/null || true
           # Copy root static files
           cp index.html style.css styles.css _site/ 2>/dev/null || true
           cp cv.md cv.pdf _cv.pdf _site/ 2>/dev/null || true
