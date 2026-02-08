@@ -84,4 +84,4 @@ Hyperparameters:
 * `Epochs`
 * `Activation` (ReLU, Tanh, Sigmoid)
 
----
+

@@ -29,8 +29,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          editUrl:
-            'https://github.com/backlundtransform/CSharpNumerics',
+          
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -101,13 +100,23 @@ const config: Config = {
               href: 'https://www.nuget.org/packages/CSharpNumerics/',
             },
           ],
+        },{
+          title: 'Playlist',
+          items: [
+            {
+              label: 'Youtube',
+              href: 'https://www.youtube.com/playlist?list=PLwIMQE5NbK8_b5lJeoWmlip3WWG--cTqG',
+            }
+          ],
         }
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Csharpnumerics.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Backlundtransform.`,
     },
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.vsDark,
+      additionalLanguages: ['csharp'],
+      
     },
   } satisfies Preset.ThemeConfig,
 };

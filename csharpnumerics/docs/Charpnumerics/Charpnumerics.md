@@ -1,14 +1,22 @@
+---
+sidebar_position: 1
+---
 
+# CsharpNumerics
 
-## 🎓 Learning Resources
+**CsharpNumerics** is a lightweight .NET library for numerical computing, machine learning, statistics, and physics simulations — all in pure C#.
 
-CSharpNumerics – YouTube Playlist
+It provides easy-to-use building blocks for:
 
-A playlist covering numerical methods and scientific computing in C#.
+- **Numerical Analysis** — algebra, calculus, linear algebra, and transforms.
+- **Machine Learning** — regression, classification, cross-validation, and pipelines.
+- **Statistics** — descriptive statistics and interpolation methods.
+- **Physics** — kinematics and simulation models.
 
-[![Playlist Thumbnail](https://i.ytimg.com/vi/ncCb5HUuVqE/hqdefault.jpg?sqp=-oaymwExCNACELwBSFryq4qpAyMIARUAAIhCGAHwAQH4Af4JgALQBYoCDAgAEAEYZSBlKGUwDw==&rs=AOn4CLAng8uqqBd5AIBP0ep1yj-wcZ8YhA)](https://www.youtube.com/playlist?list=PLwIMQE5NbK8_b5lJeoWmlip3WWG--cTqG)
-  
-  
+The library is available on [NuGet](https://www.nuget.org/packages/CSharpNumerics/) and the source code is on [GitHub](https://github.com/backlundtransform/CSharpNumerics).
+
+---
+
 ## 🚀 Future Directions
 
 We are continuously working to improve CsharpNumerics and plan to focus on the following areas:
