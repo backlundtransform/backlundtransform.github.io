@@ -1,3 +1,7 @@
+---
+sidebar_label: "🏷️ Classification"
+---
+
 All classifiers implement `IClassificationModel` and operate directly on `Matrix` and `Vector` primitives.
 
 ## 📊 Logistic Regression

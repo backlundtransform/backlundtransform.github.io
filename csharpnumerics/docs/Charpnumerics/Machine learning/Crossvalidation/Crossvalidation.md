@@ -1,3 +1,6 @@
+---
+sidebar_label: "🔄 Cross-Validation"
+---
 
 ## ⏩ Rolling Cross-Validation
 

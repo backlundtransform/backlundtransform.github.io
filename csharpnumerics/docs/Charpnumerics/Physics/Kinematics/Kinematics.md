@@ -1,4 +1,6 @@
-
+---
+sidebar_label: "🚀 Kinematics"
+---
 
 The `KinematicsExtensions` class provides a set of extension methods for performing common kinematic calculations in both **scalar** and **vector** form. It covers free fall, constant velocity, constant acceleration, time-independent SUVAT equations, and circular motion.
 

@@ -1,3 +1,7 @@
+---
+sidebar_label: "🌊 Transforms"
+---
+
 ## 🌊 FFT
 
 ```csharp

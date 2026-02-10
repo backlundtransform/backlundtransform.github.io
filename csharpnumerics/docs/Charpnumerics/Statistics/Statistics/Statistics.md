@@ -1,3 +1,6 @@
+---
+sidebar_label: "📊 Statistics"
+---
 
 ```csharp
 var noise = new Random().GenerateNoise(4);

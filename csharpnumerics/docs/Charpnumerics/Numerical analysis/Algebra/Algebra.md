@@ -1,3 +1,6 @@
+---
+sidebar_label: "📘 Algebra"
+---
 
 ## 📘 Numeric Extensions
 

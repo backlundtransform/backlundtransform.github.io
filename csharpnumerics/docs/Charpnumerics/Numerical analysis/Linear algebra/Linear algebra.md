@@ -1,3 +1,7 @@
+---
+sidebar_label: "🧮 Linear Algebra"
+---
+
 ## 🧭 Vector
 
 ```csharp

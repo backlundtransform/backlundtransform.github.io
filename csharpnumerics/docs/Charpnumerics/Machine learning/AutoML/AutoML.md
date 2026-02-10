@@ -1,3 +1,6 @@
+---
+sidebar_label: "⚡ AutoML"
+---
 
 CSharpNumerics includes a **lightweight, fully numerical machine learning framework** designed for **research, experimentation, and educational use**.
 The focus is on **transparency**, **mathematical clarity**, and **pipeline-based model evaluation** — not black-box automation.

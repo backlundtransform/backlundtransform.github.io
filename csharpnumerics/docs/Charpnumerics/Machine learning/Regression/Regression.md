@@ -1,3 +1,6 @@
+---
+sidebar_label: "📉 Regression"
+---
 
 All regressors implement `IRegressionModel`.
 

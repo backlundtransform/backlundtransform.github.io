@@ -3,7 +3,8 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'Csharpnumerics',
+  title: 'CSharpNumerics',
+  tagline: 'A comprehensive numerical library for C#',
   favicon: 'img/logo.png',
 
   future: {
@@ -11,7 +12,7 @@ const config: Config = {
   },
 
   url: 'https://csnumerics.com',
-  baseUrl: '/csharpnumerics/',
+  baseUrl: '/',
 
   organizationName: 'backlundtransform',
   projectName: 'csharpnumerics',
@@ -47,10 +48,12 @@ const config: Config = {
       respectPrefersColorScheme: false,
     },
     navbar: {
-      title: 'Csharpnumerics',
+      title: 'CSharpNumerics',
       logo: {
-        alt: 'Csharpnumerics Logo',
+        alt: 'CSharpNumerics Logo',
         src: 'img/logo.png',
+        srcDark: 'img/logo.png',
+        style: {borderRadius: '6px'},
       },
       items: [
         {
@@ -74,43 +77,55 @@ const config: Config = {
     footer: {
       style: 'dark',
       links: [
-      
         {
-          title: 'Sponsor',
+          title: 'Resources',
           items: [
             {
-              label: 'Support this project',
-              href: 'https://github.com/sponsors/backlundtransform', // <-- din sponsor-länk
+              label: '📦 NuGet',
+              href: 'https://www.nuget.org/packages/CSharpNumerics/',
+            },
+            {
+              label: '📂 GitHub',
+              href: 'https://github.com/backlundtransform/CSharpNumerics',
+            },
+            {
+              label: '🎬 YouTube',
+              href: 'https://www.youtube.com/playlist?list=PLwIMQE5NbK8_b5lJeoWmlip3WWG--cTqG',
             },
           ],
         },
         {
-          title: 'Reprository',
+          title: 'Projects',
           items: [
             {
-              label: 'GitHub',
-              href: 'https://github.com/backlundtransform/CSharpNumerics',
+              label: '🔭 ExoplanetHunter 3D',
+              href: 'https://exoplanethunter.com/astro3d',
             },
-          ],
-        },{
-          title: 'Download',
-          items: [
             {
-              label: 'NuGet',
-              href: 'https://www.nuget.org/packages/CSharpNumerics/',
-            },
-          ],
-        },{
-          title: 'Playlist',
-          items: [
-            {
-              label: 'Youtube',
-              href: 'https://www.youtube.com/playlist?list=PLwIMQE5NbK8_b5lJeoWmlip3WWG--cTqG',
+              label: '🌍 ExoplanetHunter',
+              href: 'https://exoplanethunter.com/',
             }
           ],
-        }
+        },
+        {
+          title: 'Connect',
+          items: [
+            {
+              label: '💜 Sponsor',
+              href: 'https://github.com/sponsors/backlundtransform',
+            },
+            {
+              label: '💼 LinkedIn',
+              href: 'https://www.linkedin.com/in/g%C3%B6ran-b%C3%A4cklund-b4343b3b/',
+            },
+            {
+              label: '🐙 GitHub',
+              href: 'https://github.com/backlundtransform',
+            },
+          ],
+        },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Backlundtransform.`,
+      copyright: `© ${new Date().getFullYear()} Backlund Transform — From theory to code.`,
     },
     prism: {
       theme: prismThemes.github,

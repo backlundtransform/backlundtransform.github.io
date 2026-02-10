@@ -1,35 +1,179 @@
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * Custom CSS – aligned with portfolio graphic profile
+ * Palette: slate-950, slate-900, slate-800, cyan-400, indigo-500
  */
 
-/* You can override the default Infima variables here. */
+/* ── Light mode (fallback – site defaults to dark) ── */
 :root {
-  --ifm-color-primary: #2563eb;
-  --ifm-color-primary-dark: #1d4ed8;
-  --ifm-color-primary-darker: #1e40af;
-  --ifm-color-primary-darkest: #1e3a8a;
-  --ifm-color-primary-light: #3b82f6;
-  --ifm-color-primary-lighter: #60a5fa;
-  --ifm-color-primary-lightest: #93c5fd;
+  --ifm-color-primary: #0891b2;
+  --ifm-color-primary-dark: #0e7490;
+  --ifm-color-primary-darker: #155e75;
+  --ifm-color-primary-darkest: #164e63;
+  --ifm-color-primary-light: #06b6d4;
+  --ifm-color-primary-lighter: #22d3ee;
+  --ifm-color-primary-lightest: #67e8f9;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
+/* ── Dark mode – matches portfolio slate/cyan palette ── */
 [data-theme='dark'] {
-  --ifm-color-primary: #60a5fa;
-  --ifm-color-primary-dark: #3b82f6;
-  --ifm-color-primary-darker: #2563eb;
-  --ifm-color-primary-darkest: #1d4ed8;
-  --ifm-color-primary-light: #93c5fd;
-  --ifm-color-primary-lighter: #bfdbfe;
-  --ifm-color-primary-lightest: #dbeafe;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: #22d3ee;
+  --ifm-color-primary-dark: #06b6d4;
+  --ifm-color-primary-darker: #0891b2;
+  --ifm-color-primary-darkest: #0e7490;
+  --ifm-color-primary-light: #67e8f9;
+  --ifm-color-primary-lighter: #a5f3fc;
+  --ifm-color-primary-lightest: #cffafe;
+
+  --ifm-background-color: #020617;
+  --ifm-background-surface-color: #0f172a;
+  --ifm-navbar-background-color: #0f172a;
+  --ifm-footer-background-color: #0f172a;
+  --ifm-card-background-color: #0f172a;
+  --ifm-toc-border-color: #1e293b;
+  --ifm-color-emphasis-300: #cbd5e1;
+  --ifm-hr-border-color: #1e293b;
+
+  --docusaurus-highlighted-code-line-bg: rgba(34, 211, 238, 0.12);
 }
 
-/* Hide pagination (Next/Previous links) */
+/* ── Navbar ── */
+.navbar {
+  border-bottom: 1px solid #1e293b;
+  backdrop-filter: blur(12px);
+}
+.navbar__logo img {
+  border-radius: 6px;
+  border: 2px solid #334155;
+  height: 32px;
+  width: 32px;
+  box-shadow: 0 0 8px rgba(34, 211, 238, 0.15);
+}
+.navbar__title {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* ── Sidebar ── */
+[data-theme='dark'] .menu {
+  background: #0f172a;
+}
+[data-theme='dark'] .menu__link {
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
+}
+[data-theme='dark'] .menu__link:hover {
+  background: #1e293b;
+  color: #22d3ee;
+}
+[data-theme='dark'] .menu__link--active {
+  background: rgba(34, 211, 238, 0.1);
+  color: #22d3ee;
+  font-weight: 600;
+}
+
+/* ── Doc page card-like content area ── */
+[data-theme='dark'] .theme-doc-markdown {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 10px;
+  padding: 2rem;
+  margin-top: 1rem;
+}
+
+/* ── Code blocks ── */
+[data-theme='dark'] pre {
+  background: #020617 !important;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+}
+
+/* ── Table of contents ── */
+[data-theme='dark'] .table-of-contents__link:hover,
+[data-theme='dark'] .table-of-contents__link--active {
+  color: #22d3ee;
+}
+
+/* ── Footer – matches portfolio slate/cyan style ── */
+.footer {
+  background: #0f172a;
+  border-top: 1px solid #1e293b;
+  padding: 2.5rem 0 1.5rem;
+}
+.footer__title {
+  color: #22d3ee;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.75rem;
+}
+.footer__link-item {
+  color: #94a3b8;
+  transition: color 0.15s;
+}
+.footer__link-item:hover {
+  color: #22d3ee;
+  text-decoration: none;
+}
+.footer__copyright {
+  color: #475569;
+  font-size: 0.85rem;
+  margin-top: 1.5rem;
+  border-top: 1px solid #1e293b;
+  padding-top: 1.5rem;
+}
+
+/* ── Buttons – indigo accent like portfolio ── */
+.button--secondary {
+  background: #6366f1;
+  border-color: #6366f1;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: background 0.2s, transform 0.15s;
+}
+.button--secondary:hover {
+  background: #4f46e5;
+  border-color: #4f46e5;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* ── Tags / badges ── */
+[data-theme='dark'] .badge {
+  background: #1e293b;
+  color: #cbd5e1;
+  border: none;
+}
+
+/* ── Scrollbar (Webkit) ── */
+[data-theme='dark'] ::-webkit-scrollbar {
+  width: 8px;
+}
+[data-theme='dark'] ::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+[data-theme='dark'] ::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+[data-theme='dark'] ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* ── Hide pagination (Next/Previous links) ── */
 .pagination-nav {
   display: none;
+}
+
+/* ── Responsive: spacing between feature columns ── */
+@media screen and (max-width: 996px) {
+  .row .col {
+    margin-bottom: 1.5rem;
+  }
+  .row .col:last-child {
+    margin-bottom: 0;
+  }
 }

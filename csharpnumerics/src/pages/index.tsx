@@ -11,17 +11,19 @@ import styles from './index.module.css';
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
-    <header>
+    <header className={clsx('hero', styles.heroBanner)}>
       <div className="container">
         <Heading as="h1" className="hero__title">
-          
+          {siteConfig.title}
         </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <p className="hero__subtitle" style={{color: '#cbd5e1', maxWidth: 600, margin: '0 auto 1.5rem'}}>
+          A comprehensive numerical library for C# — from theory to code.
+        </p>
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
             to="/docs/Charpnumerics/">
-          Tutorial
+            Get Started
           </Link>
         </div>
       </div>
