@@ -11,8 +11,8 @@ const config: Config = {
     v4: true,
   },
 
-  url: 'https://csnumerics.com',
-  baseUrl: '/',
+  url: 'https://backlundtransform.github.io',
+  baseUrl: '/csharpnumerics/',
 
   organizationName: 'backlundtransform',
   projectName: 'csharpnumerics',
