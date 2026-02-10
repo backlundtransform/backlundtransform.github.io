@@ -50,7 +50,6 @@ jobs:
           cp -r quantumcircuit _site/ 2>/dev/null || true
           cp -r csharpnumerics-2 _site/ 2>/dev/null || true
           # Copy Docusaurus build output
-          cp -r csharpnumerics/build/* _site/csharpnumerics/ 2>/dev/null || true
           mkdir -p _site/csharpnumerics
           cp -r csharpnumerics/build/* _site/csharpnumerics/
 
