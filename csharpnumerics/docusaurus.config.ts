@@ -12,7 +12,7 @@ const config: Config = {
   },
 
   url: 'https://csnumerics.com',
-  baseUrl: '/csharpnumerics/',
+  baseUrl: '/',
 
   organizationName: 'backlundtransform',
   projectName: 'csharpnumerics',

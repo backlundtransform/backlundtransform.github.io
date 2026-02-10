@@ -38,20 +38,10 @@ jobs:
         run: |
           mkdir -p _site
           touch _site/.nojekyll
+          # Docusaurus build output serves the entire site
+          cp -r csharpnumerics/build/* _site/
           # Copy CNAME for custom domain
-          cp CNAME _site/ 2>/dev/null || true
-          # Copy root static files
-          cp index.html style.css styles.css _site/ 2>/dev/null || true
-          cp cv.md cv.pdf _cv.pdf _site/ 2>/dev/null || true
-          # Copy static project folders
-          cp -r img _site/ 2>/dev/null || true
-          cp -r exoplanethunter _site/ 2>/dev/null || true
-          cp -r groupedtimeseriecv _site/ 2>/dev/null || true
-          cp -r quantumcircuit _site/ 2>/dev/null || true
-          cp -r csharpnumerics-2 _site/ 2>/dev/null || true
-          # Copy Docusaurus build output
-          mkdir -p _site/csharpnumerics
-          cp -r csharpnumerics/build/* _site/csharpnumerics/
+          cp csharpnumerics/static/CNAME _site/ 2>/dev/null || true
 
       - uses: actions/upload-pages-artifact@v3
         with:
