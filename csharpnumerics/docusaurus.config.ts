@@ -45,6 +45,7 @@ const config: Config = {
     image: 'img/CsharpNumerics.png',
     colorMode: {
       defaultMode: 'dark',
+      disableSwitch: true,
       respectPrefersColorScheme: false,
     },
     navbar: {

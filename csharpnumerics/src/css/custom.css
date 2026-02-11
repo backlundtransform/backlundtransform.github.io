@@ -41,7 +41,77 @@
 /* ── Navbar ── */
 .navbar {
   border-bottom: 1px solid #1e293b;
-  backdrop-filter: blur(12px);
+}
+
+/* Only apply backdrop blur on desktop – on mobile it creates a stacking
+   context that traps the sidebar behind the main content. */
+@media screen and (min-width: 997px) {
+  .navbar {
+    backdrop-filter: blur(12px);
+  }
+}
+
+/* ── Mobile navbar toggle (hamburger) ── */
+.navbar__toggle {
+  color: #e2e8f0;
+}
+.navbar__toggle:hover {
+  color: #22d3ee;
+}
+
+/* ── Mobile sidebar ── */
+.navbar-sidebar {
+  background: #0f172a;
+  z-index: 200;
+}
+.navbar-sidebar__backdrop {
+  z-index: 199;
+  background: rgba(0, 0, 0, 0.6);
+}
+.navbar-sidebar__brand {
+  background: #0f172a;
+  border-bottom: 1px solid #1e293b;
+}
+.navbar-sidebar__items {
+  background: #0f172a;
+}
+.navbar-sidebar__items .menu__link {
+  color: #cbd5e1;
+  padding: 0.75rem 1rem;
+}
+.navbar-sidebar__items .menu__link:hover {
+  background: #1e293b;
+  color: #22d3ee;
+}
+.navbar-sidebar__items .menu__link--active {
+  color: #22d3ee;
+  font-weight: 600;
+}
+.navbar-sidebar__back {
+  color: #94a3b8;
+}
+.navbar-sidebar__close {
+  color: #e2e8f0;
+}
+
+/* ── Navbar must stay on top ── */
+.navbar {
+  z-index: 200;
+  position: sticky;
+  top: 0;
+}
+
+/* ── Mobile: ensure navbar items don't overflow ── */
+@media screen and (max-width: 996px) {
+  .navbar__items--right {
+    flex-shrink: 0;
+  }
+  
+  /* Ensure main content doesn't cover the sidebar */
+  .main-wrapper {
+    z-index: 1;
+    position: relative;
+  }
 }
 .navbar__logo img {
   border-radius: 6px;
