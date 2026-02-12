@@ -37,15 +37,19 @@ var A = new Matrix(new double[,] { { 1, 3, 7 }, { 5, 2, 9 } });
 var transpose = A.Transpose();
 var det = A.Determinant();
 var inv = A.Inverse();
+```
 
 Arithmetic:
 
+```csharp
 var B = new Matrix(new double[,] { { 2, 5, 1 }, { 4, 3, 7 } });
 var sum = A + B;
 var product = A * B;
+```
 
 With vector:
 
+```csharp
 var x = new Vector(2, 1, 3);
 var y = A * x;
 ```
@@ -55,7 +59,6 @@ var y = A * x;
 ## 📦 Tensor (multi-dimensionell)
 
 ```csharp
-
 var tensor = new Tensor(2, 3);
 
 tensor[0, 0] = 1;
@@ -74,8 +77,11 @@ var sum = tensor + tensorB;
 var diff = tensor - tensorB;
 var prod = tensor * tensorB;
 var div = tensor / tensorB;
+```
 
+Dot product:
 
+```csharp
 var tensor1D = new Tensor(3);
 tensor1D.Values[0] = 1;
 tensor1D.Values[1] = 2;
@@ -91,20 +97,21 @@ double dot = tensor1D.Dot(tensor1D2); // 1*4 + 2*5 + 3*6 = 32
 
 ---
 
-
 ## 📏 Linear Systems
 
 ```csharp
 var result = A.LinearSystemSolver(b);
 var eigenValues = A.EigenValues();
+var eigenVector = A.EigenVector(eigenValue);
+var dominant = A.DominantEigenVector();
 ```
+
+**Gauss Elimination**
+
 ```csharp
 var matrix = new Matrix(new double[,] { { 1, -2, 3 }, { -1, 1, -2 }, { 2, -1, -1 } });
-
 var vector = new VectorN(new double[] { 7, -5, 4 });
-
-var result = matrix.LinearSystemSolver(vector);
-
+var solution = matrix.GaussElimination(vector);
 ```
 
 
