@@ -78,6 +78,3 @@ Vector radius = new Vector(0, 3, 0);
 Vector ac = velocity.CentripetalAcceleration(radius); // vector, towards center
 ```
 
----
-
-
