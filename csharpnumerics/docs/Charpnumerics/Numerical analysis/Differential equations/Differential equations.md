@@ -4,6 +4,10 @@ sidebar_label: "📐 Differential Equations"
 
 ## 📐 Differential Equations
 
+Solve initial value problems of the form:
+
+$$\frac{dy}{dt} = f(t, y), \quad y(t_0) = y_0$$
+
 **Runge–Kutta (RK4)**
 
 ```csharp
@@ -33,6 +37,8 @@ var result = f.RungeKutta(min, max, stepSize, yInitial,
 ---
 
 ## ⚙️ ODE System Solver
+
+Solve systems $\mathbf{x}'(t) = A\mathbf{x}(t)$ via eigenvalue decomposition:
 
 ```csharp
 var solutions = matrix.OdeSolver(new List<double> { 1, 0, 0 });

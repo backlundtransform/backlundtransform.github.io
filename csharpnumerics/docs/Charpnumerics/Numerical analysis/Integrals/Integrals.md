@@ -4,6 +4,8 @@ sidebar_label: "∫ Integrals"
 
 ## ∫ Integrals
 
+$$\int_a^b f(x)\,dx$$
+
 **Trapezoidal Rule**
 
 ```csharp
@@ -44,6 +46,8 @@ double result = f.IntegrateAdaptive(0, Math.PI, tolerance: 1e-12);
 ---
 
 ## 🎲 Monte Carlo Integration
+
+$$\iint_D f(x,y)\,dA, \quad \iiint_V f(x,y,z)\,dV$$
 
 **Double integral**
 

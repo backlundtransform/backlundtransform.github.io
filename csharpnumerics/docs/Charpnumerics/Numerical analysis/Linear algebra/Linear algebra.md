@@ -99,6 +99,8 @@ double dot = tensor1D.Dot(tensor1D2); // 1*4 + 2*5 + 3*6 = 32
 
 ## 📏 Linear Systems
 
+Solve $A\mathbf{x} = \mathbf{b}$, eigenvalues $A\mathbf{v} = \lambda\mathbf{v}$:
+
 ```csharp
 var result = A.LinearSystemSolver(b);
 var eigenValues = A.EigenValues();

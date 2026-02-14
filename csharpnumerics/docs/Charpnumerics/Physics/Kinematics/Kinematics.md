@@ -8,6 +8,8 @@ The `KinematicsExtensions` class provides a set of extension methods for perform
 
 Compute the velocity or time of a freely falling object:
 
+$$v = \sqrt{2gh}, \quad t = \sqrt{\frac{2h}{g}}$$
+
 ```csharp
 double v = 10.0.FreeFallVelocity();       // scalar: v = sqrt(2*g*h)
 double t = 10.0.FreeFallTime();           // scalar: t = sqrt(2*h/g)
@@ -21,6 +23,8 @@ Vector vVec = 10.0.FreeFallVelocity(dir);
 
 Compute position given constant velocity:
 
+$$s = s_0 + v \cdot t$$
+
 ```csharp
 double s = 3.0.PositionFromConstantVelocity(time: 5, initialPosition: 2); 
 
@@ -32,6 +36,8 @@ Vector position = velocity.PositionFromConstantVelocity(4, initialPosition);
 ## 🚀 Constant Acceleration
 
 Compute velocity or position under constant acceleration:
+
+$$v = v_0 + at, \quad s = s_0 + v_0 t + \tfrac{1}{2}at^2$$
 
 ```csharp
 // Scalar
@@ -51,6 +57,8 @@ Vector sVec = a.PositionFromConstantAcceleration(2, v0, s0);
 
 Compute kinematics without explicit time:
 
+$$v^2 = v_0^2 + 2a \cdot s, \quad s = \frac{v^2 - v_0^2}{2a}$$
+
 ```csharp
 double finalV = 2.0.VelocityFromDisplacement(5, initialVelocity: 1);
 double displacement = 2.0.DisplacementFromVelocities(finalVelocity: 5, initialVelocity: 1);
@@ -69,6 +77,8 @@ Vector displacementVec = a.DisplacementFromVelocities(finalVVec, v0);
 ## 🔄 Circular Motion
 
 Compute centripetal acceleration:
+
+$$a_c = \frac{v^2}{r}$$
 
 ```csharp
 double a = 3.0.CentripetalAcceleration(radius: 2); // scalar

@@ -10,7 +10,7 @@ sidebar_label: "📘 Numeric"
 int result = 5.Factorial(); // 120
 ```
 
-**Root Finding (Newton–Raphson)**
+**Root Finding (Newton–Raphson)** — $x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$
 
 ```csharp
 Func<double, double> func = x => Math.Pow(x, 2) - 4;

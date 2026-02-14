@@ -4,6 +4,8 @@ sidebar_label: "📘 Algebra"
 
 ## 🧩 Complex Numbers
 
+$z = a + bi$
+
 ```csharp
 var a = new ComplexNumber(3, 2);
 var b = new ComplexNumber(5, 3);
@@ -13,7 +15,7 @@ var product = a * b;
 var power = a.Pow(2); // 5 + 12i
 ```
 
-**Exponential form (Euler's formula)**
+**Exponential form (Euler's formula)** — $e^{i\pi} = -1$
 
 ```csharp
 new ComplexNumber(0, Math.PI).Exponential(); // -1

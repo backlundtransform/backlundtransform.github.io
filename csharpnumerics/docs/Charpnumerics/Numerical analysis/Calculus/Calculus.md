@@ -2,7 +2,9 @@
 sidebar_label: "📐 Calculus"
 ---
 
-## lim Limits
+## 🔎 Limits
+
+$$\lim_{x \to a^-} f(x), \quad \lim_{x \to a^+} f(x), \quad \lim_{x \to a} f(x)$$
 
 ```csharp
 Func<double, double> f = x => Math.Sin(x) / x;
@@ -15,6 +17,8 @@ double limit = f.Limit(0);       // two-sided: returns value if left == right, e
 ---
 
 ## Δ Derivative
+
+$$\frac{d}{dx}f(x), \quad (f \cdot g)', \quad \frac{\partial f}{\partial x_i}$$
 
 ```csharp
 Func<double, double> f = x => Math.Pow(x, 2);
