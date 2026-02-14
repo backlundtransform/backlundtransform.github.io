@@ -144,6 +144,10 @@ const config: Config = {
               label: '🐙 GitHub',
               href: 'https://github.com/backlundtransform',
             },
+            {
+              label: '🔒 Privacy Policy',
+              to: '/privacy',
+            },
           ],
         },
       ],
@@ -154,6 +158,11 @@ const config: Config = {
       darkTheme: prismThemes.vsDark,
       additionalLanguages: ['csharp'],
       
+    },
+    algolia: {
+      appId: 'V9K0X7CSTJ',
+      apiKey: 'c2f5fa260a4ab8caf4ada94d55b6c504',
+      indexName: 'CsharpNumerics AI',
     },
   } satisfies Preset.ThemeConfig,
 };
