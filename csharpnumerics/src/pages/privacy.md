@@ -38,4 +38,4 @@ Under the GDPR, you have the right to access, rectify, or delete any personal da
 
 ## Contact
 
-For questions about this privacy policy, reach out via [GitHub](https://github.com/backlundtransform).
+For questions about this privacy policy, reach out via [GitHub](https://github.com/backlundtransform) or email [gbanm06@gmail.com](mailto:gbanm06@gmail.com).
