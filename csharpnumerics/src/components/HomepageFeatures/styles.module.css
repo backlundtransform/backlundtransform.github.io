@@ -1,8 +1,12 @@
 .features {
-  display: flex;
-  align-items: stretch;
   padding: 3rem 0;
   width: 100%;
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
 }
 
 .featureSvg {
@@ -51,9 +55,32 @@
   line-height: 1.6;
 }
 
-/* Responsive: add vertical gap between cards */
-@media screen and (max-width: 996px) {
-  .features .featureCard {
-    margin-bottom: 1.5rem;
+/* 3 columns for medium-large screens */
+@media screen and (max-width: 1200px) {
+  .featureGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 2 columns for tablets */
+@media screen and (max-width: 860px) {
+  .featureGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .featureSvg {
+    height: 120px;
+    width: 120px;
+  }
+}
+
+/* 1 column for mobile */
+@media screen and (max-width: 520px) {
+  .featureGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .featureCard {
+    padding: 1.5rem 1rem;
   }
 }
