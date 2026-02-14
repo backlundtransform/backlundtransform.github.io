@@ -1,4 +1,8 @@
 {
   "label": "⚛️ Physics",
-  "position": 5
+  "position": 5,
+  "link": {
+    "type": "doc",
+    "id": "Charpnumerics/Physics/index"
+  }
 }

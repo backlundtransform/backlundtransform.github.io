@@ -1,4 +1,8 @@
 {
   "label": "📊 Statistics",
-  "position": 3
+  "position": 3,
+  "link": {
+    "type": "doc",
+    "id": "Charpnumerics/Statistics/index"
+  }
 }

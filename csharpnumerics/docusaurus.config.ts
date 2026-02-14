@@ -93,6 +93,10 @@ const config: Config = {
           href: 'https://github.com/backlundtransform/CSharpNumerics',
           label: 'GitHub',
           position: 'right',
+        }, {
+          href: 'https://exoplanethunter.com',
+          label: 'ExoplanetHunter',
+          position: 'right',
         },
       ],
     },
@@ -120,12 +124,12 @@ const config: Config = {
           title: 'Projects',
           items: [
             {
-              label: '🔭 ExoplanetHunter 3D',
+              label: '🔭 Astro3D Explorer',
               href: 'https://exoplanethunter.com/astro3d',
             },
             {
-              label: '🌍 ExoplanetHunter',
-              href: 'https://exoplanethunter.com/',
+              label: '🌍 Exoplanet Hunter App',
+              href: 'https://play.google.com/store/apps/details?id=com.varoid.exoplanethunter',
             }
           ],
         },
@@ -144,6 +148,12 @@ const config: Config = {
               label: '🐙 GitHub',
               href: 'https://github.com/backlundtransform',
             },
+           
+          ],
+        }, {
+          title: 'Legal',
+          items: [
+           
             {
               label: '🔒 Privacy Policy',
               to: '/privacy',
@@ -151,7 +161,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `© ${new Date().getFullYear()} Backlund Transform — From theory to code.`,
+      copyright: `© ${new Date().getFullYear()} <a href="https://github.com/backlundtransform" target="_blank" rel="noopener noreferrer">Backlund Transform</a> — From theory to code.`,
     },
     prism: {
       theme: prismThemes.github,

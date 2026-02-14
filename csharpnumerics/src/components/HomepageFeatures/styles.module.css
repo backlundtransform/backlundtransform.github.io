@@ -12,12 +12,25 @@
   filter: drop-shadow(0 4px 12px rgba(34, 211, 238, 0.1));
 }
 
+.featureLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+}
+
+.featureLink:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
 .featureCard {
   background: #0f172a;
   border: 1px solid #1e293b;
   border-radius: 10px;
   padding: 2rem 1.5rem;
   height: 100%;
+  cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
 

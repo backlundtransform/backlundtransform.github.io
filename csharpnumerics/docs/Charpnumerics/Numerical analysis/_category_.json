@@ -1,4 +1,8 @@
 {
   "label": "🔢 Numerical Analysis",
-  "position": 2
+  "position": 2,
+  "link": {
+    "type": "doc",
+    "id": "Charpnumerics/Numerical analysis/index"
+  }
 }
