@@ -13,47 +13,90 @@ It provides a clean, modular API with robust building blocks for scientific and 
 * **Numerical Analysis** — linear algebra, transforms, ordinary differential equations (ODEs), vector fields, and numerical integration methods
 * **Machine Learning** — regression, classification, cross-validation, and reusable pipelines
 * **Statistics** — descriptive analytics, probability tools, and interpolation techniques
-* **Physics** — kinematics and astronomy
+* **Physics** — kinematics, dynamics, rigid bodies, and astronomy
 
 📦 Available on **NuGet**: [https://www.nuget.org/packages/CSharpNumerics/](https://www.nuget.org/packages/CSharpNumerics/)
 
 
-## 🚀 Future Directions
+## 🚀 Future Directions — Roadmap
 
-We are continuously evolving CsharpNumerics with a focus on real-world numerical simulation, scientific computing, and modern applied mathematics. Key areas of future development include:
+CsharpNumerics is evolving into a comprehensive scientific computing and simulation framework, bridging applied mathematics, physics-based modeling, machine learning, and real-time numerical systems.
 
-:::info[🔬 Advanced Model Validation & Cross-Validation Tools]
-Expanding numerical and statistical utilities for robust model evaluation, uncertainty quantification, and performance analysis in scientific and engineering workflows.
-:::
+---
 
-:::info[⚛️ Expansion of the Physics Module & Field-Based Simulation]
-Building a comprehensive physics framework on top of the existing numerical core, including:
+### 🧩 Phase 1 — Core Numerical Foundations
 
-- Classical dynamics and force-based systems
-- Field-based physics (diffusion, advection, flow, heat transfer)
-- Partial differential equation (PDE) solvers for continuum models
-- Foundations for spatial and raster-based simulations (future GIS integration)
+🔬 **Advanced Model Validation & Cross-Validation Tools**
+Expanding numerical and statistical utilities for:
 
-This will enable simulations in fluid mechanics, hydrology, energy systems, and material transport.
-:::
+* Robust model evaluation
+* Uncertainty quantification
+* Performance analysis for scientific, ML, and engineering workflows
 
-:::info[📖 High-Quality Documentation, Tutorials & Industry-Oriented Examples]
-Developing practical examples demonstrating:
+---
 
-- Physical simulations
-- Numerical optimization workflows
-- Realistic engineering and scientific use cases
+### ⚛️ Phase 2 — Physics Engine & Continuum Simulation
 
-to lower the barrier to adoption and support learning.
-:::
+Building a full physics layer on top of the numerical core:
 
-:::info[💻 Classical Quantum Circuit Simulation (Educational Focus)]
-Implementing CPU-based quantum circuit simulators to allow students and developers to explore quantum algorithms, noise models, and hybrid classical–quantum workflows without specialized hardware.
-:::
+* Classical dynamics and force-driven systems
+* Rigid body mechanics and real-time simulation (game physics foundations)
+* Field-based physics:
 
-:::info[🌍 Spatial & Geometric Numerics (Long-Term Vision)]
-Integration of numerical methods with spatial data structures, meshes, and raster fields to support geographically distributed simulations and real-world physical modeling.
-:::
+  * diffusion
+  * advection
+  * flow & heat transfer
+* PDE solvers for continuum models
+* Foundations for spatial and raster-based simulation (future GIS integration)
+
+➡️ Enables applications in fluid mechanics, hydrology, energy systems, materials, and interactive simulation.
+
+---
+
+### 🎮 Phase 3 — Game Physics & Interactive Simulation
+
+Extending physics modules toward real-time environments:
+
+* Deterministic solvers for games & simulations
+* Collision systems and constraint solvers
+* Hybrid real-time + scientific simulation workflows
+* Physically-based motion for visualization and digital twins
+
+---
+
+### 📖 Phase 4 — Documentation & Applied Examples
+
+High-quality learning and industry-oriented material:
+
+* Physics simulations
+* Numerical optimization pipelines
+* ML + numerical hybrid models
+* Realistic engineering scenarios
+
+Designed for both education and production use.
+
+---
+
+### 💻 Phase 5 — Classical Quantum Simulation (Educational)
+
+CPU-based quantum circuit simulators supporting:
+
+* Quantum algorithms
+* Noise models
+* Hybrid classical–quantum experimentation
+
+(No specialized hardware required)
+
+---
+
+### 🌍 Phase 6 — Spatial & Geometric Numerics (Long-Term)
+
+Deep integration of:
+
+* Meshes and spatial data structures
+* Raster & field-based numerics
+* Large-scale physical modeling
+* GIS-connected simulation workflows
 
 
 
