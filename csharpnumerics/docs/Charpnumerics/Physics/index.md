@@ -14,4 +14,5 @@ namespace CSharpNumerics.Physics
 | Module | Description |
 |--------|-------------|
 | 🚀 [Kinematics](Kinematics/Kinematics.md) | Motion analysis, projectile trajectories, and dynamics |
+| ⚡ [Dynamics](Dynamics/Dynamics.md) | Forces, momentum, energy, work, power, and collisions |
 |🔭 [Astronomy](Astronomy/Astronomy.md) | Orbital mechanics and celestial computations |
