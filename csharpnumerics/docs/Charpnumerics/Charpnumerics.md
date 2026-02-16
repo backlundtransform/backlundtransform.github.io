@@ -3,8 +3,6 @@ sidebar_position: 1
 sidebar_label: "📦 Overview"
 ---
 
-[<img src="/img/CharpNumerics.png"/>](/img/CharpNumerics.png)
-
 
 **CsharpNumerics** is a lightweight yet powerful .NET library for numerical computing, machine learning, statistics, and physics simulations — built entirely in pure C#.
 
