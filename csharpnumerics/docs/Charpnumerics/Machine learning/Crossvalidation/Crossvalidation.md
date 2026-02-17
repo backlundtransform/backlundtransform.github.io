@@ -220,4 +220,3 @@ var result = cv.Run(ts, "Target", new DailyGrouping());
 | `StratifiedKFoldCrossValidator` | ❌             | ❌                  | Maintains class proportions; only for classification; useful for imbalanced datasets. |
 
 
----
