@@ -11,7 +11,6 @@ Perform distributions, hypothesis testing, regression, and data analysis directl
 namespace CSharpNumerics.Statistics
 ```
 
-## Modules
 
 | Module | Description |
 |--------|-------------|

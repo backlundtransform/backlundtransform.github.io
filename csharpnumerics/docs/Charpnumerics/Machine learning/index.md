@@ -12,7 +12,6 @@ The focus is on **transparency**, **mathematical clarity**, and **pipeline-based
 namespace CSharpNumerics.ML
 ```
 
-## Modules
 
 | Module | Description |
 |--------|-------------|

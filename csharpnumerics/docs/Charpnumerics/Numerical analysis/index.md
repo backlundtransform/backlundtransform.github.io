@@ -11,7 +11,7 @@ Robust tools for root finding, integration, solving differential equations, and 
 namespace CSharpNumerics.Numerics
 ```
 
-## Modules
+
 
 | Module | Description |
 |--------|-------------|

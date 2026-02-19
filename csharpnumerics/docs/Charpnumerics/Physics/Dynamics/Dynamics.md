@@ -120,6 +120,60 @@ double KE    = body.KineticEnergy;                 // ½mv² + ½ωᵀIω
 body.ClearForces();  // reset accumulators after integration step
 ```
 
+## ⏱️ RigidBody Integration
+
+Three time-stepping methods advance a `RigidBody` by one `dt`. Each delegates to the corresponding ODE solver in `DifferentialEquationExtensions`, packing body state into `VectorN` internally.
+
+```csharp
+// Semi-implicit (symplectic) Euler — stable for games, first-order
+// Apply forces before calling; accumulators are cleared afterwards
+var body = RigidBody.CreateSolidSphere(10, 1);
+body.Position = new Vector(0, 0, 100);
+body.ApplyForce(new Vector(0, 0, -9.80665 * body.Mass));
+body.IntegrateSemiImplicitEuler(dt: 0.001);
+
+// Velocity Verlet — O(dt²) accuracy, excellent energy conservation
+// Forces are evaluated by forceFunc (no need to pre-apply)
+Func<RigidBody, (Vector force, Vector torque)> gravity = b =>
+    (new Vector(0, 0, -9.80665 * b.Mass), new Vector(0, 0, 0));
+body.IntegrateVelocityVerlet(gravity, dt: 0.01);
+
+// Explicit Euler — simplest, least stable
+body.ApplyForce(new Vector(0, 0, -9.80665 * body.Mass));
+body.IntegrateEuler(dt: 0.001);
+```
+
+## 🧲 Common Force Models
+
+Ready-made force functions for building simulations — combine them in a `forceFunc` for the integrators.
+
+```csharp
+// Spring (Hooke's law): F = -k·(|Δr| - L₀)·r̂
+var spring = 50.0.SpringForce(restLength: 2.0, position, anchor);
+
+// Viscous damping: F = -c·v
+var damping = 0.5.DampingForce(velocity);
+
+// Aerodynamic drag: F = -½·Cd·ρ·A·|v|·v
+var drag = 0.47.DragForce(fluidDensity: 1.225, crossSectionArea: 0.01, velocity);
+
+// Friction (kinetic — moving object)
+var kinetic = 0.3.FrictionForce(normalForceMagnitude: 98, velocity);
+
+// Friction (static — stationary object, opposes applied force up to μN)
+var friction = 0.5.FrictionForce(normalForceMagnitude: 100, velocity: new Vector(0, 0, 0),
+    appliedTangentialForce: new Vector(20, 0, 0));  // returns (-20, 0, 0)
+
+// Compose forces in a Verlet simulation
+Func<RigidBody, (Vector, Vector)> forces = b =>
+{
+    var F = 50.0.SpringForce(2.0, b.Position, new Vector(0, 0, 0))
+          + 0.5.DampingForce(b.Velocity);
+    return (F, new Vector(0, 0, 0));
+};
+body.IntegrateVelocityVerlet(forces, dt: 0.01);
+```
+
 ## 🌀 Moment of Inertia (Scalar)
 
 $$I_{\text{solid sphere}} = \tfrac{2}{5}mr^2, \quad I_{\text{hollow sphere}} = \tfrac{2}{3}mr^2, \quad I_{\text{solid cyl}} = \tfrac{1}{2}mr^2, \quad I_{\text{rod, center}} = \tfrac{mL^2}{12}, \quad I_{\text{rod, end}} = \tfrac{mL^2}{3}$$
