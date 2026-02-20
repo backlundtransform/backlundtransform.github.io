@@ -22,79 +22,64 @@ CsharpNumerics is evolving into a comprehensive scientific computing and simulat
 
 ---
 
-### 🧩 Phase 1 — Core Numerical Foundations
+### 🧩 Phase 1 — Stochastic Foundations & Solvers
 
-🔬 **Advanced Model Validation & Cross-Validation Tools**
-Expanding numerical and statistical utilities for:
+**Goal:** Extend the Statistics module to provide broader support for simulation and probabilistic calculations.
+* Features:
+  * Implementation of probability density functions (Normal, Poisson, Beta, Gamma).
+  * Monte Carlo Simulation – A multi-threaded framework for running  independent simulations to quantify risk and probability.
+  * Utilities for uncertainty quantification and resampling
 
-* Robust model evaluation
-* Uncertainty quantification
-* Performance analysis for scientific, ML, and engineering workflows
-
----
-
-### ⚛️ Phase 2 — Physics Engine & Continuum Simulation
-
-Building a full physics layer on top of the numerical core:
-
-* Classical dynamics and force-driven systems
-* Rigid body mechanics and real-time simulation (game physics foundations)
-* Field-based physics:
-
-  * diffusion
-  * advection
-  * flow & heat transfer
-* PDE solvers for continuum models
-* Foundations for spatial and raster-based simulation (future GIS integration)
-
-➡️ Enables applications in fluid mechanics, hydrology, energy systems, materials, and interactive simulation.
 
 ---
 
-### 🎮 Phase 3 — Game Physics & Interactive Simulation
+### 🎧 Phase 2 — Audio & Oscillation Engine 
 
-Extending physics modules toward real-time environments:
+**Goal:** Build a concrete application of the Oscillations module.
 
-* Deterministic solvers for games & simulations
-* Collision systems and constraint solvers
-* Hybrid real-time + scientific simulation workflows
-* Physically-based motion for visualization and digital twins
+* Features:
 
----
-
-### 📖 Phase 4 — Documentation & Applied Examples
-
-High-quality learning and industry-oriented material:
-
-* Physics simulations
-* Numerical optimization pipelines
-* ML + numerical hybrid models
-* Realistic engineering scenarios
-
-Designed for both education and production use.
+  * Wave propagation, Fourier transforms, filters
+  * Feature extraction on signals using ML
+  * Real-time or offline simulation pipelines
 
 ---
 
-### 💻 Phase 5 — Classical Quantum Simulation (Educational)
 
-CPU-based quantum circuit simulators supporting:
+### 🌍 Phase 3 — GeoEngine & Spatial Simulations
 
-* Quantum algorithms
-* Noise models
-* Hybrid classical–quantum experimentation
+**Goal:** Apply statistical modeling and Monte Carlo methods to spatial problems.
+
+* Features:
+
+  * Raster- and mesh-based spatial representation
+  * Monte Carlo pipelines for probability and risk maps
+  * Visualization: probability fields, percentiles, extreme scenarios
+  * Spatial Clustering: Identifying "hotspots" or risk zones using unsupervised learning.
+
+Use cases:
+
+* **Hydrology:** Runoff and accumulation models based on gravity and terrain slope.
+* **Diffusion & Advection:** Simulating how smoke, pollutants, or heat move across a field influenced by wind/vector fields.
+* **Acoustics** Ray-casting for acoustics (noise mapping) and line-of-sight analysis in urban or natural environments.
+
+---
+
+
+### 💻 Phase 4 — Classical Quantum Simulation (Educational)
+
+**Goal:** CPU-based quantum circuit simulators
+
+* Features:
+
+  * Quantum algorithms
+  * Noise models
+  * Hybrid classical–quantum experimentation
 
 (No specialized hardware required)
 
----
 
-### 🌍 Phase 6 — Spatial & Geometric Numerics (Long-Term)
 
-Deep integration of:
-
-* Meshes and spatial data structures
-* Raster & field-based numerics
-* Large-scale physical modeling
-* GIS-connected simulation workflows
 
 
 
