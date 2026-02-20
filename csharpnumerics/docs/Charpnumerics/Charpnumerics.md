@@ -57,12 +57,6 @@ CsharpNumerics is evolving into a comprehensive scientific computing and simulat
   * Visualization: probability fields, percentiles, extreme scenarios
   * Spatial Clustering: Identifying "hotspots" or risk zones using unsupervised learning.
 
-Use cases:
-
-* **Hydrology:** Runoff and accumulation models based on gravity and terrain slope.
-* **Diffusion & Advection:** Simulating how smoke, pollutants, or heat move across a field influenced by wind/vector fields.
-* **Acoustics** Ray-casting for acoustics (noise mapping) and line-of-sight analysis in urban or natural environments.
-
 ---
 
 
