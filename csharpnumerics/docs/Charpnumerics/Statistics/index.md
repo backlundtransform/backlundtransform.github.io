@@ -15,4 +15,5 @@ namespace CSharpNumerics.Statistics
 | Module | Description |
 |--------|-------------|
 | 📊 [Statistics](Statistics/Statistics.md) | Descriptive statistics, distributions, and hypothesis testing |
-|📈[Interpolation](Interpolation/Interpolation.md) | Polynomial, spline, and other interpolation methods |
+| 📈 [Interpolation](Interpolation/Interpolation.md) | Polynomial, spline, and other interpolation methods |
+| 🗃️ [Data](Data/Data.md) | Core data structures for indexed and time-indexed data |
