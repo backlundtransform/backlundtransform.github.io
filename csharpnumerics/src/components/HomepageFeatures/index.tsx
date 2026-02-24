@@ -15,7 +15,7 @@ const FeatureList: FeatureItem[] = [
   {
     title: 'Numerical Analysis',
     Svg: require('@site/static/img/undraw_analysis.svg').default,
-    href: '/docs/Charpnumerics/Numerical analysis/',
+    href: '/docs/Csharpnumerics/Numerical analysis/',
     description: (
       <>
         Robust tools for root finding, integration, solving differential equations, 
@@ -26,7 +26,7 @@ const FeatureList: FeatureItem[] = [
   {
     title: 'Statistics & Data',
     Svg: require('@site/static/img/undraw_statistics.svg').default,
-    href: '/docs/Charpnumerics/Statistics/',
+    href: '/docs/Csharpnumerics/Statistics/',
     description: (
       <>
         Perform distributions, hypothesis testing, regression, and data analysis
@@ -37,7 +37,7 @@ const FeatureList: FeatureItem[] = [
   {
     title: 'Machine Learning',
     Svg: require('@site/static/img/undraw_machine_learning.svg').default,
-    href: '/docs/Charpnumerics/Machine learning/',
+    href: '/docs/Csharpnumerics/Machine learning/',
     description: (
       <>
         Foundations for crossvalidation, regression, classification and optimization designed for explainability and numerical stability.
@@ -46,7 +46,7 @@ const FeatureList: FeatureItem[] = [
   }, {
     title: 'Physics',
     Svg: require('@site/static/img/undraw_physics.svg').default,
-    href: '/docs/Charpnumerics/Physics/',
+    href: '/docs/Csharpnumerics/Physics/',
     description: (
       <>
         Mathematical tools and models inspired by classical and computational physics applications.
