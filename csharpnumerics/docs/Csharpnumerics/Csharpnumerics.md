@@ -9,10 +9,13 @@ slug: /Csharpnumerics/
 
 It provides a clean, modular API with robust building blocks for scientific and engineering workflows, including:
 
-* **Numerical Analysis** — linear algebra, transforms, ordinary differential equations (ODEs), vector fields, and numerical integration methods
-* **Machine Learning** — regression, classification, cross-validation, and reusable pipelines
-* **Statistics** — descriptive analytics, probability tools, and interpolation techniques
-* **Physics** — classical mechanics, rigid body dynamics, orbital mechanics, and real-time simulation
+* **Numerical Analysis** — linear algebra, transforms, ordinary differential equations (ODEs), vector fields, and advanced numerical integration methods
+
+* **Statistics** — descriptive and inferential analysis, probability distributions, random processes, and Monte Carlo simulation
+
+* **Machine Learning** — supervised and unsupervised learning, automated model selection (AutoML), cross-validation, clustering, and stability analysis
+
+* **Physics** — classical mechanics, rigid body dynamics, orbital mechanics, and real-time physical simulation
 
 📦 Available on **NuGet**: [https://www.nuget.org/packages/CSharpNumerics/](https://www.nuget.org/packages/CSharpNumerics/)
 

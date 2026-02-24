@@ -19,6 +19,6 @@ namespace CSharpNumerics.ML
 | 🔄[Cross-Validation](Crossvalidation/Crossvalidation.md) | K-fold, stratified, and custom validation strategies |
 | 🏷️[Classification](Classification/Classification.md) | Decision trees, logistic regression, and more |
 | 📉 [Regression](Regression/Regression.md) | Linear, polynomial, and advanced regression models |
-| 🔬 [Unsupervised AutoML](Unsupervised%20AutoML/Unsupervised%20AutoML.md) | Automated pipeline, Fluent API, Clustering experiment |
-| 🔵 [Clustering](Clustering/Clustering.md) | Clustering models, evaluators, and grid search |
+| 🔬 [Unsupervised AutoML](Unsupervised%20AutoML/Unsupervised%20AutoML.md) | Automated pipeline, fluent API, clustering experiment |
+| 🔵 [Clustering](Clustering/Clustering.md) | Clustering models and evaluators |
 | 🎲 [Uncertainty Estimation](Uncertainty%20Estimation/Uncertainty%20Estimation.md) | Monte Carlo bootstrap, consensus matrix, and stability analysis |
