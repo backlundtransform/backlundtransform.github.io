@@ -1,5 +1,5 @@
 ---
-sidebar_label: "⚡ AutoML"
+sidebar_label: "⚡ Supervised AutoML"
 ---
 
 ## ➡️ Pipeline Grid

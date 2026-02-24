@@ -128,6 +128,81 @@ var score = result.BestScore;
 * Can be combined with **Pipelines**, **Series**, or **TimeSeries**
 
 ---
+## 🎲 Monte Carlo Cross-Validation
+
+Runs **many random train/test splits** (typically 100–1000) and collects the resulting score into a full **probability distribution**. Built on top of the library's `MonteCarloSimulator` engine.
+
+Unlike ShuffleSplit which returns a single aggregate score, Monte Carlo CV returns a complete `MonteCarloResult` with **confidence intervals**, **histograms**, **standard error**, and a **convergence curve**.
+
+**Example visualization (200 iterations, 20% test size)**
+
+```
+Iteration   1: Train [random 80%] | Test [random 20%] → score = 0.88
+Iteration   2: Train [random 80%] | Test [random 20%] → score = 0.85
+Iteration   3: Train [random 80%] | Test [random 20%] → score = 0.91
+...
+Iteration 200: Train [random 80%] | Test [random 20%] → score = 0.87
+
+→ Mean = 0.87, StdDev = 0.03, 95% CI = [0.84, 0.90]
+```
+
+**Standard usage (drop-in `ICrossValidator`)**
+
+```csharp
+var cv = new MonteCarloCrossValidator(
+    pipelineGrid,
+    iterations: 200,
+    testSize: 0.2,
+    seed: 42);
+
+var result = cv.Run(X, y);
+
+var bestModel = result.BestPipeline;
+var score = result.BestScore;
+```
+
+**Extended usage (full score distributions)**
+
+```csharp
+var cv = new MonteCarloCrossValidator(
+    pipelineGrid,
+    iterations: 200,
+    testSize: 0.2,
+    seed: 42);
+
+var detailed = cv.RunDetailed(X, y);
+
+// Confidence interval for the best pipeline
+var ci = detailed.BestConfidenceInterval;       // e.g. (0.84, 0.90)
+double stdDev = detailed.BestScoreStdDev;        // e.g. 0.03
+
+// Convergence curve — verify that enough iterations were run
+double[] convergence = detailed.ConvergenceCurve;
+
+// Full MonteCarloResult per pipeline
+foreach (var (pipeline, mcResult) in detailed.DetailedScores)
+{
+    Console.WriteLine($"{pipeline} → {mcResult.Mean:F3} ± {mcResult.StandardDeviation:F3}");
+  
+    Console.WriteLine($"  SE: {mcResult.StandardError:F4}");
+    
+    // Histogram of score distribution
+    var histogram = mcResult.Histogram(10);
+}
+```
+
+**Key points:**
+
+* Quantifies **model evaluation uncertainty** — not just a point estimate
+* Reports **confidence intervals** for scores (e.g. "accuracy = 0.87 ± 0.03")
+* **Convergence curve** shows whether enough iterations were run
+* **Histogram** visualizes the full score distribution
+* **Standard error** decreases with more iterations ($SE = \sigma / \sqrt{n}$)
+* All pipelines are evaluated on **identical random splits** (fair comparison)
+* Implements `ICrossValidator` — **drop-in replacement** for other validators
+* Reproducible via `seed` parameter
+
+---
 ## 📅 Leave-One-Out Cross-Validation
 
 Train on all rows except one, test on the held-out row, then iterate. Works for **tabular or grouped data**.

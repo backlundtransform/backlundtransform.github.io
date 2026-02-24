@@ -16,7 +16,8 @@ namespace CSharpNumerics.Numerics
 | Module | Description |
 |--------|-------------|
 | 📘[Numeric](Numeric/Numeric.md) | Core numeric utilities and helper functions |
-| 📐[Calculus](Calculus/Calculus.md) | Derivatives, limits, and related tools |
+| �[Interpolation](Interpolation/Interpolation.md) | Polynomial, spline, and other interpolation methods |
+| �📐[Calculus](Calculus/Calculus.md) | Derivatives, limits, and related tools |
 | 🧮[Linear Algebra](Linear%20algebra/Linear%20algebra.md) | Matrix operations, decompositions, and solvers |
 | ∫ [Integrals](Integrals/Integrals.md) | Numerical integration methods |
 | 📐 [Differential Equations](Differential%20equations/Differential%20equations.md) | ODE solvers and related methods |

@@ -1,5 +1,5 @@
 ---
-sidebar_label: "📊 Statistics"
+sidebar_label: "📊 Descriptive & Inferential"
 ---
 
 ## 📏 Descriptive Statistics
@@ -35,16 +35,6 @@ var (slope, intercept, corr) = serie.LinearRegression(p => (p.Index, p.Value));
 var expFunc = serie.ExponentialRegression(p => (p.Index, p.Value));
 ```
 
----
-
-## 👥 K-Nearest Neighbors
-
-Classify a point based on its closest neighbors:
-
-```csharp
-var data = new List<(double x, double y, int c)> { (7,7,0), (7,4,0), (3,4,1), (1,4,1) };
-int classification = data.KnearestNeighbors(p => (p.x, p.y, p.c), (3,7), 3);
-```
 
 ---
 
@@ -66,15 +56,6 @@ Running total over a sequence:
 var cumsum = data.CumulativeSum(p => p.Value);
 ```
 
----
 
-## 🔔 Normal Distribution
-
-Create a probability density function for $\mathcal{N}(\mu, \sigma)$:
-
-```csharp
-var pdf = Statistics.NormalDistribution(standardDeviation: 1, mean: 0);
-double density = pdf(0.5);
-```
 
 
