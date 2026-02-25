@@ -58,7 +58,6 @@ This format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 ### 🔵 Changed
 
 - Renamed `StatisticsExtensions` → `DescriptiveStatisticsExtensions` for clarity
-- Changed namespace for `DescriptiveStatisticsExtensions` to `CsharpNumerics.Numerics`
 - Changed namespace for `DifferentialEquationExtensions` to `CsharpNumerics.Numerics`
 - Changed namespace for`TransformExtensions` to `CsharpNumerics.Numerics`
 - Changed namespace for `VectorFieldExtensions` to `CsharpNumerics.Numerics`
