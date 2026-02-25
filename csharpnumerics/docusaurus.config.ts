@@ -111,12 +111,9 @@ const config: Config = {
         {
           title: 'Resources',
           items: [
+          
             {
-              label: '� Changelog',
-              to: '/changelog',
-            },
-            {
-              label: '�📦 NuGet',
+              label: '📦 NuGet',
               href: 'https://www.nuget.org/packages/CSharpNumerics/',
             },
             {
