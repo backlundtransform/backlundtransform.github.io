@@ -64,12 +64,11 @@ This format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 - Changed namespace for `VectorFieldExtensions` to `CsharpNumerics.Numerics`
 - Updated `InterpolationExtensions` with support for new interpolation types
 - Moved `InterpolationType` enum from Statistics namespace to `CsharpNumerics.Numerics.Enums`
-- Changed namespace for `DerivativeExtensions`, `IntegrationExtensions`, `LimitExtensions`, and `TrigonometryExtensions`
+- Changed namespace for `DerivativeExtensions`, `IntegrationExtensions`, `LimitExtensions`, and `TrigonometryExtensions`  to `CsharpNumerics.Numerics`
 
 ### 🗑️ Removed
 
 - Deprecated `Statistics.cs` methods class
-- `InterpolationType` enum from the Statistics namespace (relocated to `CsharpNumerics.Numerics`)
 
 ---
 
