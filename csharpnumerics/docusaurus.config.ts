@@ -85,6 +85,11 @@ const config: Config = {
           label: 'Tutorial',
         },
         {
+          to: '/changelog',
+          label: 'Changelog',
+          position: 'left',
+        },
+        {
           href: 'https://www.nuget.org/packages/CSharpNumerics/',
           label: 'NuGet',
           position: 'right',
@@ -107,7 +112,11 @@ const config: Config = {
           title: 'Resources',
           items: [
             {
-              label: '📦 NuGet',
+              label: '� Changelog',
+              to: '/changelog',
+            },
+            {
+              label: '�📦 NuGet',
               href: 'https://www.nuget.org/packages/CSharpNumerics/',
             },
             {
