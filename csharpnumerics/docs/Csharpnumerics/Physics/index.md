@@ -17,6 +17,7 @@ namespace CSharpNumerics.Physics
 |--------|-------------|
 | 🚀 [Kinematics](Kinematics/Kinematics.md) | Motion analysis, projectile trajectories, and dynamics |
 | ⚡ [Dynamics](Dynamics/Dynamics.md) | Forces, momentum, energy, work, power, and collisions |
+| 🔄 [Oscillations](Oscillations/Oscillations.md) | Harmonic, damped, driven, and coupled oscillator models |
 |🔭 [Astronomy](Astronomy/Astronomy.md) | Orbital mechanics and celestial computations |
 
 ## 🔬 Applied Physics

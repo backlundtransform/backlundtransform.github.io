@@ -1,6 +1,6 @@
-## 🔵 Clustering Models
 
-**KMeans**
+
+## 🎯 KMeans
 
 Class: `KMeans`
 
@@ -16,7 +16,7 @@ Exposes after fit: `Centroids`, `Inertia`, `Iterations`
 
 ---
 
-**DBSCAN**
+## 🔍 DBSCAN
 
 Class: `DBSCAN`
 
@@ -29,7 +29,7 @@ Discovers K automatically. Noise points labeled `-1`. Exposes `NoiseCount`.
 
 ---
 
-**Agglomerative Clustering**
+## 🌳 Agglomerative Clustering
 
 Class: `AgglomerativeClustering`
 

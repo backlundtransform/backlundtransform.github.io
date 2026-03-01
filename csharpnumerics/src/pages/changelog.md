@@ -18,6 +18,40 @@ This format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ---
 
+## [2.5.0] — 2026-03-01
+
+### 🟢 Added
+
+#### Statistics — Extended Descriptive & Inferential Statistics
+- New distributions: `StudentTDistribution`, `ChiSquaredDistribution`, `FDistribution` (with `InverseCdf`, `TwoTailedPValue`, `UpperTailPValue`)
+- New descriptive functions: `Median`, `Percentile`, `InterquartileRange`, `Skewness`, `Kurtosis`, `SampleVariance`, `Mode`, `Range`, `CumulativeSum`, `ConfidenceIntervals`
+- New inferential tests: `OneSampleTTest`, `TwoSampleTTest`, `PairedTTest`, `ZTest`, `ChiSquaredTest`, `OneWayAnova`
+- New correlations: `PearsonCorrelation` (with p-value), `SpearmanCorrelation`
+- New regressions: `ExponentialRegression`, `LogarithmicRegression`, `PowerRegression`, `PolynomialRegression`
+
+#### Physics — Oscillation Framework
+- `SimpleHarmonicOscillator` — position, velocity, acceleration, phase, energy (kinetic/potential/total), period, frequency
+- `DampedOscillator` — underdamped/critically damped/overdamped, `DampingRegime` enum, envelope functions, energy decay, Q-factor
+- `DrivenOscillator` — forced oscillation with resonance frequency, amplitude response, phase response, steady-state, transient response
+- `CoupledOscillators` — N coupled oscillators, normal modes, mode frequencies, energy per oscillator, energy transfer
+- `IOscillator` interface for common signature
+- 2 300+ lines of tests (328 + 677 + 556 + 742)
+
+#### ML — Supervised Experiment API
+- `SupervisedExperiment` — fluent API mirroring `ClusteringExperiment` for supervised models
+- `CrossValidatorConfig` — lazy factory with `KFold()`, `StratifiedKFold()`, `ShuffleSplit()`, `LeaveOneOut()`, `MonteCarlo()`, `Custom()`
+- `SupervisedExperimentResult` — `Rankings`, `Best`, `BestBy(cvName)`, `BestConfusionMatrix`, `BestR2`, `CVResults`
+- `ScoreDistributionSummary` — descriptive statistics (mean, median, std, IQR, skewness, kurtosis, CI) for pipeline scores
+- New methods on `ClusteringExperimentResult`: `ScoreSummary()`, `ScorePercentile()`
+- New methods on `SupervisedExperimentResult`: `ScoreSummary()`, `ScorePercentile()`, `RankCorrelation()`, `ScoreConsistency()`
+- 818 lines of tests (721 supervised + 97 clustering)
+
+### 🔵 Changed
+
+- Refactored `StandardDeviation` to support both sample and population variants
+
+---
+
 ## [2.4.0] — 2026-02-24
 
 **75 files changed** — 9,464 insertions, 1,342 deletions

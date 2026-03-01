@@ -9,74 +9,74 @@ All regressors implement `IRegressionModel`.
 
 Class: `Linear`
 
-Hyperparameters:
-
-* `LearningRate`
-* `FitIntercept`
+| Hyperparameter | Values |
+|---|---|
+| `LearningRate` | Step size |
+| `FitIntercept` | Include bias term |
 
 ## 🔷 Ridge Regression (L2)
 
 Class: `Ridge`
 
-Hyperparameters:
-
-* `Alpha`
-* `FitIntercept`
+| Hyperparameter | Values |
+|---|---|
+| `Alpha` | Regularization strength |
+| `FitIntercept` | Include bias term |
 
 
 ## ✂️ Lasso Regression (L1)
 
 Class: `Lasso`
 
-Hyperparameters:
-
-* `Alpha`
-* `MaxIterations`
+| Hyperparameter | Values |
+|---|---|
+| `Alpha` | Regularization strength |
+| `MaxIterations` | Convergence limit |
 
 ## 🔗 Elastic Net (L1 + L2)
 
 Class: `ElasticNet`
 
-Hyperparameters:
-
-* `Lambda`
-* `L1Ratio`
+| Hyperparameter | Values |
+|---|---|
+| `Lambda` | Regularization strength |
+| `L1Ratio` | L1 vs L2 balance |
 
 ## ➡️ Support Vector Regression (Linear)
 
 Class: `LinearSVR`
 
-Hyperparameters:
-
-* `C`
-* `Epsilon`
-* `LearningRate`
-* `Epochs`
+| Hyperparameter | Values |
+|---|---|
+| `C` | Regularization strength |
+| `Epsilon` | Insensitive zone |
+| `LearningRate` | Step size |
+| `Epochs` | Training iterations |
 
 ## 🎯 Support Vector Regression (Kernel)
 
 Class: `KernelSVR`
 
-Hyperparameters:
-
-* `C`
-* `LearningRate`
-* `Epochs`
-* `Kernel`
-* `Gamma`
-* `Degree`
+| Hyperparameter | Values |
+|---|---|
+| `C` | Regularization strength |
+| `LearningRate` | Step size |
+| `Epochs` | Training iterations |
+| `Kernel` | `RBF`, `Polynomial` |
+| `Gamma` | Kernel coefficient |
+| `Degree` | Polynomial degree |
 
 
 ## 🧠 Multilayer Perceptron (Regressor)
 
 Class: `MLPRegressor`
 
-Hyperparameters:
-
-* `HiddenLayers`
-* `LearningRate`
-* `Epochs`
-* `BatchSize`
-* `L2`
-* `Activation`
+| Hyperparameter | Values |
+|---|---|
+| `HiddenLayers` | e.g. `64`, `64,32` |
+| `LearningRate` | Step size |
+| `Epochs` | Training iterations |
+| `BatchSize` | Mini-batch size |
+| `L2` | L2 regularization |
+| `Activation` | `ReLU`, `Tanh`, `Sigmoid` |
 

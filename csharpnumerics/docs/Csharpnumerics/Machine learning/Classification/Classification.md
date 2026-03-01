@@ -8,34 +8,34 @@ All classifiers implement `IClassificationModel` and operate directly on `Matrix
 
 Class: `Logistic`
 
-Hyperparameters:
-
-* `LearningRate`
-* `MaxIterations`
-* `FitIntercept` 
-* `RegularizationStrength`
-* `Tolerance` 
+| Hyperparameter | Values |
+|---|---|
+| `LearningRate` | Step size |
+| `MaxIterations` | Convergence limit |
+| `FitIntercept` | Include bias term |
+| `RegularizationStrength` | L2 penalty |
+| `Tolerance` | Convergence threshold | 
 
 
 ## 🌳 Decision Tree
 
 Class: `DecisionTree`
 
-Hyperparameters:
-
-* `MaxDepth`
-* `MinSamplesSplit`
+| Hyperparameter | Values |
+|---|---|
+| `MaxDepth` | Maximum tree depth |
+| `MinSamplesSplit` | Minimum samples to split |
 
 
 ## 🌲 Random Forest
 
 Class: `RandomForest`
 
-Hyperparameters:
-
-* `NumTrees`
-* `MaxDepth`
-* `MinSamplesSplit`
+| Hyperparameter | Values |
+|---|---|
+| `NumTrees` | Number of trees |
+| `MaxDepth` | Maximum tree depth |
+| `MinSamplesSplit` | Minimum samples to split |
 
 
 
@@ -43,49 +43,48 @@ Hyperparameters:
 
 Class: `KNearestNeighbors`
 
-Hyperparameters:
-
-* `K`
+| Hyperparameter | Values |
+|---|---|
+| `K` | Number of neighbors |
 
 ## 🎲 Naive Bayes
 
 Class: `NaiveBayes`
 
-Hyperparameters:
-(No tunable hyperparameters)
+No tunable hyperparameters.
 
 ## ➡️ Support Vector Classifier (Linear)
 
 Class: `LinearSVC`
 
-Hyperparameters:
-
-* `C` (regularization strength)
-* `LearningRate`
-* `Epochs`
+| Hyperparameter | Values |
+|---|---|
+| `C` | Regularization strength |
+| `LearningRate` | Step size |
+| `Epochs` | Training iterations |
 
 ## 🎯 Support Vector Classifier (Kernel)
 
 Class: `KernelSVC`
 
-Hyperparameters:
-
-* `C`
-* `Kernel` (RBF, Polynomial)
-* `LearningRate`
-* `Epochs`
-* `Gamma`
-* `Degree` (for polynomial kernel)
+| Hyperparameter | Values |
+|---|---|
+| `C` | Regularization strength |
+| `Kernel` | `RBF`, `Polynomial` |
+| `LearningRate` | Step size |
+| `Epochs` | Training iterations |
+| `Gamma` | Kernel coefficient |
+| `Degree` | Polynomial degree |
 
 ## 🧠 Multilayer Perceptron (Classifier)
 
 Class: `MLPClassifier`
 
-Hyperparameters:
-
-* `HiddenLayers` (e.g. `64`, `64,32`)
-* `LearningRate`
-* `Epochs`
-* `Activation` (ReLU, Tanh, Sigmoid)
+| Hyperparameter | Values |
+|---|---|
+| `HiddenLayers` | e.g. `64`, `64,32` |
+| `LearningRate` | Step size |
+| `Epochs` | Training iterations |
+| `Activation` | `ReLU`, `Tanh`, `Sigmoid` |
 
 
