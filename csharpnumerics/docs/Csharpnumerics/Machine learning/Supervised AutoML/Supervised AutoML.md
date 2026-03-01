@@ -39,15 +39,7 @@ Run a full experiment with grid search and cross-validation in one call:
 ```csharp
 var result = SupervisedExperiment
     .For(X, y)
-    .WithGrid(new PipelineGrid()
-        .AddModel<KNearestNeighbors>(g => g
-            .Add("K", 3, 5, 7)
-            .AddScaler<StandardScaler>(s => { }))
-        .AddModel<DecisionTree>(g => g
-            .Add("MaxDepth", 3, 5, 10))
-        .AddModel<RandomForest>(g => g
-            .Add("NumTrees", 50)
-            .Add("MaxDepth", 5, 8)))
+    .WithGrid(pipelineGrid)
     .WithCrossValidators(
         CrossValidatorConfig.KFold(folds: 5),
         CrossValidatorConfig.StratifiedKFold(folds: 10),

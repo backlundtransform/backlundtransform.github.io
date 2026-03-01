@@ -36,7 +36,7 @@ var clusteringGrid = new ClusteringGrid()
 
 ## ➡️ ClusteringExperiment (Fluent API)
 
-Run a full experiment with grid search and evaluator in one call:
+Run a full experiment with grid search and evaluators in one call:
 
 ```csharp
 var experiment = ClusteringExperiment
