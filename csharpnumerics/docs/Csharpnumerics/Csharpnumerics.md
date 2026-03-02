@@ -4,18 +4,30 @@ sidebar_label: "📦 Overview"
 slug: /Csharpnumerics/
 ---
 
+**CsharpNumerics** is a lightweight yet powerful .NET library for scientific computing, machine learning, physics, and scientific visualization — built entirely in pure C#.
 
-**CsharpNumerics** is a lightweight yet powerful .NET library for numerical computing, machine learning, statistics, and physics simulations — built entirely in pure C#.
+It provides a clean, modular architecture with robust building blocks for scientific and engineering workflows, including:
 
-It provides a clean, modular API with robust building blocks for scientific and engineering workflows, including:
+### Numerical Analysis
 
-* **Numerical Analysis** — linear algebra, transforms, ordinary differential equations (ODEs), vector fields, and advanced numerical integration methods
+Linear algebra, transforms, ordinary differential equations (ODEs), vector fields, numerical integration, and advanced computational methods.
 
-* **Statistics** — descriptive and inferential analysis, probability distributions, random processes, and Monte Carlo simulation
+### Statistics
 
-* **Machine Learning** — supervised and unsupervised learning, automated model selection (AutoML), cross-validation, clustering, and stability analysis
+Descriptive and inferential statistics, probability distributions, stochastic processes, and Monte Carlo simulation.
 
-* **Physics** — classical mechanics, rigid body dynamics, orbital mechanics, and real-time physical simulation
+### Machine Learning
+
+Supervised and unsupervised learning, automated model selection, cross-validation, clustering, and model stability analysis.
+
+### Physics
+
+Foundational physical models and simulation systems, including state-space dynamics, force interactions, rigid body and orbital mechanics.
+
+### Scientific Visualization
+
+A modular simulation engine supporting real-time and offline visualization, extensible rendering pipelines, and domain modules.
+
 
 📦 Available on **NuGet**: [https://www.nuget.org/packages/CSharpNumerics/](https://www.nuget.org/packages/CSharpNumerics/)
 

@@ -4,15 +4,22 @@
 }
 
 .featureGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1.5rem;
 }
 
+.featureGrid > div {
+  flex: 0 1 calc(33.333% - 1.5rem);
+  max-width: 340px;
+  min-width: 200px;
+}
+
 .featureSvg {
-  height: 160px;
-  width: 160px;
-  margin-bottom: 1rem;
+  height: 130px;
+  width: 130px;
+  margin-bottom: 0.75rem;
   filter: drop-shadow(0 4px 12px rgba(34, 211, 238, 0.1));
 }
 
@@ -32,7 +39,7 @@
   background: #0f172a;
   border: 1px solid #1e293b;
   border-radius: 10px;
-  padding: 2rem 1.5rem;
+  padding: 1.5rem 1.25rem;
   height: 100%;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
@@ -47,40 +54,43 @@
 .featureCard h3 {
   color: #22d3ee;
   font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 0.3rem;
 }
 
 .featureCard p {
   color: #cbd5e1;
-  font-size: 0.95rem;
-  line-height: 1.6;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  margin-bottom: 0;
 }
 
 /* 3 columns for medium-large screens */
 @media screen and (max-width: 1200px) {
-  .featureGrid {
-    grid-template-columns: repeat(3, 1fr);
+  .featureGrid > div {
+    flex: 0 1 calc(33.333% - 1.25rem);
   }
 }
 
 /* 2 columns for tablets */
 @media screen and (max-width: 860px) {
-  .featureGrid {
-    grid-template-columns: repeat(2, 1fr);
+  .featureGrid > div {
+    flex: 0 1 calc(50% - 1.5rem);
   }
 
   .featureSvg {
-    height: 120px;
-    width: 120px;
+    height: 100px;
+    width: 100px;
   }
 }
 
 /* 1 column for mobile */
 @media screen and (max-width: 520px) {
-  .featureGrid {
-    grid-template-columns: 1fr;
+  .featureGrid > div {
+    flex: 0 1 100%;
   }
 
   .featureCard {
-    padding: 1.5rem 1rem;
+    padding: 1.25rem 1rem;
   }
 }

@@ -18,19 +18,17 @@ const FeatureList: FeatureItem[] = [
     href: '/docs/Csharpnumerics/Numerical analysis/',
     description: (
       <>
-        Robust tools for root finding, integration, solving differential equations, 
-        and linear algebra routines.
+        Linear algebra, transforms, ordinary differential equations (ODEs), vector fields, numerical integration, and advanced computational methods.
       </>
     ),
   },
   {
-    title: 'Statistics & Data',
+    title: 'Statistics',
     Svg: require('@site/static/img/undraw_statistics.svg').default,
     href: '/docs/Csharpnumerics/Statistics/',
     description: (
       <>
-        Perform distributions, hypothesis testing, regression, and data analysis
-        directly in CSharpNumerics.
+        Descriptive and inferential statistics, probability distributions, stochastic processes, and Monte Carlo simulation.
       </>
     ),
   },
@@ -40,7 +38,7 @@ const FeatureList: FeatureItem[] = [
     href: '/docs/Csharpnumerics/Machine learning/',
     description: (
       <>
-        Foundations for crossvalidation, regression, classification and optimization designed for explainability and numerical stability.
+        Supervised and unsupervised learning, automated model selection, cross-validation, clustering, and model stability analysis.
       </>
     ),
   }, {
@@ -49,7 +47,16 @@ const FeatureList: FeatureItem[] = [
     href: '/docs/Csharpnumerics/Physics/',
     description: (
       <>
-        Mathematical tools and models inspired by classical and computational physics applications.
+        Foundational physical models and simulation systems, including state-space dynamics, force interactions, rigid body and orbital mechanics.
+      </>
+    ),
+  }, {
+    title: 'Scientific Visualization',
+    Svg: require('@site/static/img/undraw_visualization.svg').default,
+    href: '/docs/Csharpnumerics/Scientific Visualization/',
+    description: (
+      <>
+        A modular simulation engine supporting real-time and offline visualization, extensible rendering pipelines, and domain modules.
       </>
     ),
   },
