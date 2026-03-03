@@ -1,11 +1,11 @@
 ---
-sidebar_label: "🔬 Overview"
-title: "Scientific Visualization"
+sidebar_label: "⚙️ Overview"
+title: "Domain Engines"
 ---
 
-# 🔬 Scientific Visualization
+# ⚙️ Domain Engines
 
-A modular simulation engine supporting real-time and offline visualization, extensible rendering pipelines, and domain modules.
+Modular computational engines designed for integration with external visualization, simulation, and analysis platforms.
 
 ```csharp
 namespace CSharpNumerics.Physics.Applied

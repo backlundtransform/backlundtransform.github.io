@@ -51,12 +51,12 @@ const FeatureList: FeatureItem[] = [
       </>
     ),
   }, {
-    title: 'Scientific Visualization',
+    title: 'Domain Engines',
     Svg: require('@site/static/img/undraw_visualization.svg').default,
-    href: '/docs/Csharpnumerics/Scientific Visualization/',
+    href: '/docs/Csharpnumerics/Domain Engines/',
     description: (
       <>
-        A modular simulation engine supporting real-time and offline visualization, extensible rendering pipelines, and domain modules.
+        Modular computational engines designed for integration with external visualization, simulation, and analysis platforms.
       </>
     ),
   },
