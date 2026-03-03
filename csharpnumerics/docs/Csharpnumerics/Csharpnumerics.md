@@ -8,23 +8,23 @@ slug: /Csharpnumerics/
 
 It provides a clean, modular architecture with robust building blocks for scientific and engineering workflows, including:
 
-### Numerical Analysis
+### 🔢 Numerical Analysis
 
 Linear algebra, transforms, ordinary differential equations (ODEs), vector fields, numerical integration, and advanced computational methods.
 
-### Statistics
+### 📊 Statistics
 
 Descriptive and inferential statistics, probability distributions, stochastic processes, and Monte Carlo simulation.
 
-### Machine Learning
+### 🤖 Machine Learning
 
 Supervised and unsupervised learning, automated model selection, cross-validation, clustering, and model stability analysis.
 
-### Physics
+### ⚛️ Physics
 
 Foundational physical models and simulation systems, including state-space dynamics, force interactions, rigid body and orbital mechanics.
 
-### Scientific Visualization
+### 🔬 Scientific Visualization
 
 A modular simulation engine supporting real-time and offline visualization, extensible rendering pipelines, and domain modules.
 
