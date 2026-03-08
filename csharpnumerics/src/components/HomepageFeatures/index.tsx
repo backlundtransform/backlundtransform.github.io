@@ -47,13 +47,13 @@ const FeatureList: FeatureItem[] = [
     href: '/docs/Csharpnumerics/Physics/',
     description: (
       <>
-        Foundational physical models and simulation systems, including state-space dynamics, force interactions, rigid body and orbital mechanics.
+        Classical mechanics, electromagnetics, heat transfer, environmental modeling, orbital mechanics, oscillations, and astronomy.
       </>
     ),
   }, {
-    title: 'Domain Engines',
+    title: 'Simulation Engines',
     Svg: require('@site/static/img/undraw_visualization.svg').default,
-    href: '/docs/Csharpnumerics/Domain Engines/',
+    href: '/docs/Csharpnumerics/Simulation Engines/',
     description: (
       <>
         Modular computational engines designed for integration with external visualization, simulation, and analysis platforms.

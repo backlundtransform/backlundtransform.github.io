@@ -18,6 +18,45 @@ This format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ---
 
+## [2.6.0] — 2026-03-07
+
+### 🟢 Added
+
+#### Complex Linear Algebra
+- `ComplexMatrix` — full complex-valued matrix type
+- `ComplexVector` and `ComplexVectorN` — complex-valued vector types
+
+#### Tensor & Scalar Fields
+- `ScalarField` and `TensorField` objects
+- `ElectroMagneticFieldExtensions` for electromagnetic field computations
+
+#### Environmental Physics
+- `EnvironmentalExtensions` with atmospheric/environmental calculations
+- `StabilityClass` enum for atmospheric stability classification
+
+#### Finite Difference Framework
+- `BoundaryCondition`, `Grid2D`, and `GridOperators` for 2D finite difference methods
+
+#### Time Stepping
+- `ITimeStepper` interface and `TimeStepResult` model
+- `EulerStepper`, `RK4Stepper`, `AdaptiveRK45Stepper`, and `VelocityVerletStepper` implementations
+
+#### Heat Physics
+- `HeatExtensions` for heat transfer computations
+
+#### Dimensionality Reduction (ML)
+- `IDimensionalityReducer` interface
+- `PCA` (Principal Component Analysis) implementation
+- Updated `ClusteringExperiment`, `ClusteringGrid`, `ClusteringPipeline`, `Pipeline`, and `PipelineGrid` to support dimensionality reduction
+
+### 🔵 Changed
+
+#### Game Physics Engine — Refactoring
+- Moved physics world, collision detection/response, constraint solver, broad-phase algorithms, constraints (ball socket, distance, hinge, spring joints), and physics objects (AABB, bounding sphere, contact point) from `Physics/Applied/` to `Engines/Game/`
+- Moved `FileExtensions` from `Extensions/` to `Engines/Common/Extensions/`
+
+---
+
 ## [2.5.0] — 2026-03-01
 
 ### 🟢 Added

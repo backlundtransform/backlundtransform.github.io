@@ -1,14 +1,14 @@
 ---
 sidebar_label: "⚙️ Overview"
-title: "Domain Engines"
+title: "Simulation Engines"
 ---
 
-# ⚙️ Domain Engines
+# ⚙️ Simulation Engines
 
 Modular computational engines designed for integration with external visualization, simulation, and analysis platforms.
 
 ```csharp
-namespace CSharpNumerics.Physics.Applied
+namespace CSharpNumerics.Engines
 ```
 
 | Module | Description |

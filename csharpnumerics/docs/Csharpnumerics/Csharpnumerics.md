@@ -4,7 +4,7 @@ sidebar_label: "📦 Overview"
 slug: /Csharpnumerics/
 ---
 
-**CsharpNumerics** is a lightweight yet powerful .NET library for scientific computing, machine learning, physics, and domain engines — built entirely in pure C#.
+**CsharpNumerics** is a lightweight yet powerful .NET library for scientific computing, machine learning, physics, and simulation engines — built entirely in pure C#.
 
 It provides a clean, modular architecture with robust building blocks for scientific and engineering workflows, including:
 
@@ -22,9 +22,9 @@ Supervised and unsupervised learning, automated model selection, cross-validatio
 
 ### ⚛️ Physics
 
-Foundational physical models and simulation systems, including state-space dynamics, force interactions, rigid body and orbital mechanics.
+Classical mechanics, electromagnetics, heat transfer, environmental modeling, orbital mechanics, oscillations, and astronomy.
 
-### ⚙️ Domain Engines
+### ⚙️ Simulation Engines
 
 Modular computational engines designed for integration with external visualization, simulation, and analysis platforms.
 

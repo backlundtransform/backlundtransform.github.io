@@ -12,7 +12,6 @@ namespace CSharpNumerics.Numerics
 ```
 
 
-
 | Module | Description |
 |--------|-------------|
 | 📘[Numeric](Numeric/Numeric.md) | Core numeric utilities and helper functions |
@@ -21,6 +20,7 @@ namespace CSharpNumerics.Numerics
 | 🧮[Linear Algebra](Linear%20algebra/Linear%20algebra.md) | Matrix operations, decompositions, and solvers |
 | ∫ [Integrals](Integrals/Integrals.md) | Numerical integration methods |
 | 📐 [Differential Equations](Differential%20equations/Differential%20equations.md) | ODE solvers and related methods |
-| 🌐[Vector Fields](Vector%20fields/Vector%20fields.md) | Gradient, divergence, curl, and field visualization |
+| 🌐[Fields](Fields/Fields.md) | Scalar fields, vector fields, tensor fields, and differential operators |
+| 🔲[Finite Difference](Finite%20difference/Finite%20difference.md) | PDE discretization via method of lines (Grid2D, operators, boundary conditions) |
 | 🧩[Complex Analysis](Complex%20analysis/Complex%20analysis.md) | Complex numbers, complex functions, and analyticity |
 | 🌊[Transforms](Transforms/Transforms.md) | Fourier, Laplace, and other transforms |
