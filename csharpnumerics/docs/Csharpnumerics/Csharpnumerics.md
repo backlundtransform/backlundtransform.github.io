@@ -32,61 +32,154 @@ Modular computational engines designed for integration with external visualizati
 📦 Available on **NuGet**: [https://www.nuget.org/packages/CSharpNumerics/](https://www.nuget.org/packages/CSharpNumerics/)
 
 
-## 🚀 Future Directions — Roadmap
+Här är en **uppdaterad roadmap** där jag har integrerat dina nya idéer:
 
-CsharpNumerics is evolving into a comprehensive scientific computing and simulation framework, bridging applied mathematics, physics-based modeling, machine learning, and real-time numerical systems.
+* Unity som **visualiseringslager**
+* Web GIS som krav
+* dina engines (Audio, Geo, Quantum, Multiphysics)
+* ML / Monte Carlo pipelines
 
----
-
-### 🧩 Phase 1 — Stochastic Foundations & Solvers
-
-**Goal:** Extend the Statistics module to provide broader support for simulation and probabilistic calculations.
-* Features:
-  * Implementation of probability density functions (Normal, Poisson, Beta, Gamma).
-  * Monte Carlo Simulation – A multi-threaded framework for running  independent simulations to quantify risk and probability.
-  * Utilities for uncertainty quantification and resampling
-
+Jag har också lagt till **Multiphysics** och ett **Visualization Layer** eftersom de blir centrala i din arkitektur.
 
 ---
 
-### 🎧 Phase 2 — Audio & Oscillation Engine 
+## 🚀 Simulation Platform Roadmap
 
-**Goal:** Build a concrete application of the Oscillations module.
+### 🎧 Phase 1 — Audio & Oscillation Engine
 
-* Features:
+**Goal:** Build a concrete application of the Oscillations module and signal processing framework.
 
-  * Wave propagation, Fourier transforms, filters
-  * Feature extraction on signals using ML
-  * Real-time or offline simulation pipelines
+**Core focus:** Waves, signal analysis, and ML on temporal data.
+
+**Features**
+
+* Wave propagation models
+* Digital signal processing
+* Fourier transforms and spectral analysis
+* Filters (low/high/band-pass)
+* Signal feature extraction using ML
+* Real-time and offline simulation pipelines
+* Visualization in Unity:
+
+  * wave fields
+  * oscillation patterns
+  * frequency spectra
+
+Underlying physics based on the
+Wave Equation
+
+Possible applications:
+
+* acoustic simulations
+* vibration analysis
+* signal anomaly detection
+* sensor data pipelines
 
 ---
 
+### 🌍 Phase 2 — GeoEngine & Spatial Simulations
 
-### 🌍 Phase 3 — GeoEngine & Spatial Simulations
+**Goal:** Apply statistical modeling and Monte Carlo methods to spatial and geophysical problems.
 
-**Goal:** Apply statistical modeling and Monte Carlo methods to spatial problems.
+**Core focus:** GIS, probabilistic modeling, environmental simulations.
 
-* Features:
+**Features**
 
-  * Raster- and mesh-based spatial representation
-  * Monte Carlo pipelines for probability and risk maps
-  * Visualization: probability fields, percentiles, extreme scenarios
-  * Spatial Clustering: Identifying "hotspots" or risk zones using unsupervised learning.
+* Raster- and mesh-based spatial representation
+* Terrain models
+* Monte Carlo pipelines for risk modeling
+* Spatial clustering and hotspot detection
+* Unsupervised ML for spatial pattern discovery
+* Time-dependent spatial simulations
+
+Spatial formats supported:
+
+* GeoJSON
+* GeoTIFF
+
+Visualization:
+
+* Web GIS dashboards
+* Unity terrain simulations
+
+Example applications:
+
+* wildfire spread
+* gas dispersion
+* environmental risk mapping
+* probability fields and extreme scenario analysis
 
 ---
 
+### 💻 Phase 3 — Classical Quantum Simulation (Educational)
 
-### 💻 Phase 4 — Classical Quantum Simulation (Educational)
+**Goal:** Create CPU-based educational quantum circuit simulators.
 
-**Goal:** CPU-based quantum circuit simulators
+**Core focus:** understanding quantum algorithms and state evolution.
 
-* Features:
+**Features**
 
-  * Quantum algorithms
-  * Noise models
-  * Hybrid classical–quantum experimentation
+* Quantum circuit simulation
+* Quantum algorithms
+* Noise modeling
+* Hybrid classical–quantum experimentation
+* State vector simulations
+* Circuit visualization tools
 
-(No specialized hardware required)
+Visualization:
+
+* quantum circuit diagrams
+* interactive state evolution
+* qubit representation using the
+  Bloch sphere
+
+No specialized hardware required.
+
+Potential uses:
+
+* education
+* algorithm exploration
+* research prototyping
+
+---
+
+### 🎨 Phase 4 — Multiphysics Engine
+
+**Goal:** Build a general-purpose physics simulation framework.
+
+**Core focus:** classical physics and coupled simulations.
+
+**Supported physics models**
+
+Thermal simulations:
+
+* heat diffusion
+* thermal propagation in solids
+  Based on the
+  Heat Equation
+
+Fluid simulations:
+
+* fluid flow
+* pipe flow
+* atmospheric flows
+  Based on the
+  Navier–Stokes equations
+
+Electromagnetism:
+
+* current in conductors
+* electromagnetic wave propagation
+  Based on
+  Maxwell's equations
+
+Example applications:
+
+* heat propagation in rods
+* fluid flow through pipes
+* electromagnetic effects in conductors
+* environmental physics models
+
 
 
 
