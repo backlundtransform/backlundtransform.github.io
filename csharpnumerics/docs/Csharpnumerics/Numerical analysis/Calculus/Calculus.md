@@ -1,5 +1,5 @@
 ﻿---
-sidebar_label: "📏 Calculus"
+sidebar_label: "∂ Calculus"
 ---
 
 ## 🔎 Limits

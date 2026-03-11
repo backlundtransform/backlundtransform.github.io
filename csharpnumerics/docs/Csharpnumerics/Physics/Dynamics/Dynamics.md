@@ -1,5 +1,5 @@
 ---
-sidebar_label: "⚡ Dynamics"
+sidebar_label: "🍎 Dynamics"
 ---
 
 The `DynamicsExtensions` class provides extension methods for particle dynamics — **forces, momentum, energy, work, power, and collisions**.

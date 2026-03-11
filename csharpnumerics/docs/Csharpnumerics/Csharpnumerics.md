@@ -143,7 +143,7 @@ Potential uses:
 
 ---
 
-### 🎨 Phase 4 — Multiphysics Engine
+### 🧩 Phase 4 — Multiphysics Engine
 
 **Goal:** Build a general-purpose physics simulation framework.
 

@@ -1,5 +1,5 @@
 ---
-sidebar_label: "📈 Interpolation"
+sidebar_label: "🔗 Interpolation"
 ---
 
 CSharpNumerics provides a unified interpolation API supporting linear and logarithmic scales:

@@ -1,5 +1,5 @@
 ---
-sidebar_label: "🔄 Oscillations"
+sidebar_label: "🪀 Oscillations"
 ---
 
 The `Physics.Oscillations` namespace provides one-dimensional oscillator models with both **analytic** and **numerical** solutions. All oscillators implement `IOscillator` for a consistent API.

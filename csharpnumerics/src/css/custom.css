@@ -238,48 +238,6 @@
   display: none;
 }
 
-/* ── Changelog page ── */
-[data-theme='dark'] .markdown h2 {
-  border-bottom: 1px solid #1e293b;
-  padding-bottom: 0.5rem;
-}
-[data-theme='dark'] .markdown h2 code {
-  color: #22d3ee;
-}
-
-/* Version badges in changelog h2 */
-[data-theme='dark'] .markdown h2 a {
-  color: #22d3ee;
-}
-
-/* Highlighted breaking change blocks */
-[data-theme='dark'] .markdown blockquote {
-  background: rgba(34, 211, 238, 0.05);
-  border-left: 4px solid #22d3ee;
-  border-radius: 0 8px 8px 0;
-  padding: 0.8rem 1.2rem;
-  color: #cbd5e1;
-}
-
-/* Changelog tables */
-[data-theme='dark'] .markdown table {
-  border-collapse: collapse;
-  width: 100%;
-}
-[data-theme='dark'] .markdown table th {
-  background: #1e293b;
-  color: #22d3ee;
-  font-weight: 600;
-}
-[data-theme='dark'] .markdown table td,
-[data-theme='dark'] .markdown table th {
-  border: 1px solid #1e293b;
-  padding: 0.5rem 0.75rem;
-}
-[data-theme='dark'] .markdown table tr:nth-child(even) {
-  background: rgba(15, 23, 42, 0.5);
-}
-
 /* ── Responsive: spacing between feature columns ── */
 @media screen and (max-width: 996px) {
   .row .col {

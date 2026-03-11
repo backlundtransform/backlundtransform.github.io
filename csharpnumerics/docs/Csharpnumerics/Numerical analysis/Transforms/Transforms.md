@@ -1,5 +1,5 @@
 ---
-sidebar_label: "🌊 Transforms"
+sidebar_label: "📡 Transforms"
 ---
 
 ## 🌊 FFT / DFT
