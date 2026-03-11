@@ -32,15 +32,6 @@ Modular computational engines designed for integration with external visualizati
 📦 Available on **NuGet**: [https://www.nuget.org/packages/CSharpNumerics/](https://www.nuget.org/packages/CSharpNumerics/)
 
 
-Här är en **uppdaterad roadmap** där jag har integrerat dina nya idéer:
-
-* Unity som **visualiseringslager**
-* Web GIS som krav
-* dina engines (Audio, Geo, Quantum, Multiphysics)
-* ML / Monte Carlo pipelines
-
-Jag har också lagt till **Multiphysics** och ett **Visualization Layer** eftersom de blir centrala i din arkitektur.
-
 ---
 
 ## 🚀 Simulation Platform Roadmap
