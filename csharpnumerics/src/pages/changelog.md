@@ -18,7 +18,7 @@ This format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ---
 
-## [2.6.0] — 2026-03-07
+## [2.6.1] — 2026-03-07
 
 ### 🟢 Added
 
@@ -54,6 +54,59 @@ This format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 #### Game Physics Engine — Refactoring
 - Moved physics world, collision detection/response, constraint solver, broad-phase algorithms, constraints (ball socket, distance, hinge, spring joints), and physics objects (AABB, bounding sphere, contact point) from `Physics/Applied/` to `Engines/Game/`
 - Moved `FileExtensions` from `Extensions/` to `Engines/Common/Extensions/`
+
+---
+
+## [2.6.0] — 2026-03-12
+
+### 🟢 Added
+
+#### Fluid Dynamics (`CSharpNumerics.Physics`)
+- Added `FluidExtensions` bridging `VectorField`/`ScalarField` to classical fluid dynamics:
+  - **Navier–Stokes:** `ConvectiveAcceleration(this VectorField, (double, double, double), double)`, `ViscousTerm(this VectorField, double, (double, double, double), double)`, `PressureGradientForce(this ScalarField, (double, double, double))`, `NavierStokesResidual(this VectorField, ScalarField, double, double, (double, double, double), Vector)` (full and Euler inviscid forms), `IncompressibilityResidual(this VectorField, (double, double, double))`
+  - **Bernoulli's principle:** `BernoulliConstant(this double, double, double, double)`, `BernoulliPressure(this double, double, double, double, double, double)`, `DynamicPressure(this double, double)`, `StagnationPressure(this double, double, double)`
+  - **Continuity:** `MassFlux(this VectorField, double)` (constant and variable density), `ContinuityResidual(this VectorField, double, (double, double, double))`, `VolumeFlowRate(this double, double)`, `ContinuitySpeed(this double, double, double)`
+  - **Vorticity & topology:** `Vorticity(this VectorField, (double, double, double))`, `Enstrophy(this VectorField, (double, double, double))`, `HelicityDensity(this VectorField, (double, double, double))`, `VelocityFromStreamFunction(this ScalarField)`
+  - **Drag & lift:** `DragForce(this double, double, double, Vector)`, `LiftForce(this double, double, double, double)`, `TerminalVelocity(this double, double, double, double)`, `StokesDrag(this double, double, double)`
+  - **Dimensionless numbers:** `ReynoldsNumber(this double, double, double, double)`, `MachNumber(this double, double)`, `FroudeNumber(this double, double)`, `StrouhalNumber(this double, double, double)`, `WeberNumber(this double, double, double, double)`
+  - **Viscous flows:** `PoiseuilleFlowRate(this double, double, double, double)`, `PoiseuilleVelocity(this double, double, double, double, double)`
+  - **Hydrostatics:** `HydrostaticPressure(this double, double, double)`, `BuoyantForce(this double, double)`, `KineticEnergyDensity(this Vector, double)`, `MomentumDensity(this Vector, double)`
+
+#### Wave Equations (`CSharpNumerics.Physics.Waves`)
+- Added `WaveEquation1D` — finite-difference solver for the 1D wave equation with fixed or open boundaries. Includes `Snapshot()`, `SpaceTimeField(double, double)`, `EnergyDensity(this Vector, Vector)`, `FrequencyContent(int, double, double)`, `StandingWaveMode(int)`, and CFL stability check
+- Added `WaveEquation2D` — finite-difference solver for the 2D wave equation on a rectangular grid. Supports initial conditions, energy tracking, and 2D snapshot arrays
+- Added `DampedDrivenWaveEquation1D` — 1D wave equation with damping (α) and an external driving source term
+- Added `WavePacket` — Gaussian wave packet with dispersion. Computes `PhaseVelocity(double, double)`, `GroupVelocity(double, double)`, `Width(t)`, `SpreadRate(double, double)`, and `Propagate(t)`
+- Added `WaveSuperposition` — harmonic superposition engine with `BeatFrequency()`, `InterferencePattern(double[], double)`, and `FourierCoefficients(double[], double)`
+- Added `IWaveField` interface and `BoundaryType` enum
+
+#### Audio Engine (`CSharpNumerics.Engines.Audio`)
+- Added `SignalGenerator` — waveform generation (Sine, Square, Sawtooth, Triangle, WhiteNoise)
+- Added `AudioOscillator` — stateful oscillator with continuous phase for click-free real-time synthesis
+- Added `AudioBuffer` — sample container with Mix, Normalize, Trim, Fade, Reverse, Resample, and WAV export
+- Added `Envelope(double)` — ADSR (Attack-Decay-Sustain-Release) amplitude shaping
+- Added `Synthesizer` — additive synthesis combining multiple oscillators with ADSR envelope
+- Added `AudioFilter` — frequency-domain filtering (LowPass, HighPass, BandPass) via FFT
+- Added `Reverb` — Schroeder-model reverb with parallel comb filters and series all-pass filters
+- Added `Delay` — circular-buffer delay line with feedback
+- Added `Compressor` — dynamic range compression with attack/release envelope
+- Added `SpatialAudio` — stereo panning (constant-power) and inverse-distance attenuation
+- Added `SpectrumAnalyzer` — windowed FFT analysis (Hann, Hamming, Blackman, Rectangular)
+- Added `PitchDetector` — fundamental frequency detection via autocorrelation or Harmonic Product Spectrum
+- Added `BeatDetector` — onset detection via spectral flux with tempo (BPM) estimation
+
+#### Fourier Series (`CSharpNumerics.Numerics.SignalProcessing`)
+- Added `FourierSeries` — real Fourier coefficient analysis and synthesis with `PowerSpectrum()`, `ParsevalEnergy()`, `TimeDomainEnergy(Func<double, double>, int)`, and partial-sum reconstruction (`SynthesizeRange(double[], int)`) for Gibbs phenomenon demonstration
+
+#### Hypothesis Testing (`CSharpNumerics.Statistics`)
+- Added `HypothesisTestsExtensions` with full test infrastructure:
+  - **Parametric:** `TTest(this IEnumerable<double>, double, Alternative, double)` (one-sample, two-sample with Welch correction), `PairedTTest<T>(this IEnumerable<T>, Func<T, (double before, double after)>, double)`, `ZTest<T>(this IEnumerable<T>, Func<T, double>, double, double, double)`, `FTest(this IEnumerable<double>, IEnumerable<double>, Alternative, double)`, `Anova(this IEnumerable<IEnumerable<double>>, double)`
+  - **Non-parametric:** `MannWhitneyUTest(this IEnumerable<double>, IEnumerable<double>, Alternative, double)`, `WilcoxonSignedRankTest(this IEnumerable<double>, Alternative, double)`, `ChiSquaredTest<T>(this IEnumerable<T>, Func<T, (double observed, double expected)>, double)`
+  - All tests return `HypothesisTestResult` with test statistic, p-value, reject/accept decision, confidence interval, effect size, and degrees of freedom
+- Added `Alternative` enum (TwoSided, Less, Greater)
+
+#### Engine Infrastructure (`CSharpNumerics.Engines.Common`)
+- Added `ISimulationEngine` interface, `SimulationClock`, `EventBus`, `FieldSerializer`, and `PlatformAdapter` as shared infrastructure for simulation engines
 
 ---
 

@@ -14,3 +14,4 @@ namespace CSharpNumerics.Engines
 | Module | Description |
 |--------|-------------|
 | 🎮 [Game Engine](Game%20Engine.md) | Game engine physics — bounding volumes, collisions, constraints, and simulation |
+| 🎧 [Audio Engine](Audio%20Engine.md) | Digital audio synthesis, effects processing, and analysis |
