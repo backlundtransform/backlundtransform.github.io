@@ -36,39 +36,8 @@ Modular computational engines designed for integration with external visualizati
 
 ## 🚀 Simulation Platform Roadmap
 
-### 🎧 Phase 1 — Audio & Oscillation Engine
 
-**Goal:** Build a concrete application of the Oscillations module and signal processing framework.
-
-**Core focus:** Waves, signal analysis, and ML on temporal data.
-
-**Features**
-
-* Wave propagation models
-* Digital signal processing
-* Fourier transforms and spectral analysis
-* Filters (low/high/band-pass)
-* Signal feature extraction using ML
-* Real-time and offline simulation pipelines
-* Visualization in Unity:
-
-  * wave fields
-  * oscillation patterns
-  * frequency spectra
-
-Underlying physics based on the
-Wave Equation
-
-Possible applications:
-
-* acoustic simulations
-* vibration analysis
-* signal anomaly detection
-* sensor data pipelines
-
----
-
-### 🌍 Phase 2 — GeoEngine & Spatial Simulations
+### 🌍 Phase 1 — GeoEngine & Spatial Simulations
 
 **Goal:** Apply statistical modeling and Monte Carlo methods to spatial and geophysical problems.
 
@@ -102,7 +71,7 @@ Example applications:
 
 ---
 
-### 💻 Phase 3 — Classical Quantum Simulation (Educational)
+### 💻 Phase 2 — Classical Quantum Simulation (Educational)
 
 **Goal:** Create CPU-based educational quantum circuit simulators.
 
@@ -134,7 +103,7 @@ Potential uses:
 
 ---
 
-### 🧩 Phase 4 — Multiphysics Engine
+### 🧩 Phase 3 — Multiphysics Engine
 
 **Goal:** Build a general-purpose physics simulation framework.
 
