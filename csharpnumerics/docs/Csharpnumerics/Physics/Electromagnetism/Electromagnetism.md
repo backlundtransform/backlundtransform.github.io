@@ -1,5 +1,5 @@
 ---
-sidebar_label: "🧲 Electromagnetic"
+sidebar_label: "🧲 Electromagnetism"
 ---
 
 The `ElectroMagneticFieldExtensions` class bridges `VectorField` (∇·, ∇×) and `VectorFieldExtensions` (∇, ∇²) to classical electrodynamics — Coulomb's law, Lorentz force, Maxwell's equations, Poynting vector, potentials, and Biot–Savart sources.

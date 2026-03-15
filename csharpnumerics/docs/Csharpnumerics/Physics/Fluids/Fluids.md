@@ -1,5 +1,5 @@
 ---
-sidebar_label: "💧 Fluid"
+sidebar_label: "💧 Fluids"
 ---
 
 The `FluidExtensions` class bridges `VectorField` (∇·, ∇×) and `ScalarField` (∇, ∇²) to classical fluid dynamics — Navier–Stokes equations, Bernoulli's principle, continuity, vorticity, drag/lift, dimensionless numbers, viscous pipe flow, and hydrostatics.

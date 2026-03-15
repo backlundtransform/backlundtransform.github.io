@@ -141,6 +141,50 @@ Example applications:
 * environmental physics models
 
 
+---
+
+### 🪐 Phase 4 — Astronomy & Exoplanet Simulation
+
+**Goal:** Build an astronomy simulation and discovery platform combining machine learning, numerical methods, and visualization.
+
+**Core focus:** exoplanet detection, orbital mechanics, and planetary system simulations.
+
+**Supported astronomy models**
+
+**Orbital mechanics**
+
+planetary orbits
+multi-body gravitational systems
+planetary system stability simulations based on Newtonian gravity
+
+**Exoplanet detection**
+
+transit light curve analysis
+supervised machine learning models
+AutoGrid model selection with cross validation
+CNN support for time-series transit detection
+
+**Astronomical data sources**
+
+datasets from
+
+* Kepler Space Telescope
+* Transiting Exoplanet Survey Satellite
+* Planet Hunters
+
+**Visualization**
+
+interactive light curve plots
+3D planetary system visualization using
+Three.js
+
+**Example applications**
+
+exoplanet candidate detection
+planetary system simulation
+machine learning experiments on astronomical datasets
+educational astronomy simulations
+
 
 
 

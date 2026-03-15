@@ -18,6 +18,37 @@ This format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ---
 
+## [2.6.3] – 2026-03-15
+
+### 🟢 Added
+
+####  GIS / Geo-Engine (`CSharpNumerics.Engines.GIS`)
+
+A full geospatial simulation engine under `Engines/GIS/`:
+
+- **Coordinates & Projections** – `GeoCoordinate` type and `Projection` class with coordinate-system transforms.
+- **GeoGrid** – `GeoGrid`, `GeoCell`, and `GridSnapshot` for spatial grid-based modelling.
+- **Plume Simulation** – `PlumeSimulator` for atmospheric plume dispersion on a geo-grid, and `PlumeMonteCarloModel` for stochastic ensemble runs with `ScenarioVariation` support.
+- **Scenario Analysis** – `RiskScenario`, `RiskScenarioBuilder`, `ScenarioResult`, and `TimeFrame` for building and evaluating risk scenarios.
+- **Spatial Analysis** – `ProbabilityMap`, `ScenarioClusterAnalyzer`, and `TimeAnimator` for post-processing simulation results.
+- **Export** – `GeoJsonExporter`, `CesiumExporter`, and `UnityBinaryExporter` for shipping results to web maps, Cesium 3D globe, or Unity.
+
+####  Nuclear Physics (`CSharpNumerics.Physics.Materials.Nuclear`)
+
+A nuclear-physics module under `Physics/Materials/Nuclear/`:
+
+- **Isotopes** – `Isotope` data type and `IsotopeLibrary` with built-in entries (Cs-137, I-131, Sr-90, Co-60, etc.) and runtime registration of custom isotopes.
+- **Radioactive Decay** – `Decay` class for activity, remaining mass, and time-dependent calculations.
+- **Decay Chains** – `DecayChain` with Bateman-equation solver (e.g. Cs-137 → Ba-137m → Ba-137, I-131 → Xe-131).
+- **Radiation Dose** – `RadiationDose` with point-source dose rate, ground-shine dose, and inhalation dose models.
+- **Materials** – `Materials` helper class for physical material properties.
+
+####  Environmental Extensions
+
+- Added `GaussianPuff` transient dispersion model to `EnvironmentalExtensions` (time-dependent puff advecting downwind with Briggs σ).
+
+---
+
 ## [2.6.1] — 2026-03-07
 
 ### 🟢 Added
