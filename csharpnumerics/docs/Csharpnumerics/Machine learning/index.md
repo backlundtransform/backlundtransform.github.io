@@ -20,6 +20,6 @@ namespace CSharpNumerics.ML
 | 🏷️[Classification](Classification/Classification.md) | Decision trees, logistic regression, and more |
 | 📉 [Regression](Regression/Regression.md) | Linear, polynomial, and advanced regression models |
 | 🔬 [Unsupervised AutoML](Unsupervised%20AutoML/Unsupervised%20AutoML.md) | Automated pipeline, fluent API, clustering experiment |
-| 🔵 [Clustering](Clustering/Clustering.md) | Clustering models and evaluators |
+| 🫧 [Clustering](Clustering/Clustering.md) | Clustering models and evaluators |
 | 🎲 [Uncertainty Estimation](Uncertainty%20Estimation/Uncertainty%20Estimation.md) | Monte Carlo bootstrap, consensus matrix, and stability analysis |
 | 🗜️[Dimensionality Reduction](Dimensionality%20Reduction/Dimensionality%20Reduction.md) | PCA and unsupervised preprocessing for supervised and clustering pipelines |
