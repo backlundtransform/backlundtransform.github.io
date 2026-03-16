@@ -1,5 +1,5 @@
 ---
-sidebar_label: "🔬 Unsupervised AutoML"
+sidebar_label: "🌂 Unsupervised AutoML"
 ---
 
 
