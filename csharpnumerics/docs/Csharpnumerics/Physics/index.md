@@ -23,4 +23,4 @@ namespace CSharpNumerics.Physics
 | 🧲 [Electromagnetism](Electromagnetism/Electromagnetism.md) | Coulomb's law, Lorentz force, Maxwell's equations, potentials, and Biot–Savart |
 | 🔭 [Astronomy](Astronomy/Astronomy.md) | Orbital mechanics and celestial computations |
 | 🌿 [Environmental](Environmental/Environmental.md) | Gaussian plume dispersion, Fickian diffusion, advection, and advection–diffusion |
-| ☢️ [Materials](Materials/Materials.md) | Isotopes, radioactive decay chains, and radiation dose |
+| ☢️ [Nuclear](Nuclear/Nuclear.md) | Isotopes, radioactive decay chains, and radiation dose |
