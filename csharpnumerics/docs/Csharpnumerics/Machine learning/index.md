@@ -23,3 +23,5 @@ namespace CSharpNumerics.ML
 | 🫧 [Clustering](Clustering/Clustering.md) | Clustering models and evaluators |
 | 🎲 [Uncertainty Estimation](Uncertainty%20Estimation/Uncertainty%20Estimation.md) | Monte Carlo bootstrap, consensus matrix, and stability analysis |
 | 🗜️[Dimensionality Reduction](Dimensionality%20Reduction/Dimensionality%20Reduction.md) | PCA and unsupervised preprocessing for supervised and clustering pipelines |
+| ☔[Reinforcement AutoML](Reinforcement%20AutoML/Reinforcement%20AutoML.md) | RL experiment runner, grid search, Monte Carlo evaluation |
+| 🕹️[RL Algorithms](RL%20Algorithms/RL%20Algorithms.md) | Agents, policies, environments, replay buffers, and diagnostics |

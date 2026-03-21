@@ -24,3 +24,4 @@ namespace CSharpNumerics.Numerics
 | 🔲[Finite Difference](Finite%20difference/Finite%20difference.md) | PDE discretization via method of lines (Grid2D, operators, boundary conditions) |
 | 🛰️[Complex Analysis](Complex%20analysis/Complex%20analysis.md) | Complex numbers, complex functions, and analyticity |
 | 📡[Transforms](Transforms/Transforms.md) | Fourier, Laplace, and other transforms |
+| 🔋[Optimization](Optimization/Optimization.md) | Gradient-based optimisers, learning rate schedules, Pareto fronts, and NSGA-II |

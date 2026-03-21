@@ -371,3 +371,97 @@ Output GeoJSON includes per-feature nuclear properties:
   }
 }
 ```
+
+---
+
+## 🌍 GIS-RL Integration
+
+Bridges **GIS simulation** with the **RL framework** through `ScenarioRLAnalyzer`. Train RL agents to learn **optimal mitigation strategies** for spatial scenarios — atmospheric plumes, floods, fires, or any GIS-based model.
+
+| Bridge | ML module | Purpose |
+|---|---|---|
+| `ScenarioClusterAnalyzer` | Clustering | *What can happen?* (outcome grouping) |
+| `ScenarioRLAnalyzer` | Reinforcement Learning | *What should we do?* (optimal response) |
+
+ **Extensibility**
+
+`ScenarioRLAnalyzer` accepts any environment:
+
+| Entry point | Use case |
+|---|---|
+| `ScenarioRLAnalyzer.For(emissionRate, sourcePosition)` | Builds a `PlumeEnvironment` internally |
+| `ScenarioRLAnalyzer.For(IGISEnvironment)` | Custom GIS environment (flood, fire, etc.) |
+| `ScenarioRLAnalyzer.For(IEnvironment)` | Any RL environment |
+
+Implement `IGISEnvironment` for custom spatial simulations:
+
+```csharp
+public class FloodEnvironment : IGISEnvironment
+{
+    public int ObservationSize => 6;
+    public int ActionSize => 4;
+    public double[] Reset() { /* ... */ }
+    public (double[] state, double reward, bool done, Dictionary<string, object> info)
+        Step(int action) { /* ... */ }
+
+    // IGISEnvironment members
+    public GeoGrid Grid { get; }
+    public TimeFrame TimeFrame { get; }
+    public double Threshold { get; set; }
+    public double ActionCost { get; set; }
+    public int MaxSteps { get; }
+    public GridSnapshot LastSnapshot { get; }
+}
+```
+
+ **Quick Start**
+
+```csharp
+var result = ScenarioRLAnalyzer
+    .For(5.0, new Vector(0, 0, 50))
+    .WithWind(10, new Vector(1, 0, 0))
+    .WithStability(StabilityClass.D)
+    .OverGrid(new GeoGrid(-500, 500, -500, 500, 0, 0, 50))
+    .OverTime(0, 600, 10)
+    .WithAgent(new DQN
+    {
+        HiddenLayers = new[] { 64, 64 },
+        LearningRate = 0.001,
+        Gamma = 0.99,
+        BatchSize = 32
+    })
+    .WithPolicy(new EpsilonGreedy(seed: 42))
+    .WithReplayBuffer(10000, seed: 42)
+    .WithEpisodes(500, maxStepsPerEpisode: 60)
+    .WithSeed(42)
+    .Run();
+
+Console.WriteLine($"{result.AgentName} → avg return = {result.AverageReturn:F2}");
+```
+ **Direct Environment Usage**
+
+`PlumeEnvironment` implements `IEnvironment` and works with the standard `RLExperiment` API:
+
+```csharp
+var env = new PlumeEnvironment(
+    emissionRate: 5.0, windSpeed: 10,
+    windDirection: new Vector(1, 0, 0), stackHeight: 50,
+    sourcePosition: new Vector(0, 0, 50),
+    grid: new GeoGrid(-500, 500, -500, 500, 0, 0, 50),
+    timeFrame: new TimeFrame(0, 600, 10),
+    stability: StabilityClass.D);
+
+var result = RLExperiment
+    .For(env)
+    .WithAgent(new PPO
+    {
+        ActorHiddenLayers = new[] { 64, 64 },
+        CriticHiddenLayers = new[] { 64, 64 },
+        ClipEpsilon = 0.2
+    })
+    .WithEpisodes(500, maxStepsPerEpisode: 60)
+    .WithSeed(42)
+    .Run();
+```
+
+> **Note:** When using `For(IGISEnvironment)` or `For(IEnvironment)`, physics configuration methods (`WithWind`, `WithStability`, etc.) are **disabled** — configure these on the environment before passing it in.

@@ -18,6 +18,58 @@ This format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ---
 
+## [2.6.5] – 2026-03-21
+
+### 🟢 Added
+
+#### Reinforcement Learning (`CSharpNumerics.ML.ReinforcementLearning`)
+
+A complete RL framework under `ML/ReinforcementLearning/`:
+
+- **Tabular Agents** – `QLearning`, `SARSA`, and `MonteCarloControl` with shared `TabularAgent` base class, Q-table access, and state-mapper support.
+- **Value-Based (Deep) Agents** – `DQN` with target network and experience replay, `DoubleDQN` to reduce overestimation bias, and `DuelingDQN` with separate value/advantage streams.
+- **Policy Gradient Agents** – `REINFORCE` (Monte Carlo policy gradient with optional baseline), `ActorCritic` (A2C with entropy bonus), and `PPO` (clipped surrogate + GAE).
+- **Continuous Control** – `DDPG` (deterministic actor-critic with Polyak-averaged target networks).
+- **Environments** – `GridWorld`, `CartPole`, `MountainCar` (discrete), and `Pendulum` (continuous torque).
+- **Exploration Policies** – `EpsilonGreedy`, `SoftmaxPolicy`, `GaussianNoise`, and `OrnsteinUhlenbeck` process, all with per-episode decay and `Clone()`.
+- **Replay Buffers** – `ReplayBuffer` (uniform circular buffer) and `PrioritizedReplayBuffer` (TD-error prioritized sampling).
+- **Experiment API** – `RLExperiment` fluent builder with `Run()`, `RunGrid()`, and `RunMonteCarlo()` modes; `RLPipelineGrid` for hyperparameter grid search across agent types; `EpisodeEvaluator` for standalone agent evaluation with confidence intervals.
+- **Diagnostics** – `QValueHeatmap` (tabular Q-value / greedy-policy maps), `PolicyVisualizer` (action probabilities, entropy, dominant action), and `ValueFunctionSurface` (1D/2D value-function sampling for deep agents).
+- **Interfaces** – `IAgent`, `IEnvironment`, `IPolicy`, `IReplayBuffer`.
+- **Core Types** – `Transition`, `Episode`, `TrainingResult` (return/loss/exploration curves).
+
+#### Neural Network (`CSharpNumerics.ML.NeuralNetwork`)
+
+- Shared `NeuralNetwork` class used by all deep RL agents and MLP models — forward pass, backpropagation, and weight management.
+
+#### GIS-RL Integration (`CSharpNumerics.Engines.GIS.RL`)
+
+Bridges the GIS simulation engine with the RL framework:
+
+- **`IGISEnvironment`** – interface extending `IEnvironment` with `GeoGrid`, `TimeFrame`, `Threshold`, `ActionCost`, `MaxSteps`, and `GridSnapshot`.
+- **`PlumeEnvironment`** – RL environment wrapping `PlumeSimulator` in transient mode (8-dim observation, 6 discrete actions: barriers + emission filter).
+- **`ScenarioRLAnalyzer`** – fluent API for training RL agents on GIS scenarios with `For(emissionRate, position)`, `For(IGISEnvironment)`, and `For(IEnvironment)` entry points; supports physics config, environment tuning, grid search, and replay buffers.
+
+#### Optimization (`CSharpNumerics.Numerics.Optimization`)
+
+A numerical optimization module under `Numerics/Optimization/`:
+
+- **Single-Objective** – `GradientDescent`, `Adam`, `CoordinateDescent`, and `Minimizer` (high-level wrapper).
+- **Multi-Objective** – `NSGA2` (Non-dominated Sorting Genetic Algorithm II) and `ParetoFront` for Pareto-optimal solution sets.
+- **Convergence Strategies** – `EarlyStopping`, `LearningRateSchedule`, and `MaxIterationsOrTolerance`.
+- **Interfaces** – `IOptimizer`, `IObjectiveFunction`, `IConvergenceCriterion`.
+
+#### Dimensionality Reduction – PCA (`CSharpNumerics.ML.DimensionalityReduction`)
+
+- Reworked `PCA` implementation with power iteration and deflation for eigendecomposition. Exposes `Components`, `ExplainedVariance`, `ExplainedVarianceRatio`, and `Mean`. Integrates into both supervised and clustering pipelines via `AddReducer<PCA>()` and `WithReducer()`.
+
+### 🔧 Fixed
+
+- **Experiment bug** – Fixed issue in `ClusteringExperiment` (and related experiment infrastructure).
+- **Supervised model corrections** – Fixes across `Logistic`, `LinearSVC`, `KernelSVC`, `MLPClassifier`, `ElasticNet`, `Lasso`, `LinearSVR`, `KernelSVR`, and `MLPRegressor` (numerical stability, hyperparameter handling, and `NeuralNetwork` integration for MLP models).
+
+---
+
 ## [2.6.3] – 2026-03-15
 
 ### 🟢 Added
