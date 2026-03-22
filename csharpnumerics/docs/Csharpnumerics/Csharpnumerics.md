@@ -37,41 +37,7 @@ Modular computational engines designed for integration with external visualizati
 ## 🚀 Simulation Platform Roadmap
 
 
-### 🌍 Phase 1 — GeoEngine & Spatial Simulations
-
-**Goal:** Apply statistical modeling and Monte Carlo methods to spatial and geophysical problems.
-
-**Core focus:** GIS, probabilistic modeling, environmental simulations.
-
-**Features**
-
-* Raster- and mesh-based spatial representation
-* Terrain models
-* Monte Carlo pipelines for risk modeling
-* Spatial clustering and hotspot detection
-* Unsupervised ML for spatial pattern discovery
-* Time-dependent spatial simulations
-
-Spatial formats supported:
-
-* GeoJSON
-* GeoTIFF
-
-Visualization:
-
-* Web GIS dashboards
-* Unity terrain simulations
-
-Example applications:
-
-* wildfire spread
-* gas dispersion
-* environmental risk mapping
-* probability fields and extreme scenario analysis
-
----
-
-### 💻 Phase 2 — Classical Quantum Simulation (Educational)
+### 💻 Phase 1 — Classical Quantum Simulation (Educational)
 
 **Goal:** Create CPU-based educational quantum circuit simulators.
 
@@ -103,7 +69,7 @@ Potential uses:
 
 ---
 
-### 🧩 Phase 3 — Multiphysics Engine
+### 🧩 Phase 2 — Multiphysics Engine
 
 **Goal:** Build a general-purpose physics simulation framework.
 
@@ -143,7 +109,7 @@ Example applications:
 
 ---
 
-### 🪐 Phase 4 — Astronomy & Exoplanet Simulation
+### 🪐 Phase 3 — Astronomy & Exoplanet Simulation
 
 **Goal:** Build an astronomy simulation and discovery platform combining machine learning, numerical methods, and visualization.
 
