@@ -18,6 +18,43 @@ This format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ---
 
+## [2.7.0] – 2026-03-28
+
+**10,056 lines added across 63 files** | Previous release: v2.6.5 (2026-03-21)
+
+### 🟢 Added
+
+#### Quantum Computing Engine (`CSharpNumerics.Engines.Quantum`)
+
+- **Quantum Circuit Simulator** — `QuantumCircuit`, `QuantumState`, `QuantumSimulator`, `QuantumEnvironment` for building and simulating multi-qubit quantum circuits.
+- **Fluent Circuit Builder** — `QuantumCircuitBuilder` with a chainable API for composing quantum circuits.
+- **Algorithms** — `ShorAlgorithm` (integer factorization), `GroverSearch` (unstructured search), `QFT` / `InverseQFT` (Quantum Fourier Transform), `QPE` (Quantum Phase Estimation).
+- **Noisy Simulation** — `NoisyQuantumSimulator` with pluggable noise channels: `DepolarizingNoise`, `DephasingNoise`, `AmplitudeDampingNoise`.
+- **Quantum Error Correction** — `ErrorCorrectionSimulator`, `SyndromeDecoder`, and four codes: `BitFlipCode3`, `PhaseFlipCode3`, `SteaneCode7`, `ShorCode9`.
+
+#### Quantum Physics Primitives (`CSharpNumerics.Physics.Quantum`)
+
+- **Gates** — `HadamardGate`, `PauliX/Y/Z`, `PhaseGate`, `SGate`, `TGate`, `RxGate`, `RyGate`, `RzGate`, `SWAPGate`, `CNOTGate`, `CZGate`, `CPhaseGate`, `ControlledGate`, `ToffoliGate`, `FredkinGate`, `ModularMultiplyGate`, `PhaseOracle`.
+- **Bloch Sphere** — `BlochVector` for single-qubit state visualisation.
+- **Fidelity** — `QuantumFidelity` for state comparison metrics.
+- **Noise Interfaces** — `INoiseChannel` abstraction for noise models.
+- **Error Correction Interfaces** — `IQuantumErrorCorrectionCode` and four code implementations (see above).
+
+#### GIS Engine — Exposure Analysis (`CSharpNumerics.Engines.GIS`)
+
+- **Exposure Polygon Generator** — `ExposurePolygonGenerator` and `ExposurePolygon` for computing peak-exposure contour polygons from plume simulations.
+- **GeoJSON Export** — `GeoJsonExporter` for exporting exposure polygons.
+- **Scenario Enhancements** — `ScenarioResult` output model; `RiskScenarioBuilder` and `PlumeSimulator` updates.
+
+#### Chemical Materials (`CSharpNumerics.Physics.Materials.Chemical`)
+
+- `ChemicalSubstance` — properties and behaviour modelling for chemical substances.
+- `ChemicalLibrary` — built-in library of common substances.
+- Updated `Materials` base infrastructure accordingly.
+
+
+---
+
 ## [2.6.5] – 2026-03-21
 
 ### 🟢 Added

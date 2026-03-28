@@ -38,7 +38,7 @@ const FeatureList: FeatureItem[] = [
     href: '/docs/Csharpnumerics/Machine learning/',
     description: (
       <>
-        Supervised and unsupervised learning, automated model selection, cross-validation, clustering, and model stability analysis.
+        Supervised, unsupervised and reinforcement learning, automated model selection, cross-validation, clustering, and model stability analysis.
       </>
     ),
   }, {
@@ -47,7 +47,7 @@ const FeatureList: FeatureItem[] = [
     href: '/docs/Csharpnumerics/Physics/',
     description: (
       <>
-        Classical mechanics, electromagnetics, heat transfer, environmental modeling, orbital mechanics, oscillations, and astronomy.
+        Classical mechanics, electromagnetics, heat transfer, environmental modeling, quantum computing, and astrophysics.
       </>
     ),
   }, {

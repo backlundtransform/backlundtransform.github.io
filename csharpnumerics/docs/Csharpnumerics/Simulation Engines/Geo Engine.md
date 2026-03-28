@@ -55,7 +55,7 @@ foreach (Vector pos in grid)
     Console.WriteLine(pos);
 ```
 
-### GeoCell & GridSnapshot
+** GeoCell & GridSnapshot**
 
 ```csharp
 // GridSnapshot holds scalar values for one time step
@@ -75,7 +75,7 @@ foreach (GeoCell cell in snapshot.AllCells())
     Console.WriteLine($"{cell.Position} = {cell.Value:E3}");
 ```
 
-### TimeFrame
+**TimeFrame**
 
 ```csharp
 using CSharpNumerics.Engines.GIS.Scenario;
@@ -212,7 +212,7 @@ int[] members = analysis.GetClusterIterations(dominant);
 List<GridSnapshot> mean = analysis.GetClusterMeanSnapshots(dominant);
 ```
 
-### ProbabilityMap & TimeAnimator — probability mapping
+** ProbabilityMap & TimeAnimator — probability mapping**
 
 ```csharp
 // Exceedance probability per cell at one time step
@@ -370,6 +370,53 @@ Output GeoJSON includes per-feature nuclear properties:
     "dose": 0.004
   }
 }
+```
+
+---
+
+## 🔺 Exposure Polygons — Peak & Time-Integrated Contours
+
+Generate closed polygons delineating areas where an exposure metric (peak or time-integrated)
+exceeds a threshold. Works with concentration or any named layer (activity, dose).
+
+```csharp
+using CSharpNumerics.Engines.GIS.Analysis;
+
+// Run a scenario with radioactive material
+var result = RiskScenario
+    .ForGaussianPlume(5.0)
+    .FromSource(new Vector(0, 0, 50))
+    .WithWind(10, new Vector(1, 0, 0))
+    .WithStability(StabilityClass.D)
+    .WithMaterial(Materials.Radioisotope("Cs137"))
+    .OverGrid(new GeoGrid(-500, 500, -500, 500, 0, 100, 50))
+    .OverTime(0, 3600, 60)
+    .RunSingle();
+
+// Peak exceedance polygon — where the maximum dose at any time step exceeds threshold
+ExposurePolygon peakDose = result.GeneratePeakExposurePolygon(
+    threshold: 1e-6, layerName: "dose");
+
+// Time-integrated exposure polygon — where cumulative dose exceeds threshold
+ExposurePolygon integratedDose = result.GenerateIntegratedExposurePolygon(
+    threshold: 1e-4, layerName: "dose");
+
+// Polygon properties
+List<Vector> boundary = peakDose.Boundary;      // closed ring of vertices
+int cells = peakDose.ExceedanceCellCount;       // cells above threshold
+double area = peakDose.AreaSquareMetres;         // approximate area (m²)
+ExposureType type = peakDose.Type;               // Peak or Integrated
+
+// Also works with plain concentration (no material needed)
+var concPoly = result.GeneratePeakExposurePolygon(threshold: 1e-6);
+
+// Export to GeoJSON Polygon
+string json = GeoJsonExporter.ToGeoJson(peakDose);
+GeoJsonExporter.Save(peakDose, "peak_dose_zone.geojson");
+
+// Export multiple polygons as FeatureCollection
+string fc = GeoJsonExporter.ToGeoJson(
+    new List<ExposurePolygon> { peakDose, integratedDose });
 ```
 
 ---

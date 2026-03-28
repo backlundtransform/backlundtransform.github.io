@@ -18,11 +18,12 @@ Descriptive and inferential statistics, probability distributions, stochastic pr
 
 ### 🤖 Machine Learning
 
-Supervised and unsupervised learning, automated model selection, cross-validation, clustering, and model stability analysis.
+  Supervised, unsupervised and reinforcement learning, automated model selection, cross-validation, clustering, and model stability analysis.
+     
 
 ### ⚛️ Physics
 
-Classical mechanics, electromagnetics, heat transfer, environmental modeling, orbital mechanics, oscillations, and astronomy.
+ Classical mechanics, electromagnetics, heat transfer, environmental modeling, quantum computing, and astrophysics.
 
 ### ⚙️ Simulation Engines
 
@@ -109,7 +110,7 @@ Example applications:
 
 ---
 
-### 🪐 Phase 3 — Astronomy & Exoplanet Simulation
+### 🔭 Phase 3 — Astronomy & Exoplanet Simulation
 
 **Goal:** Build an astronomy simulation and discovery platform combining machine learning, numerical methods, and visualization.
 

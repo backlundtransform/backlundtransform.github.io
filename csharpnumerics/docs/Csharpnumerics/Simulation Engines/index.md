@@ -16,3 +16,4 @@ namespace CSharpNumerics.Engines
 | 🎮 [Game Engine](Game%20Engine.md) | Game engine physics — bounding volumes, collisions, constraints, and simulation |
 | 🎧 [Audio Engine](Audio%20Engine.md) | Digital audio synthesis, effects processing, and analysis |
 | 🌍 [Geo Engine](Geo%20Engine.md) | Atmospheric dispersion, Monte Carlo risk analysis, probability mapping, and GIS export |
+| 💻 [Quantum Engine](Quantum%20Engine.md) | Quantum circuit simulator, algorithms (QFT, Grover, QPE, Shor), noisy simulation, and error correction |
