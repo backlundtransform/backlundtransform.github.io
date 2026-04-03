@@ -4,6 +4,8 @@ sidebar_label: "🌌 Astrophysics"
 
 The `AstronomyExtensions` class provides extension methods for astronomical calculations: **distance conversions**, **Julian date**, **sidereal time**, and **horizontal ↔ equatorial coordinate transforms**. 
 
+**Namespace:** `CSharpNumerics.Physics.Astro`
+
 ## 📏 Distance Conversions
 
 Convert between light-years, parsecs, and astronomical units:

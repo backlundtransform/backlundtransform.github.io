@@ -4,6 +4,8 @@ sidebar_label: "🧬 Materials Science"
 
 Nuclear isotopes, radioactive decay chains, radiation dose, and hazardous chemical substances with toxicological thresholds and unit conversions.
 
+**Namespace:** `CSharpNumerics.Physics.Materials`
+
 ```csharp
 using CSharpNumerics.Physics.Materials.Nuclear.Isotopes;
 using CSharpNumerics.Physics.Materials.Nuclear.Decay;
@@ -172,3 +174,101 @@ var erpg2Zone = result.GeneratePeakExposurePolygon(3, "ppm");
 var integratedZone = result.GenerateIntegratedExposurePolygon(
     threshold: 1000, layerName: "toxicDose");  // 1000 ppm·s
 ```
+
+---
+
+## 🧱 Engineering Materials
+
+The `EngineeringMaterial` immutable struct bundles thermo-mechanical-electrical properties for multiphysics simulations. The `EngineeringLibrary` provides common pre-defined materials.
+
+**Namespace:** `CSharpNumerics.Physics.Materials.Engineering`
+
+**Material Properties**
+
+| Property | Unit | Description |
+|----------|------|-------------|
+| `ThermalConductivity` | W/(m·K) | Heat conduction coefficient $k$ |
+| `SpecificHeat` | J/(kg·K) | Specific heat capacity $c_p$ |
+| `Density` | kg/m³ | Mass density $\rho$ |
+| `DynamicViscosity` | Pa·s | Dynamic viscosity $\mu$ |
+| `ElectricPermittivity` | F/m | Dielectric permittivity $\varepsilon$ |
+| `YoungsModulus` | Pa | Young's modulus $E$ |
+| `PoissonsRatio` | — | Poisson's ratio $\nu$ |
+
+**Computed properties:**
+
+| Computed | Formula | Description |
+|----------|---------|-------------|
+| `ThermalDiffusivity` | $\alpha = k/(\rho c_p)$ | Heat diffusion rate |
+| `KinematicViscosity` | $\nu = \mu/\rho$ | Flow diffusion rate |
+
+**Pre-defined Materials**
+
+```csharp
+using CSharpNumerics.Physics.Materials.Engineering;
+
+var steel = EngineeringLibrary.Steel;       // E=200 GPa, k=50 W/(m·K)
+var al    = EngineeringLibrary.Aluminum;    // E=69 GPa, k=237 W/(m·K)
+var cu    = EngineeringLibrary.Copper;      // E=117 GPa, k=401 W/(m·K)
+var water = EngineeringLibrary.Water;       // μ=1e-3 Pa·s, ρ=1000 kg/m³
+var air   = EngineeringLibrary.Air;         // μ=1.81e-5 Pa·s
+var conc  = EngineeringLibrary.Concrete;    // E=30 GPa
+var glass = EngineeringLibrary.Glass;       // E=70 GPa
+
+double alpha = steel.ThermalDiffusivity;     // k/(ρ·cp)
+double nu    = water.KinematicViscosity;     // μ/ρ
+```
+
+**Custom Materials**
+
+```csharp
+var titanium = new EngineeringMaterial(
+    name: "Titanium",
+    thermalConductivity: 21.9,        // W/(m·K)
+    specificHeat: 523,                // J/(kg·K)
+    density: 4507,                    // kg/m³
+    dynamicViscosity: 0,              // not a fluid
+    electricPermittivity: 0,
+    youngsModulus: 116e9,             // Pa
+    poissonsRatio: 0.34);
+```
+
+---
+
+## 🌲 Fuel Models (Anderson 13)
+
+The `FuelModel` readonly struct holds Rothermel fuel parameters. All 13 standard Anderson models are pre-loaded in `FuelLibrary`.
+
+```csharp
+// All models are in SI units
+FuelModel chaparral = FuelLibrary.Get(FuelModelType.Chaparral);
+// chaparral.SurfaceAreaToVolumeRatio = 4921 (1/m)
+// chaparral.FuelBedDepth             = 1.829 (m)
+// chaparral.OvendryFuelLoad          = 3.663 (kg/m²)
+// chaparral.MoistureOfExtinction     = 0.20
+
+// Iterate all models
+foreach (var fuel in FuelLibrary.All)
+    Console.WriteLine($"{fuel.Type}: δ={fuel.FuelBedDepth:F3} m");
+
+// Register a custom fuel model at runtime
+FuelLibrary.Register(new FuelModel(
+    (FuelModelType)99, "Custom Sage", sigma: 5000,
+    delta: 0.5, w0: 1.2, Mx: 0.25, h: 18000));
+```
+
+| Model | Type | σ (1/m) | δ (m) | w₀ (kg/m²) | Mₓ |
+|-------|------|---------|-------|-------------|-----|
+| 1 | Short Grass | 11,483 | 0.305 | 0.166 | 0.12 |
+| 2 | Timber/Grass Understory | 3,281 | 0.305 | 0.897 | 0.15 |
+| 3 | Tall Grass | 4,921 | 0.762 | 0.675 | 0.25 |
+| 4 | Chaparral | 6,562 | 1.829 | 3.663 | 0.20 |
+| 5 | Brush | 6,562 | 0.610 | 0.784 | 0.20 |
+| 6 | Dormant Brush | 5,741 | 0.762 | 0.672 | 0.25 |
+| 7 | Southern Rough | 5,741 | 0.762 | 0.529 | 0.40 |
+| 8 | Closed Timber Litter | 6,562 | 0.061 | 1.121 | 0.30 |
+| 9 | Hardwood Litter | 8,202 | 0.061 | 0.327 | 0.25 |
+| 10 | Timber/Litter Understory | 6,562 | 0.305 | 1.121 | 0.25 |
+| 11 | Light Logging Slash | 4,921 | 0.305 | 1.345 | 0.15 |
+| 12 | Medium Logging Slash | 4,921 | 0.701 | 3.363 | 0.20 |
+| 13 | Heavy Logging Slash | 4,921 | 0.914 | 5.604 | 0.25 |

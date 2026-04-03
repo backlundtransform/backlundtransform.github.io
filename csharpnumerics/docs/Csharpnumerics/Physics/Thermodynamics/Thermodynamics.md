@@ -1,9 +1,7 @@
 
 The `HeatExtensions` class provides extension methods for heat transfer calculations — **conduction, convection, radiation, the heat equation, dimensionless numbers, lumped-capacitance transient analysis, and fins**.
 
-```csharp
-using CSharpNumerics.Physics;
-```
+**Namespace:** `CSharpNumerics.Physics.Thermodynamics`
 
 ---
 

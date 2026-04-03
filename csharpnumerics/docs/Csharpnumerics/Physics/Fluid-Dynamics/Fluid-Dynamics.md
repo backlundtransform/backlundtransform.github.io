@@ -4,6 +4,8 @@ sidebar_label: "💧 Fluid Dynamics"
 
 The `FluidExtensions` class bridges `VectorField` (∇·, ∇×) and `ScalarField` (∇, ∇²) to classical fluid dynamics — Navier–Stokes equations, Bernoulli's principle, continuity, vorticity, drag/lift, dimensionless numbers, viscous pipe flow, and hydrostatics.
 
+**Namespace:** `CSharpNumerics.Physics.FluidDynamics`
+
 ## 🌀 Navier–Stokes Equations (Incompressible)
 
 $$\rho\!\left(\frac{\partial \mathbf{v}}{\partial t} + (\mathbf{v}\cdot\nabla)\mathbf{v}\right) = -\nabla p + \mu\nabla^2\mathbf{v} + \mathbf{f}, \qquad \nabla\cdot\mathbf{v} = 0$$

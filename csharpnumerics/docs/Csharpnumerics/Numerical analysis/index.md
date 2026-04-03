@@ -14,14 +14,15 @@ namespace CSharpNumerics.Numerics
 
 | Module | Description |
 |--------|-------------|
-| 📘[Numeric](Numeric/Numeric.md) | Core numeric utilities and helper functions |
-| 🔗 [Interpolation](Interpolation/Interpolation.md) | Polynomial, spline, and other interpolation methods |
-|∂ [Calculus](Calculus/Calculus.md) | Derivatives, limits, and related tools |
-| 🧮 [Linear Algebra](Linear%20algebra/Linear%20algebra.md) | Matrix operations, decompositions, and solvers |
-| ∫ [Integrals](Integrals/Integrals.md) | Numerical integration methods |
-| 📐 [Differential Equations](Differential%20equations/Differential%20equations.md) | ODE solvers and related methods |
-| 🌐[Fields](Fields/Fields.md) | Scalar fields, vector fields, tensor fields, and differential operators |
-| 🔲[Finite Difference](Finite%20difference/Finite%20difference.md) | PDE discretization via method of lines (Grid2D, operators, boundary conditions) |
-| 🛰️[Complex Analysis](Complex%20analysis/Complex%20analysis.md) | Complex numbers, complex functions, and analyticity |
-| 📡[Transforms](Transforms/Transforms.md) | Fourier, Laplace, and other transforms |
-| 🔋[Optimization](Optimization/Optimization.md) | Gradient-based optimisers, learning rate schedules, Pareto fronts, and NSGA-II |
+| 📘 [Numeric](Numeric/Numeric.md) | Core numeric utilities, constants, and helper functions |
+| 🔗 [Interpolation](Interpolation/Interpolation.md) | Polynomial, spline, and piecewise interpolation methods |
+| ∂ [Calculus](Calculus/Calculus.md) | Derivatives, limits, series, and differential calculus tools |
+| 🧮 [Linear Algebra](Linear%20algebra/Linear%20algebra.md) | Matrix operations, decompositions, eigenproblems, and solvers |
+| ∫ [Integrals](Integrals/Integrals.md) | Numerical quadrature, integration rules, and accumulation methods |
+| 📐 [Differential Equations](Differential%20equations/Differential%20equations.md) | Ordinary differential-equation solvers and time-stepping methods |
+| 🌐 [Fields](Fields/Fields.md) | Scalar, vector, and tensor fields with differential operators |
+| 🔲 [Finite Difference](Finite%20difference/Finite%20difference.md) | Finite-difference discretization, grids, operators, and boundary conditions |
+| 🕸️ [Finite Element](Finite%20element/Finite%20element.md) | 1D finite-element primitives for bar and Euler-Bernoulli beam analysis |
+| 🛰️ [Complex Analysis](Complex%20analysis/Complex%20analysis.md) | Complex numbers, analytic functions, and contour-based tools |
+| 📡 [Transforms](Transforms/Transforms.md) | Fourier, Laplace, and related transform methods |
+| 🔋 [Optimization](Optimization/Optimization.md) | Gradient methods, schedules, Pareto optimisation, and NSGA-II |

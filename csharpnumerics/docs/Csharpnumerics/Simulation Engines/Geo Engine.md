@@ -3,7 +3,7 @@ sidebar_label: "🌍 Geo Engine"
 sidebar_position: 3
 ---
 
-A fluent simulation engine for modelling atmospheric gas dispersion over geographic areas. Combines Gaussian plume physics, Monte Carlo uncertainty quantification, ML clustering, and probability mapping into a single pipeline — with export to GeoJSON (Cesium) and Unity3D binary.
+A fluent simulation engine for modelling atmospheric gas dispersion over geographic areas. Combines Gaussian plume physics, Monte Carlo uncertainty quantification, ML clustering, and probability mapping into a single pipeline, with export to GeoJSON, Cesium, and Unity3D binary formats.
 
 **Namespace:** `CSharpNumerics.Engines.GIS`
 
@@ -26,7 +26,7 @@ The engine builds on existing library capabilities:
 
 ---
 
-## 📐 GeoGrid — 3-D spatial grid
+## 📐 GeoGrid — 3-D Spatial Grid
 
 A uniform 3-D grid defined by axis-aligned bounds and a cell step size:
 
@@ -55,7 +55,7 @@ foreach (Vector pos in grid)
     Console.WriteLine(pos);
 ```
 
-** GeoCell & GridSnapshot**
+**GeoCell & GridSnapshot**
 
 ```csharp
 // GridSnapshot holds scalar values for one time step
@@ -90,9 +90,9 @@ int idx = tf.NearestIndex(1800);           // 30
 
 ---
 
-## 🌫️ PlumeSimulator — single-scenario physics
+## 🌫️ PlumeSimulator — Single-Scenario Physics
 
-Evaluates the Gaussian plume (steady-state or transient puff) on a `GeoGrid` for every time step:
+Evaluates the Gaussian plume on a `GeoGrid` for every time step in steady-state mode, or the Gaussian puff in transient mode.
 
 ```csharp
 using CSharpNumerics.Engines.GIS.Simulation;
@@ -129,7 +129,7 @@ GridSnapshot snap = sim.RunSingle(grid, time: 300);
 
 ---
 
-## 🎲 ScenarioVariation — parameter ranges for Monte Carlo
+## 🎲 ScenarioVariation — Parameter Ranges for Monte Carlo
 
 Defines how physics parameters are varied across stochastic iterations:
 
@@ -138,7 +138,7 @@ var variation = new ScenarioVariation()
     .WindSpeed(8, 12)                    // uniform [8, 12] m/s
     .WindDirectionJitter(15)             // Gaussian jitter, σ = 15°
     .EmissionRate(3, 7)                  // uniform [3, 7] kg/s
-    .SetStabilityWeights(                // categorical sampling
+    .SetStabilityWeights(
         d: 0.6, c: 0.2, e: 0.2);
 
 bool hasVar = variation.HasVariation;    // true
@@ -146,7 +146,7 @@ bool hasVar = variation.HasVariation;    // true
 
 ---
 
-## 🎯 PlumeMonteCarloModel — N stochastic scenarios
+## 🎯 PlumeMonteCarloModel — N Stochastic Scenarios
 
 Runs N scenarios by sampling from `ScenarioVariation` and collecting per-cell concentration distributions:
 
@@ -164,23 +164,23 @@ var mcModel = new PlumeMonteCarloModel(
     mode: PlumeMode.SteadyState);
 
 // Full batch: returns scenario matrix + all snapshots
-MonteCarloScenarioResult result = mcModel.RunBatch(
+MonteCarloScenarioResult mcResult = mcModel.RunBatch(
     iterations: 1000,
     seed: 42);
 
 // Scenario matrix: (1000 × cells·timeSteps)
-Matrix scenarioMatrix = result.ScenarioMatrix;
+Matrix scenarioMatrix = mcResult.ScenarioMatrix;
 
 // Per-cell distribution across all scenarios
-double[] cellDist = result.GetCellDistribution(
+double[] cellDist = mcResult.GetCellDistribution(
     cellIndex: grid.NearestFlatIndex(new Vector(200, 0, 0)),
     timeIndex: 30);                    // at t = 30 min
 
 // Single scenario vector
-double[] row = result.GetScenarioVector(0);
+double[] row = mcResult.GetScenarioVector(0);
 ```
 
-**Compatible with the existing `MonteCarloSimulator`** for scalar summary statistics (peak concentration):
+**Compatible with the existing `MonteCarloSimulator`** for scalar summary statistics:
 
 ```csharp
 using CSharpNumerics.Statistics.MonteCarlo;
@@ -194,7 +194,7 @@ double p95 = peakStats.Percentile(95);
 
 ---
 
-## 🔬 ScenarioClusterAnalyzer — ML clustering of scenarios
+## 🔬 ScenarioClusterAnalyzer — ML Clustering of Scenarios
 
 Finds the most probable emission scenario by clustering the Monte Carlo scenario matrix:
 
@@ -212,7 +212,7 @@ int[] members = analysis.GetClusterIterations(dominant);
 List<GridSnapshot> mean = analysis.GetClusterMeanSnapshots(dominant);
 ```
 
-** ProbabilityMap & TimeAnimator — probability mapping**
+**ProbabilityMap & TimeAnimator**
 
 ```csharp
 // Exceedance probability per cell at one time step
@@ -270,28 +270,28 @@ result.ExportCesium("output/plume.czml");
 
 ---
 
-## 📦 Export — GeoJSON, Unity binary, Cesium CZML
+## 📦 Export — GeoJSON, Unity Binary, Cesium CZML
 
 ```csharp
 using CSharpNumerics.Engines.GIS.Export;
 
-// GeoJSON — single snapshot or full animation
+// GeoJSON - single snapshot or full animation
 GeoJsonExporter.Save(snapshot, "snap.geojson");
 GeoJsonExporter.Save(animation, "anim.geojson");
 var paths = GeoJsonExporter.SavePerTimeStep(animation, "out/step");
 
-// Unity binary — compact float[] format with GPLM header
+// Unity binary - compact float[] format with GPLM header
 UnityBinaryExporter.Save(snapshots, animation, "plume.bin");
 var data = UnityBinaryExporter.Read("plume.bin");  // round-trip
 
-// Cesium CZML — time-animated colour-coded entities
+// Cesium CZML - time-animated colour-coded entities
 CesiumExporter.Save(animation, "plume.czml", name: "Plume Risk");
-string json = CesiumExporter.ToGeoJsonCesium(probMap);
+string json = CesiumExporter.ToGeoJsonCesium(map);
 ```
 
 ---
 
-## 🌐 GIS Coordinates — WGS84, UTM, local tangent plane
+## 🌐 GIS Coordinates — WGS84, UTM, Local Tangent Plane
 
 Create geo-referenced grids from latitude/longitude bounding boxes with automatic projection:
 
@@ -305,8 +305,8 @@ double dist = stockholm.DistanceTo(gothenburg);  // ~398 km
 
 // Local Tangent Plane projection
 var proj = new Projection(stockholm, ProjectionType.LocalTangentPlane);
-Vector local = proj.ToLocal(59.34, 18.08);        // → metres (east, north, up)
-GeoCoordinate back = proj.ToGeo(local);            // → lat/lon round-trip
+Vector local = proj.ToLocal(59.34, 18.08);        // -> metres (east, north, up)
+GeoCoordinate back = proj.ToGeo(local);           // -> lat/lon round-trip
 
 // UTM projection (auto-detects zone)
 var utmProj = new Projection(stockholm, ProjectionType.UTM);
@@ -335,13 +335,13 @@ using CSharpNumerics.Physics.Materials;
 // Create a material descriptor (auto-attaches known decay chain)
 var material = Materials.Radioisotope("Cs137");
 
-// Use in the fluent pipeline — adds "activity" and "dose" layers to snapshots
+// Use in the fluent pipeline - adds "activity" and "dose" layers to snapshots
 var result = RiskScenario
     .ForGaussianPlume(5.0)
     .FromSource(new Vector(0, 0, 50))
     .WithWind(10, new Vector(1, 0, 0))
     .WithStability(StabilityClass.D)
-    .WithMaterial(Materials.Radioisotope("Cs137"))    // ← attach isotope
+    .WithMaterial(Materials.Radioisotope("Cs137"))
     .WithVariation(v => v.WindSpeed(8, 12))
     .OverGrid(new GeoGrid(-500, 500, -500, 500, 0, 100, 10))
     .OverTime(0, 3600, 60)
@@ -354,7 +354,7 @@ double[] activityLayer = snap.GetLayer("activity");   // Bq/m³
 double[] doseLayer = snap.GetLayer("dose");           // Sv
 bool hasIt = snap.HasLayer("activity");               // true
 
-// GeoJSON export automatically includes activity & dose properties
+// GeoJSON export automatically includes activity and dose properties
 result.ExportGeoJson("fallout.geojson");
 ```
 
@@ -376,8 +376,7 @@ Output GeoJSON includes per-feature nuclear properties:
 
 ## 🔺 Exposure Polygons — Peak & Time-Integrated Contours
 
-Generate closed polygons delineating areas where an exposure metric (peak or time-integrated)
-exceeds a threshold. Works with concentration or any named layer (activity, dose).
+Generate closed polygons delineating areas where an exposure metric exceeds a threshold. Works with concentration or any named layer, including activity and dose.
 
 ```csharp
 using CSharpNumerics.Engines.GIS.Analysis;
@@ -393,17 +392,17 @@ var result = RiskScenario
     .OverTime(0, 3600, 60)
     .RunSingle();
 
-// Peak exceedance polygon — where the maximum dose at any time step exceeds threshold
+// Peak exceedance polygon - where the maximum dose at any time step exceeds threshold
 ExposurePolygon peakDose = result.GeneratePeakExposurePolygon(
     threshold: 1e-6, layerName: "dose");
 
-// Time-integrated exposure polygon — where cumulative dose exceeds threshold
+// Time-integrated exposure polygon - where cumulative dose exceeds threshold
 ExposurePolygon integratedDose = result.GenerateIntegratedExposurePolygon(
     threshold: 1e-4, layerName: "dose");
 
 // Polygon properties
-List<Vector> boundary = peakDose.Boundary;      // closed ring of vertices
-int cells = peakDose.ExceedanceCellCount;       // cells above threshold
+List<Vector> boundary = peakDose.Boundary;       // closed ring of vertices
+int cells = peakDose.ExceedanceCellCount;        // cells above threshold
 double area = peakDose.AreaSquareMetres;         // approximate area (m²)
 ExposureType type = peakDose.Type;               // Peak or Integrated
 
@@ -419,18 +418,227 @@ string fc = GeoJsonExporter.ToGeoJson(
     new List<ExposurePolygon> { peakDose, integratedDose });
 ```
 
+Output GeoJSON polygon:
+
+```json
+{
+  "type": "Feature",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [[[100, 50, 0], [150, 75, 0], [200, 50, 0], [100, 50, 0]]]
+  },
+  "properties": {
+    "threshold": 1e-6,
+    "layerName": "dose",
+    "exposureType": "peak",
+    "exceedanceCellCount": 42,
+    "areaSquareMetres": 105000
+  }
+}
+```
+
+---
+
+## ⛰️ Terrain & Fuel Maps
+
+The terrain subsystem provides elevation surfaces and per-cell fuel assignment for terrain-aware spread simulations.
+
+**TerrainGrid** - elevation surface with slope and aspect:
+
+```csharp
+using CSharpNumerics.Engines.GIS.Terrain;
+
+var grid = new GeoGrid(0, 1000, 0, 1000, 0, 0, 25);
+
+// Procedural terrain from a function
+var terrain = TerrainGrid.FromFunction(grid, (x, y) => 100 + 0.1 * x);
+
+// Or from a 2D array
+var terrain2 = TerrainGrid.FromArray(grid, elevationArray);
+
+// Slope and aspect at a cell
+double slope  = terrain.Slope(10, 10);         // radians
+double aspect = terrain.Aspect(10, 10);        // radians (0 = N, π/2 = E)
+double sDir   = terrain.SlopeInDirection(10, 10, windDir);  // slope along heading
+```
+
+**FuelMap** - per-cell fuel model and moisture:
+
+```csharp
+using CSharpNumerics.Physics.Materials.Fire.Enums;
+
+var fuelMap = new FuelMap(grid);
+fuelMap.SetUniformFuel(FuelModelType.ShortGrass);
+fuelMap.SetUniformMoisture(0.08);  // 8% dead fuel moisture
+
+// Mixed fuels by elevation band
+fuelMap.SetFuelByElevation(terrain, new[]
+{
+    (0.0,   300.0, FuelModelType.ShortGrass),
+    (300.0, 600.0, FuelModelType.Brush),
+    (600.0, 999.0, FuelModelType.TimberLitterUnderstory)
+});
+
+// Per-cell moisture variation
+fuelMap.SetMoisture(5, 5, 0.15);   // wet spot
+```
+
+---
+
+## 🔥 Wildfire Simulator
+
+A cellular automaton that propagates fire across terrain using the Rothermel (1972) rate-of-spread model. Each time step, burning cells attempt to ignite their eight neighbours based on directional slope, wind, and fuel parameters.
+
+```csharp
+using CSharpNumerics.Engines.GIS.Spread.Wildfire;
+using CSharpNumerics.Engines.GIS.Scenario;
+
+var parameters = new WildfireParameters(
+    ignitionPoints: new List<(int, int)> { (20, 20) }.AsReadOnly(),
+    midflameWindSpeed: 3.0,              // m/s
+    windDirection: new Vector(1, 0, 0),  // east
+    burnDuration: 600);                  // seconds
+
+var simulator = new WildfireSimulator(parameters);
+var snapshots = simulator.Run(grid, terrain, fuelMap,
+    new TimeFrame(0, 3600, 60));  // 1 hour, 1-minute steps
+
+// Inspect results
+var last = snapshots[snapshots.Count - 1];
+Console.WriteLine($"Burned: {last.BurnedAreaHectares:F1} ha");
+Console.WriteLine($"Burning cells: {last.BurningCellCount}");
+Console.WriteLine($"Flame length: {last.Snapshot.GetLayer(\"flameLength\").Max()} m");
+```
+
+**SpreadSnapshot layers:**
+
+| Layer | Description |
+|-------|-------------|
+| `burnState` | 0 = Unburned, 1 = Burning, 2 = Burned, 3 = Firebreak |
+| `flameLength` | Flame length in metres |
+| `rateOfSpread` | Rate of spread in m/min |
+| `burnTime` | Seconds since cell ignition |
+
+---
+
+## 🔥 Wildfire Fluent API
+
+Wildfire scenarios use the same fluent pattern as the plume pipeline, accessed via `RiskScenario.ForWildfire()`.
+
+**Deterministic run:**
+
+```csharp
+var result = RiskScenario
+    .ForWildfire()
+    .WithTerrain(terrain)
+    .WithFuel(fuelMap)
+    .WithIgnition(20, 20)
+    .WithWind(5.0, new Vector(1, 0, 0))
+    .WithMoisture(0.08)
+    .OverGrid(grid)
+    .OverTime(0, 7200, 60)        // 2 hours, 1-minute steps
+    .RunSingle();
+
+double area = result.FinalBurnedArea;       // hectares
+double flame = result.MaxFlameLength;       // metres
+var perimeter = result.GenerateFirePerimeter(result.Snapshots.Count - 1);
+```
+
+**Monte Carlo ensemble with weather uncertainty:**
+
+```csharp
+var mcResult = RiskScenario
+    .ForWildfire()
+    .WithTerrain(terrain)
+    .WithFuel(fuelMap)
+    .WithIgnition(20, 20)
+    .WithWind(5.0, new Vector(1, 0, 0))
+    .WithVariation(v => v
+        .WindSpeed(2, 8)              // uniform [2, 8] m/s
+        .WindDirectionJitter(30)      // ±30° Gaussian jitter
+        .Moisture(0.04, 0.12))        // uniform [4%, 12%]
+    .OverGrid(grid)
+    .OverTime(0, 3600, 60)
+    .RunMonteCarlo(100, seed: 42);
+
+// Per-cell burn probability across all iterations
+double[] burnProb = mcResult.BurnProbability;
+double meanArea   = mcResult.MeanBurnedArea;   // hectares
+double maxArea    = mcResult.MaxBurnedArea;
+```
+
+**Clustering + probability map:**
+
+```csharp
+using CSharpNumerics.ML.Clustering.Algorithms;
+using CSharpNumerics.ML.Clustering.Evaluators;
+
+var probMap = mcResult
+    .AnalyzeWith(
+        new KMeans { Seed = 42 },
+        new SilhouetteEvaluator(),
+        minK: 2, maxK: 5)
+    .Build();   // -> WildfireScenarioResult from dominant cluster
+
+// probMap.Snapshots contain probability-weighted burn state (0-1)
+// Use for risk assessment visualizations
+```
+
+---
+
+## 📤 Wildfire Export
+
+All three export formats support fire-specific data.
+
+**GeoJSON - fire snapshots with burn properties:**
+
+```csharp
+string json = GeoJsonExporter.ToGeoJson(snapshots[snapshots.Count - 1]);
+// Features with: burnState, flameLength, rateOfSpread, timeStep
+```
+
+**GeoJSON - fire perimeters as polygons:**
+
+```csharp
+var perimeters = result.FirePerimeters;
+string json = GeoJsonExporter.FirePerimetersToGeoJson(perimeters, result.Snapshots);
+// Polygon features with timeIndex, timeStep, areaSquareMetres
+```
+
+**GeoJSON - burn probability heatmap:**
+
+```csharp
+string json = GeoJsonExporter.BurnProbabilityToGeoJson(mcResult);
+// Point features with burnProbability, iterations
+```
+
+**CZML - animated fire spread:**
+
+```csharp
+CesiumExporter.SaveFireCzml(result.Snapshots, timeFrame, "fire.czml");
+// Per-cell time-sampled colour: red (burning) -> grey (burned)
+```
+
+**Unity binary - fire layers:**
+
+```csharp
+UnityBinaryExporter.SaveFire(result.Snapshots, grid, timeFrame, "fire.bin");
+var data = UnityBinaryExporter.ReadFire("fire.bin");
+// data.Concentration = burnState[][], data.Probability = flameLength[][]
+```
+
 ---
 
 ## 🌍 GIS-RL Integration
 
-Bridges **GIS simulation** with the **RL framework** through `ScenarioRLAnalyzer`. Train RL agents to learn **optimal mitigation strategies** for spatial scenarios — atmospheric plumes, floods, fires, or any GIS-based model.
+Bridges **GIS simulation** with the **RL framework** through `ScenarioRLAnalyzer`. Train RL agents to learn **optimal mitigation strategies** for spatial scenarios, including atmospheric plumes, floods, fires, or any GIS-based model.
 
 | Bridge | ML module | Purpose |
 |---|---|---|
 | `ScenarioClusterAnalyzer` | Clustering | *What can happen?* (outcome grouping) |
 | `ScenarioRLAnalyzer` | Reinforcement Learning | *What should we do?* (optimal response) |
 
- **Extensibility**
+**Extensibility**
 
 `ScenarioRLAnalyzer` accepts any environment:
 
@@ -461,7 +669,7 @@ public class FloodEnvironment : IGISEnvironment
 }
 ```
 
- **Quick Start**
+**Quick Start**
 
 ```csharp
 var result = ScenarioRLAnalyzer
@@ -483,9 +691,10 @@ var result = ScenarioRLAnalyzer
     .WithSeed(42)
     .Run();
 
-Console.WriteLine($"{result.AgentName} → avg return = {result.AverageReturn:F2}");
+Console.WriteLine($"{result.AgentName} -> avg return = {result.AverageReturn:F2}");
 ```
- **Direct Environment Usage**
+
+**Direct Environment Usage**
 
 `PlumeEnvironment` implements `IEnvironment` and works with the standard `RLExperiment` API:
 
@@ -511,4 +720,4 @@ var result = RLExperiment
     .Run();
 ```
 
-> **Note:** When using `For(IGISEnvironment)` or `For(IEnvironment)`, physics configuration methods (`WithWind`, `WithStability`, etc.) are **disabled** — configure these on the environment before passing it in.
+> **Note:** When using `For(IGISEnvironment)` or `For(IEnvironment)`, physics configuration methods such as `WithWind` and `WithStability` are disabled. Configure those on the environment before passing it in.

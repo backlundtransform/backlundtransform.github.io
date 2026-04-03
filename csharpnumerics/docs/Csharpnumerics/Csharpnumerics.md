@@ -70,7 +70,7 @@ Potential uses:
 
 ---
 
-### 🧩 Phase 2 — Multiphysics Engine
+### ⚡ Phase 2 — Multiphysics Engine
 
 **Goal:** Build a general-purpose physics simulation framework.
 

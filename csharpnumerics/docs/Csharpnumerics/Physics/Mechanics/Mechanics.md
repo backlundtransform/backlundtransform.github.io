@@ -4,10 +4,9 @@ sidebar_label: "🚀 Mechanics"
 
 Classical mechanics — **kinematics, dynamics, and oscillations** in one unified module. Covers motion analysis, forces, energy, collisions, rigid bodies, and oscillator models.
 
-```csharp
-using CSharpNumerics.Physics;
-using CSharpNumerics.Physics.Oscillations;
-```
+**Namespace:** `CSharpNumerics.Physics.Mechanics`
+
+**Oscillations Namespace:** `CSharpNumerics.Physics.Mechanics.Oscillations`
 
 ---
 
@@ -408,6 +407,8 @@ Matrix Ic = 6.0.InertiaTensorSolidCylinder(radius: 1, height: 4);
 ---
 
 ## 🎵 Simple Harmonic Oscillator
+
+**Namespace:** `CSharpNumerics.Physics.Mechanics.Oscillations`
 
 Models the undamped system $\ddot{x} + \omega_0^2 x = 0$ where $\omega_0 = \sqrt{k/m}$.
 

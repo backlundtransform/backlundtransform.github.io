@@ -4,6 +4,8 @@ sidebar_label: "🌊 Waves"
 
 The `Physics.Waves` namespace provides PDE-based wave simulation using **Method of Lines** (spatial discretisation via `GridOperators`, temporal integration via `ITimeStepper`), as well as analytical tools for superposition, wave packets, and Fourier analysis. All wave field classes implement `IWaveField`.
 
+**Namespace:** `CSharpNumerics.Physics.Waves`
+
 ## 🔌 IWaveField Interface
 
 ```csharp

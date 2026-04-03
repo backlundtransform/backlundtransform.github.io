@@ -4,6 +4,8 @@ sidebar_label: "🐈 Quantum Mechanics"
 
 Quantum gates, state representations, fidelity metrics, noise channels, and error-correcting codes for qubit-based computation.
 
+**Namespace:** `CSharpNumerics.Physics.Quantum`
+
 ```csharp
 using CSharpNumerics.Physics.Quantum;
 using CSharpNumerics.Physics.Quantum.NoiseModels;

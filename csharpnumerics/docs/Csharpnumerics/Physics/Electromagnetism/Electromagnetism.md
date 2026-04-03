@@ -4,6 +4,8 @@ sidebar_label: "🧲 Electromagnetism"
 
 The `ElectroMagneticFieldExtensions` class bridges `VectorField` (∇·, ∇×) and `VectorFieldExtensions` (∇, ∇²) to classical electrodynamics — Coulomb's law, Lorentz force, Maxwell's equations, Poynting vector, potentials, and Biot–Savart sources.
 
+**Namespace:** `CSharpNumerics.Physics.Electromagnetism`
+
 ## 🔋 Point Charges
 
 Electric field, potential, and Coulomb force from point charges:

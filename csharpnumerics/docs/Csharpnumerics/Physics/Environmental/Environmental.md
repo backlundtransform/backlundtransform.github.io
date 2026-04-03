@@ -1,9 +1,7 @@
 
 The `EnvironmentalExtensions` class bridges `ScalarField` (∇, ∇²) and `VectorField` to atmospheric and aquatic transport physics — Gaussian plume dispersion, Fickian diffusion, advection, and the advection–diffusion equation.
 
-```csharp
-using CSharpNumerics.Physics;
-```
+**Namespace:** `CSharpNumerics.Physics.Environmental`
 
 ---
 
@@ -151,3 +149,58 @@ ScalarField dCdt2 = C.AdvectionDiffusionRate(wind, D, source);
 double Pe = 2.0.PecletNumber(characteristicLength: 100, diffusionCoefficient: 0.1);
 // Pe = 2000 → advection-dominated
 ```
+
+---
+
+## 🔥 Rothermel Surface Fire Spread
+
+The `RothermelModel` static class implements the **Rothermel (1972) surface fire spread model** — the standard used by FARSITE, FlamMap, and BehavePlus. All parameters are in **SI units**.
+
+**Namespace:** `CSharpNumerics.Physics.Environmental.Fire`
+
+**Rate of spread:**
+
+$$R = \frac{I_R \cdot \xi \cdot (1 + \phi_w + \phi_s)}{\rho_b \cdot \varepsilon \cdot Q_{ig}}$$
+
+```csharp
+using CSharpNumerics.Physics.Environmental.Fire;
+using CSharpNumerics.Physics.Materials.Fire;
+using CSharpNumerics.Physics.Materials.Fire.Enums;
+
+// Get a standard Anderson 13 fuel model
+FuelModel grass = FuelLibrary.Get(FuelModelType.ShortGrass);
+
+// Rate of spread on flat terrain, moderate wind
+double ros = RothermelModel.RateOfSpread(
+    fuel: grass,
+    moistureContent: 0.05,     // 5% dead fuel moisture
+    windSpeed: 2.24,           // m/s (≈ 5 mph mid-flame)
+    slopeRadians: 0);          // flat
+// ros ≈ 23–25 m/min for Short Grass
+
+// Individual sub-equations
+double IR   = RothermelModel.ReactionIntensity(grass, moistureContent: 0.05);
+double phiW = RothermelModel.WindFactor(grass, midflameWindSpeed: 2.24);
+double phiS = RothermelModel.SlopeFactor(
+    RothermelModel.PackingRatio(grass), slopeRadians: Math.PI / 6);
+double xi   = RothermelModel.PropagatingFluxRatio(grass);
+double Qig  = RothermelModel.HeatOfPreignition(moistureContent: 0.05);
+double eps  = RothermelModel.EffectiveHeatingNumber(grass);
+
+// Flame length from Byram's fireline intensity correlation
+double fl = RothermelModel.FlameLength(IR, ros);  // metres
+```
+
+**Sub-equation reference:**
+
+| Method | Symbol | Unit |
+|--------|--------|------|
+| `ReactionIntensity` | $I_R$ | kJ/m²·min |
+| `WindFactor` | $\phi_w$ | — |
+| `SlopeFactor` | $\phi_s$ | — |
+| `PropagatingFluxRatio` | $\xi$ | — |
+| `HeatOfPreignition` | $Q_{ig}$ | kJ/kg |
+| `EffectiveHeatingNumber` | $\varepsilon$ | — |
+| `PackingRatio` | $\beta$ | — |
+| `OptimalPackingRatio` | $\beta_{op}$ | — |
+| `FlameLength` | $L$ | m |

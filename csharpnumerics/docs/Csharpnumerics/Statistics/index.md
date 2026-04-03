@@ -14,10 +14,10 @@ namespace CSharpNumerics.Statistics
 
 | Module | Description |
 |--------|-------------|
-| 📏 [Descriptive](Descriptive/Descriptive.md) | Summary statistics, variance, percentiles, skewness, kurtosis |
-| 📈[Inferential](Inferential/Inferential.md) | Regression, correlation, and hypothesis tests |
-| 🧪 [Hypothesis Testing](Hypothesis%20Testing/Hypothesis%20Testing.md) | t-tests, z-test, chi-squared, F-test, Mann–Whitney, Wilcoxon, ANOVA |
-| 🎲 [Random](Random/Random.md) | Seedable random number engine with advanced sampling methods |
-|🔔 [Distributions](Distributions/Distributions.md) | Probability distributions with a common `IDistribution` interface |
-| 🎯 [Monte Carlo](Monte%20Carlo/Monte%20Carlo.md) | General-purpose Monte Carlo simulation engine |
-| 🗃️ [Data](Data/Data.md) | Core data structures for indexed and time-indexed data |
+| 📏 [Descriptive](Descriptive/Descriptive.md) | Summary statistics, moments, percentiles, skewness, and kurtosis |
+| 📈 [Inferential](Inferential/Inferential.md) | Regression, correlation, estimation, and inferential analysis |
+| 🧪 [Hypothesis Testing](Hypothesis%20Testing/Hypothesis%20Testing.md) | Parametric and non-parametric tests, ANOVA, and significance workflows |
+| 🎲 [Random](Random/Random.md) | Seedable random-number generation and advanced sampling methods |
+| 🔔 [Distributions](Distributions/Distributions.md) | Probability distributions, density functions, and shared distribution interfaces |
+| 🎯 [Monte Carlo](Monte%20Carlo/Monte%20Carlo.md) | General-purpose Monte Carlo simulation and stochastic estimation |
+| 🗃️ [Data](Data/Data.md) | Indexed datasets, time-series structures, and statistical data containers |

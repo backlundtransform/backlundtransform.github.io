@@ -18,6 +18,53 @@ This format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ---
 
+## [2.8.0] – 2026-04-03
+
+### 🟢 Added
+
+#### Multiphysics Engine (`CSharpNumerics.Engines.Multiphysics`)
+
+- Introduced a new multiphysics engine with simulation builders, timeline snapshots, result objects, and solver abstractions.
+- Added multiphysics solvers for beam stress, electric fields, heat plates, and pipe flow.
+- Added multiphysics Monte Carlo tooling, including scenario results, parameter variation, clustering, and surrogate training.
+- Added new export options for multiphysics simulations in JSON and binary formats.
+
+#### Finite Element (`CSharpNumerics.Numerics.FiniteElement`)
+
+- Added a finite element module with `Mesh1D`, `Assembler1D`, `BarElement`, `BeamElement`, and `IElement1D`.
+
+#### GIS Wildfire & Terrain (`CSharpNumerics.Engines.GIS`)
+
+- Added wildfire and terrain spread simulation support in the GIS engine, including terrain grids, fuel maps, spread snapshots, scenario builders, simulation results, and Monte Carlo outputs.
+- Added wildfire export support for GeoJSON, Cesium, and Unity binary workflows.
+
+#### Fire, Materials, and Solid Mechanics
+
+- Added fire and engineering material models, including fuel libraries, fuel model types, and a Rothermel-based fire spread model.
+- Added new solid mechanics APIs for beam analysis, section properties, and stress-strain calculations.
+
+#### Test Coverage
+
+- Expanded automated test coverage for multiphysics, finite elements, terrain modeling, wildfire simulation, wildfire exports, and solid mechanics.
+
+### 🔵 Changed
+
+- Refactored the Physics section into clearer domain-specific areas such as `Astro`, `Electromagnetism`, `Environmental`, `FluidDynamics`, `Mechanics`, `SolidMechanics`, and `Thermodynamics`.
+- Split large monolithic physics extension files into smaller, focused modules for improved maintainability and discoverability.
+- Updated the Numerics, Physics, GIS, and Multiphysics documentation with new examples and architecture notes.
+- Extended finite-difference grid operators to support the new multiphysics and finite element workflows.
+- Refined several GIS simulation and scenario components to align with the new spread and wildfire model structure.
+
+### 🔴 Breaking Changes
+
+- Physics namespaces were reorganized, so existing consumers may need to update `using` statements and type references.
+- `AstronomyExtensions` was moved under `CSharpNumerics.Physics.Astro`.
+- Mechanics-related APIs such as dynamics, kinematics, rigid body, and oscillation types were moved into `CSharpNumerics.Physics.Mechanics`.
+- Previous consolidated solid mechanics functionality was restructured into more focused APIs such as `BeamExtensions`, `SectionPropertiesExtensions`, and `StressStrainExtensions`.
+- Environmental, fluid, and electromagnetic extension APIs were split into dedicated modules, which may require code updates in downstream projects.
+
+---
+
 ## [2.7.0] – 2026-03-28
 
 **10,056 lines added across 63 files** | Previous release: v2.6.5 (2026-03-21)
