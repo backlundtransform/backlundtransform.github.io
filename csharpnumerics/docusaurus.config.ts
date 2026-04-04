@@ -133,6 +133,10 @@ const config: Config = {
               label: '🔭 Astro3D Explorer',
               href: 'https://exoplanethunter.com/astro3d',
             },
+                {
+                  label: '☢️ Riskz',
+                  href: 'https://riskz.labz.se/',
+                },
             {
               label: '🌍 Exoplanet Hunter App',
               href: 'https://play.google.com/store/apps/details?id=com.varoid.exoplanethunter',
