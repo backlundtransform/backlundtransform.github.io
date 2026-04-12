@@ -2,7 +2,7 @@
 sidebar_label: "🎲 Random"
 ---
 
-## 🎲 Random
+
 
 The `CSharpNumerics.Statistics.Random` namespace provides `RandomGenerator` — a seedable random number engine with advanced sampling methods built on top of `System.Random`.
 

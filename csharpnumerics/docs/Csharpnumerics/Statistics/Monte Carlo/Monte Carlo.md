@@ -2,7 +2,7 @@
 sidebar_label: "🎯 Monte Carlo"
 ---
 
-## 🎯 Monte Carlo
+
 
 The `CSharpNumerics.Statistics.MonteCarlo` namespace provides a general-purpose Monte Carlo simulation engine.
 

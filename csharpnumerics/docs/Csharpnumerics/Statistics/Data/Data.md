@@ -2,7 +2,6 @@
 sidebar_label: "🗃️ Data"
 ---
 
-## 🗃️ Data
 
 The `CSharpNumerics.Statistics.Data` namespace provides core data structures for working with indexed and time-indexed data.
 

@@ -18,3 +18,4 @@ namespace CSharpNumerics.Engines
 | 🌍 [Geo Engine](Geo%20Engine.md) | Dispersion modelling, GIS analysis, wildfire spread, probability mapping, and spatial export |
 | 💻 [Quantum Engine](Quantum%20Engine.md) | Quantum circuits, core algorithms, noisy simulation, and error correction |
 | ⚡ [Multiphysics Engine](Multiphysics%20Engine.md) | Multiphysics PDE solvers, materials-aware workflows, export pipelines, and Monte Carlo/ML integration |
+| 🛰️ [Exoplanet Engine](Exoplanet%20Engine.md) | Transit detection, light-curve validation, feature extraction, and ML-assisted exoplanet classification |

@@ -272,3 +272,18 @@ FuelLibrary.Register(new FuelModel(
 | 11 | Light Logging Slash | 4,921 | 0.305 | 1.345 | 0.15 |
 | 12 | Medium Logging Slash | 4,921 | 0.701 | 3.363 | 0.20 |
 | 13 | Heavy Logging Slash | 4,921 | 0.914 | 5.604 | 0.25 |
+
+---
+
+## 🔦 Optical Materials
+
+Pre-defined media are available via `OpticalMaterialLibrary` or the `Materials.Optical()` factory:
+
+```csharp
+using CSharpNumerics.Physics.Materials;
+using CSharpNumerics.Physics.Optics;
+
+var diamond = OpticalMaterialLibrary.Diamond;       // n=2.417
+var bk7 = Materials.Optical("CrownGlass");        // factory lookup
+var flint = Materials.Optical("SF11");            // n=1.7847, low Abbe -> high dispersion
+```
