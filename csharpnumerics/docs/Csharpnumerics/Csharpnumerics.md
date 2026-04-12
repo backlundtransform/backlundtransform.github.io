@@ -110,7 +110,7 @@ Example applications:
 
 ---
 
-### 🔭 Phase 3 — Astronomy & Exoplanet Simulation
+### 🛰️ Phase 3 — Astronomy & Exoplanet Simulation
 
 **Goal:** Build an astronomy simulation and discovery platform combining machine learning, numerical methods, and visualization.
 

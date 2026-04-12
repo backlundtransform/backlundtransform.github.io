@@ -15,7 +15,7 @@ namespace CSharpNumerics.Physics
 | Module | Description |
 |--------|-------------|
 | 🚀 [Mechanics](Mechanics/Mechanics.md) | Kinematics, dynamics, rigid-body motion, forces, energy, collisions, and oscillators |
-| 🔦 [Optics](Optics/Optics.md) | Geometric optics: rays, lenses, mirrors, prisms, apertures, sensors, and ray tracing |
+| 💿 [Optics](Optics/Optics.md) | Geometric optics: rays, lenses, mirrors, prisms, apertures, sensors, and ray tracing |
 | 🌊 [Waves](Waves/Waves.md) | Wave equations, superposition, wave packets, and Fourier analysis |
 | 🔩 [Solid Mechanics](Solid-Mechanics/Solid-Mechanics.md) | Euler-Bernoulli beams, Hooke's law, second moments of area, flexure, and beam deflections |
 | 💧 [Fluid Dynamics](Fluid-Dynamics/Fluid-Dynamics.md) | Navier-Stokes flow, Bernoulli relations, continuity, vorticity, drag, lift, and hydrostatics |

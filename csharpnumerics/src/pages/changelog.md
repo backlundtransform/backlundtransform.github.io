@@ -18,6 +18,106 @@ This format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ---
 
+## [3.0.0] – 2026-04-12
+
+Major release: Exoplanet transit-detection engine, sequence ML models (CNN1D / LSTM / BiLSTM), geometric optics, time-series analysis, curve fitting, and physics model interfaces.
+
+### 🟢 Added
+
+#### Exoplanet Engine (`CSharpNumerics.Engines.Exoplanet`)
+
+A complete analysis engine for exoplanet transit detection and ML-assisted classification — from raw light curve to transit prediction.
+
+- **Data model** – `LightCurve`, `LightCurveMetadata`, `LightCurveSanitizer`, `TransitParameters`, `TransitCandidate`, `TransitFeatureSet`, `StellarProperties`.
+- **Enums** – `CadenceType`, `DetrendingMethod`, `PeriodSearchMethod`, `SpectralType`, `TransitDisposition`.
+- **Classical detection pipeline** – `TransitDetectionPipeline`, `LightCurvePreprocessor`, `PeriodSearcher` (BLS / Lomb-Scargle wrapper), `TransitFitter` (non-linear transit model fitting), `TransitValidator` (SNR, odd/even, secondary eclipse checks).
+- **Feature extraction** – `TransitFeatureExtractor` (12 transit-specific features), `WindowedFeatureExtractor` (phase-folded windows + feature columns).
+- **ML training & inference** – `TransitClassifierTrainer` (grid-search + cross-validation), `TrainedTransitModel`, `TransitInferencePipeline`, `ModelSerializer` (binary serialization for deployment), `TrainerConfig`, `TransitPrediction`.
+- **Engine integration** – `ExoplanetEngine` implementing `ISimulationEngine` with event-driven batch processing, `ExoplanetEngineConfig`, `TransitDetectedEvent`.
+
+#### Transit Physics (`CSharpNumerics.Physics.Astro`)
+
+- `TransitModel` – Analytic transit light-curve model with limb darkening.
+- `LimbDarkening` – Quadratic, linear, and nonlinear limb-darkening laws.
+- `TransitGeometry` – Impact parameter, ingress/egress duration, transit depth from stellar/planetary radii.
+- `KeplerOrbit` – Keplerian orbital mechanics for transit timing.
+- `LimbDarkeningModel` enum.
+
+#### Sequence ML Models (`CSharpNumerics.ML.Sequence`)
+
+Three sequence model architectures with classification and regression variants:
+
+- **CNN1D** – `Conv1DLayer`, `MaxPool1DLayer`, `GlobalAvgPool1DLayer`, `FlattenLayer`, `CNN1DModelBase`, `CNN1DClassifier`, `CNN1DRegressor`, `ConvolutionPaddingMode` enum.
+- **LSTM** – `LSTMLayer`, `LSTMModelBase`, `LSTMClassifier`, `LSTMRegressor`.
+- **BiLSTM** – `BiLSTMLayer`, `BiLSTMModelBase`, `BiLSTMClassifier`, `BiLSTMRegressor`.
+- **Infrastructure** – `ISequenceModel` interface, `SequenceDataHelper`, `SequentialModel` (composable layer pipeline).
+
+Neural-network refactoring:
+- Extracted `Activations`, `DenseLayer`, `ILayer`, `OptimizerFactory` from the monolithic `NeuralNetwork` class.
+
+#### Optics (`CSharpNumerics.Physics.Optics`)
+
+Geometric-optics ray tracing and optical components:
+
+- **Core** – `Ray`, `RayHit`, `RayTracer`, `OpticalScene`, `OpticalMedium`, `IOpticalSurface`.
+- **Elements** – `ThinLens`, `PlaneMirror`, `SphericalMirror`, `Prism`, `CircularAperture`, `RectangularAperture`.
+- **Imaging** – `ImageSensor` (projected image capture).
+- **Materials** – `OpticalMaterialLibrary`, `OpticalLibrary` (refractive indices for common media).
+- **Extensions** – `OpticsExtensions` (Snell's law, Brewster angle, critical angle, thin-lens equation, magnification).
+- **Game engine** – `RaycastExtensions` added to `Engines.Game`.
+- Enums: `LensType`, `MirrorType`.
+
+#### Curve Fitting (`CSharpNumerics.Statistics.Fitting`)
+
+A comprehensive fitting toolkit:
+
+- `LeastSquaresFitter`, `WeightedLeastSquaresFitter`, `NonlinearLeastSquaresFitter` (Levenberg-Marquardt).
+- `RobustFitter` with `RobustWeightFunction` (Huber, Bisquare, etc.).
+- `FittingSolver` – unified solver façade.
+- `GoodnessOfFit` – R², adjusted R², AIC, BIC.
+- `ParameterEstimation`, `ResidualAnalysis`, `FittingResult`.
+
+#### Time-Series Analysis (`CSharpNumerics.Statistics.TimeSeriesAnalysis`)
+
+Signal-processing and period-detection tools:
+
+- `BoxFittingLeastSquares` – BLS period search with `BLSResult`.
+- `LombScarglePeriodogram` – for unevenly sampled data, with `PeriodogramResult`.
+- `PhaseFolding` – fold time-series on a detected period.
+- `TimeSeriesDetrending` – median filter, polynomial, Savitzky-Golay.
+- `PeakFitting` – Gaussian/Lorentzian peak detection, `PeakResult`, `PeakShape` enum.
+
+#### Robust Statistics (`CSharpNumerics.Statistics.Robust`)
+
+- `SigmaClipping` – iterative sigma-clipping for outlier rejection.
+- `SlidingWindowStatistics` – rolling mean/median/std with flexible windows.
+- `FalseAlarmProbability` – statistical significance for periodic signals.
+
+#### Physics Model Interfaces
+
+Standardised interfaces for the Multiphysics engine:
+
+- `IBeamModel` / `BeamModel` (`Physics.SolidMechanics`)
+- `IHeatTransferModel` / `HeatTransferModel` (`Physics.Thermodynamics`)
+- `IViscousFlowModel` / `ViscousFlowModel` (`Physics.FluidDynamics`)
+- `IElectrostaticModel` / `ElectrostaticModel` (`Physics.Electromagnetism`)
+- `BeamSupport` enum moved to `Physics.SolidMechanics.Enums`.
+
+### 🔵 Changed
+
+#### Multiphysics Engine Refactoring
+
+- `BeamStressSolver`, `HeatPlateSolver`, `PipeFlowSolver`, `ElectricFieldSolver` refactored to use the new physics-model interfaces.
+- `SimulationBuilder` updated to work with new beam support enum location.
+
+### 🔴 Breaking Changes
+
+- `BeamSupport` enum moved from `Physics.SolidMechanics` to `Physics.SolidMechanics.Enums` — update `using` statements accordingly.
+- Multiphysics solvers now require physics-model interface instances instead of raw parameters.
+- `NeuralNetwork` internals (`Activations`, `DenseLayer`, `ILayer`, `OptimizerFactory`) extracted into separate types — direct references to the monolithic class may need updating.
+
+---
+
 ## [2.8.0] – 2026-04-03
 
 ### 🟢 Added

@@ -23,6 +23,6 @@ namespace CSharpNumerics.Numerics
 | 🌐 [Fields](Fields/Fields.md) | Scalar, vector, and tensor fields with differential operators |
 | 🔲 [Finite Difference](Finite%20difference/Finite%20difference.md) | Finite-difference discretization, grids, operators, and boundary conditions |
 | 🕸️ [Finite Element](Finite%20element/Finite%20element.md) | 1D finite-element primitives for bar and Euler-Bernoulli beam analysis |
-| 🛰️ [Complex Analysis](Complex%20analysis/Complex%20analysis.md) | Complex numbers, analytic functions, and contour-based tools |
+| 🌀 [Complex Analysis](Complex%20analysis/Complex%20analysis.md) | Complex numbers, analytic functions, and contour-based tools |
 | 📡 [Transforms](Transforms/Transforms.md) | Fourier, Laplace, and related transform methods |
 | 🔋 [Optimization](Optimization/Optimization.md) | Gradient methods, schedules, Pareto optimisation, and NSGA-II |

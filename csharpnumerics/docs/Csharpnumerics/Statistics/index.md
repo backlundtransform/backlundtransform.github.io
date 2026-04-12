@@ -20,7 +20,7 @@ namespace CSharpNumerics.Statistics
 | 🎲 [Random](Random/Random.md) | Seedable random-number generation and advanced sampling methods |
 | 🔔 [Distributions](Distributions/Distributions.md) | Probability distributions, density functions, and shared distribution interfaces |
 | 🎯 [Monte Carlo](Monte%20Carlo/Monte%20Carlo.md) | General-purpose Monte Carlo simulation and stochastic estimation |
-| 🗃️ [Data](Data/Data.md) | Indexed datasets, time-series structures, and statistical data containers |
 | 🛡️ [Robust](Robust/Robust.md) | Outlier-resistant statistical methods |
-| ⏳ [Time Series Analysis](Time%20Series%20Analysis/Time%20Series%20Analysis.md) | Periodic signal detection, detrending, phase folding, and peak fitting |
 | ⤴️ [Fitting](Fitting/Fitting.md) | Curve fitting, residual analysis, goodness-of-fit, and parameter estimation |
+| ⏳ [Time Series Analysis](Time%20Series%20Analysis/Time%20Series%20Analysis.md) | Periodic signal detection, detrending, phase folding, and peak fitting |
+| 🗃️ [Data](Data/Data.md) | Indexed datasets, time-series structures, and statistical data containers |
