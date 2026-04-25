@@ -26,7 +26,7 @@ Patch release: robust statistics toolkit, exoplanet classification, biological m
 
 ### 🟢 Added
 
-#### 🛡️ Robust Statistics (`CSharpNumerics.Statistics.Robust`) — 2026-04-13
+#### Robust Statistics (`CSharpNumerics.Statistics.Robust`) — 2026-04-13
 
 - `HuberLoss` — robust loss function (quadratic/linear blend).
 - `MedianAbsoluteDeviation` — MAD with scaled σ-estimate.
@@ -36,7 +36,7 @@ Patch release: robust statistics toolkit, exoplanet classification, biological m
 - Tests: `StatisticsRobustTests.cs` (+311 lines).
 - Documentation added to Statistics README.
 
-#### 🪐 Planet Classification (`CSharpNumerics.Physics.Astro`) — 2026-04-18
+####  Planet Classification (`CSharpNumerics.Physics.Astro`) — 2026-04-18
 
 - Extended `AstronomyExtensions` with new methods (+114 lines):
   - `GetSpectralFromTemp` — Harvard spectral classification (O B A F G K M L T Y).
@@ -45,7 +45,7 @@ Patch release: robust statistics toolkit, exoplanet classification, biological m
 - New enum `SpectralType` for stellar classification.
 - Tests: `AstronomyTests.cs` expanded (+148 lines).
 
-#### 🦠 Biological Materials (`CSharpNumerics.Physics.Materials.Biological`) — 2026-04-20
+####  Biological Materials (`CSharpNumerics.Physics.Materials.Biological`) — 2026-04-20
 
 - `BiologicalAgent` — struct with viability decay, unit-mass conversion (kg/m³ ↔ units/m³).
 - `BiologicalLibrary` — registry with `GenericVirus`, `GenericBacteria`, `GenericSpore`.
@@ -53,7 +53,7 @@ Patch release: robust statistics toolkit, exoplanet classification, biological m
 - GIS integration: snapshot layers `bioUnits`, `viableBioUnits`, `infectiousDose`.
 - Tests: `BiologicalMaterialTests.cs` (+169 lines).
 
-#### 🌊 Water Contamination Engine — 2026-04-21
+####  Water Contamination Engine — 2026-04-21
 
 **Physics models** (`Physics.Environmental.Water`):
 - `LongitudinalDispersion` — 1D longitudinal dispersion in watercourses.
