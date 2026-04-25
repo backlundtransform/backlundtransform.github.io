@@ -18,6 +18,76 @@ This format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ---
 
+## [3.0.1] – 2026-04-23
+
+Patch release: robust statistics toolkit, exoplanet classification, biological materials, water contamination engine, and bug fixes.
+
+**8 commits · 46 files changed · +7 163 / −17 lines**
+
+### 🟢 Added
+
+#### 🛡️ Robust Statistics (`CSharpNumerics.Statistics.Robust`) — 2026-04-13
+
+- `HuberLoss` — robust loss function (quadratic/linear blend).
+- `MedianAbsoluteDeviation` — MAD with scaled σ-estimate.
+- `OutlierDetection` — IQR, Z-score, Modified Z-score methods.
+- `Ransac` — RANSAC linear model fitting.
+- `TrimmedMean` / `WinsorizedMean` — trimmed and Winsorized location estimators.
+- Tests: `StatisticsRobustTests.cs` (+311 lines).
+- Documentation added to Statistics README.
+
+#### 🪐 Planet Classification (`CSharpNumerics.Physics.Astro`) — 2026-04-18
+
+- Extended `AstronomyExtensions` with new methods (+114 lines):
+  - `GetSpectralFromTemp` — Harvard spectral classification (O B A F G K M L T Y).
+  - `CalculateGoldilocksZone` / `CalculateGoldilocksZoneFromRadius` — habitable zone boundaries (Kopparapu et al. 2013).
+  - `CalculateEsi` — Earth Similarity Index (Schulze-Makuch et al. 2011).
+- New enum `SpectralType` for stellar classification.
+- Tests: `AstronomyTests.cs` expanded (+148 lines).
+
+#### 🦠 Biological Materials (`CSharpNumerics.Physics.Materials.Biological`) — 2026-04-20
+
+- `BiologicalAgent` — struct with viability decay, unit-mass conversion (kg/m³ ↔ units/m³).
+- `BiologicalLibrary` — registry with `GenericVirus`, `GenericBacteria`, `GenericSpore`.
+- `Materials.Biological()` — factory method on `MaterialDescriptor`.
+- GIS integration: snapshot layers `bioUnits`, `viableBioUnits`, `infectiousDose`.
+- Tests: `BiologicalMaterialTests.cs` (+169 lines).
+
+#### 🌊 Water Contamination Engine — 2026-04-21
+
+**Physics models** (`Physics.Environmental.Water`):
+- `LongitudinalDispersion` — 1D longitudinal dispersion in watercourses.
+- `ManningEquation` — open-channel flow computation.
+- `MixingZoneModel` — tributary mixing zone calculation.
+
+**Materials** (`Physics.Materials.Water`):
+- `AquaticContaminant` — aquatic contaminant descriptor with decay, adsorption, and toxicity.
+- `ContaminantLibrary` — built-in contaminants (Cs-137, Sr-90, I-131, Benzene, Cyanide, Mercury, E. coli, …).
+- `ContaminantType` enum.
+
+**Terrain** (`Engines.GIS.Terrain`):
+- `RiverNetwork` — flow network with nodes and segments.
+- `ChannelMap` — channel map for simulation.
+
+**Simulator** (`Engines.GIS.WaterContamination`):
+- `WaterContaminationSimulator` — main simulator.
+- `WaterContaminationScenarioBuilder` — fluent API.
+- `WaterContaminationResult` / `WaterContaminationAnalysisResult`.
+- `WaterContaminationMonteCarloResult`.
+- `WaterContaminationParameters` / `WaterContaminationVariation`.
+- `CellContaminationState` enum.
+- Export: `CesiumExporter`, `GeoJsonExporter`, `UnityBinaryExporter`.
+
+Tests: 4 new test files (+1 701 lines total).  
+GIS README updated (+260 lines). Roadmap item moved to completed.
+
+### 🔧 Fixed — 2026-04-22 – 2026-04-23
+
+- Fix: terrain spread bug.
+- Fix: clustering filter matrix.
+
+---
+
 ## [3.0.0] – 2026-04-12
 
 Major release: Exoplanet transit-detection engine, sequence ML models (CNN1D / LSTM / BiLSTM), geometric optics, time-series analysis, curve fitting, and physics model interfaces.

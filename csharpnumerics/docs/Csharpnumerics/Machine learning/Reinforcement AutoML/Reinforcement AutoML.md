@@ -25,7 +25,7 @@ Console.WriteLine(result.AverageReturn);
 Console.WriteLine(result.BestReturn);
 ```
 
-### ➡️ Deep RL
+### 🔄 Deep RL
 
 ```csharp
 var result = RLExperiment
@@ -47,7 +47,7 @@ var result = RLExperiment
 Console.WriteLine($"{result.AgentName} → avg return = {result.AverageReturnLastN(50):F1}");
 ```
 
-### ➡️ Policy Gradient
+### 📐 Policy Gradient
 
 ```csharp
 var result = RLExperiment
@@ -64,7 +64,7 @@ var result = RLExperiment
     .Run();
 ```
 
-### ➡️ Continuous Control
+### 📉 Continuous Control
 
 ```csharp
 var result = RLExperiment
@@ -82,7 +82,7 @@ var result = RLExperiment
     .Run();
 ```
 
-### ➡️ Grid Search (Hyperparameter Tuning)
+### 🔍 Grid Search (Hyperparameter Tuning)
 
 Search over multiple agent types and hyperparameter combinations — the RL counterpart to `SupervisedExperiment`:
 
@@ -113,7 +113,7 @@ foreach (var r in result.Rankings)
 Console.WriteLine($"\nBest: {result.Best.Description} → {result.BestScore:F2}");
 ```
 
-### ➡️ Monte Carlo Evaluation (Confidence Intervals)
+### 🎯 Monte Carlo Evaluation (Confidence Intervals)
 
 Run multiple independent training runs to quantify performance variance:
 
@@ -133,7 +133,7 @@ var (lower, upper) = mc.ConfidenceInterval(0.95);
 Console.WriteLine($"95% CI: [{lower:F1}, {upper:F1}]");
 ```
 
-### ➡️ Episode Evaluator (Standalone)
+### 🔀 Episode Evaluator (Standalone)
 
 Evaluate a trained agent outside of the experiment loop:
 

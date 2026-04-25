@@ -1,5 +1,5 @@
 ---
-sidebar_label: "⤴️Fitting"
+sidebar_label: "⤴️Curve Fitting"
 ---
 
 The `CSharpNumerics.Statistics.Fitting` namespace provides a comprehensive curve-fitting toolkit: ordinary, weighted, nonlinear, and robust least squares, plus goodness-of-fit metrics, residual analysis, and parameter estimation.
