@@ -34,7 +34,7 @@ double[] clean = SigmaClipping.Apply(data, sigmaLow: 3.0, sigmaHigh: 3.0);
 
 ---
 
-### 📏 Median Absolute Deviation (MAD)
+## 📏 Median Absolute Deviation (MAD)
 
 A robust measure of spread: MAD = median(|xᵢ − median(x)|). The scaled MAD (k = 1.4826) estimates σ for normal data.
 
@@ -54,7 +54,7 @@ MadResult custom = MedianAbsoluteDeviation.Compute(data, scale: 1.0);
 
 ---
 
-### ✂️ Trimmed Mean
+## ✂️ Trimmed Mean
 
 Arithmetic mean after discarding a proportion of the smallest and largest values. α = 0 gives the ordinary mean; α → 0.5 converges on the median.
 
@@ -69,7 +69,7 @@ double trimmed = TrimmedMean.Compute(data, trimRatio: 0.1);
 
 ---
 
-### 🔄 Winsorized Mean
+## 🔄 Winsorized Mean
 
 Like trimmed mean, but replaces extreme values with boundary values instead of discarding them — preserving the original sample size.
 
@@ -84,7 +84,7 @@ double winsorized = WinsorizedMean.Compute(data, trimRatio: 0.1);
 
 ---
 
-### 📉 Huber Loss
+## 📉 Huber Loss
 
 Robust loss function that is quadratic for small residuals and linear for large ones — a smooth blend between MSE and MAE.
 
@@ -102,7 +102,7 @@ double meanLoss = HuberLoss.MeanLoss(residuals, delta: 1.35);
 
 ---
 
-### 🎯 RANSAC
+## 🎯 RANSAC
 
 RANdom SAmple Consensus — iterative robust model fitting that finds inlier consensus despite heavy outlier contamination.
 
@@ -123,7 +123,7 @@ result.Iterations    // iterations performed
 
 ---
 
-### 🔍 Outlier Detection
+## 🔍 Outlier Detection
 
 Three complementary methods for identifying outliers in univariate data.
 
