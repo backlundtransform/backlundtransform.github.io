@@ -214,7 +214,7 @@ double v = KeplerOrbit.OrbitalVelocity(a: 1.496e11, period: 3.156e7); // ≈ 29.
 
 ---
 
-### 🔭 Exoplanet Classification
+## 🔭 Exoplanet Classification
 
 Classify stars by temperature, compute habitable zones, and measure how Earth-like a planet is — all in `AstronomyExtensions`.
 
