@@ -132,7 +132,12 @@ const config: Config = {
                 {
                   label: '☢️ Riskz',
                   href: 'https://riskz.labz.se/',
-                }
+                },
+                
+                {
+                  label: '⚛️ Quantum Simulator',
+                  href: 'https://assetstore.unity.com/packages/slug/373478',
+                },
           ],
         },
         {
