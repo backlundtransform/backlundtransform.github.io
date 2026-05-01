@@ -38,39 +38,7 @@ Modular computational engines designed for integration with external visualizati
 ## 🚀 Simulation Platform Roadmap
 
 
-### 💻 Phase 1 — Classical Quantum Simulation (Educational)
-
-**Goal:** Create CPU-based educational quantum circuit simulators.
-
-**Core focus:** understanding quantum algorithms and state evolution.
-
-**Features**
-
-* Quantum circuit simulation
-* Quantum algorithms
-* Noise modeling
-* Hybrid classical–quantum experimentation
-* State vector simulations
-* Circuit visualization tools
-
-Visualization:
-
-* quantum circuit diagrams
-* interactive state evolution
-* qubit representation using the
-  Bloch sphere
-
-No specialized hardware required.
-
-Potential uses:
-
-* education
-* algorithm exploration
-* research prototyping
-
----
-
-### ⚡ Phase 2 — Multiphysics Engine
+### ⚡ Phase 1 — Multiphysics Engine
 
 **Goal:** Build a general-purpose physics simulation framework.
 
@@ -110,7 +78,7 @@ Example applications:
 
 ---
 
-### 🛰️ Phase 3 — Astronomy & Exoplanet Simulation
+### 🛰️ Phase 2 — Astronomy & Exoplanet Simulation
 
 **Goal:** Build an astronomy simulation and discovery platform combining machine learning, numerical methods, and visualization.
 

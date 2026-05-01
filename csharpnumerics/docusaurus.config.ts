@@ -135,7 +135,7 @@ const config: Config = {
                 },
                 
                 {
-                  label: '⚛️ Quantum Simulator',
+                  label: '|ψ⟩ Quantum Simulator',
                   href: 'https://assetstore.unity.com/packages/slug/373478',
                 },
           ],
