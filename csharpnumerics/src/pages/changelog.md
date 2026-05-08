@@ -18,6 +18,78 @@ This format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ---
 
+## [3.1.0] – 2026-05-08
+
+Feature release: 3D finite differences, 2D finite element framework, sparse linear algebra, Kármán vortex street physics, expanded engineering materials, new multiphysics solvers (CFD, magnetostatics, plane stress, 3D heat/diffusion), and water contamination simulators (2D & volumetric 3D).
+
+### 🟢 Added
+
+#### Numerics — Finite Differences (3D)
+
+- New `Grid3D` class for structured 3D grids with row-major indexing.
+- New `GridOperators3D` — `Laplacian3D`, `Gradient3D`, `Divergence3D`, `Advection3D`, `SolvePoisson3D`.
+
+#### Numerics — Finite Element (2D)
+
+- New 2D finite element framework: `Mesh2D`, `Assembler2D`, `TriElement` (CST), `QuadElement` (bilinear Q4 with 2×2 Gauss).
+- `IElement2D` interface, `ElementType` and `PlaneType` enums.
+
+#### Numerics — Linear Algebra
+
+- New `SparseMatrix` class (CSR format) — triplet assembly, sparse matrix-vector product, diagonal extraction, Dirichlet elimination, preconditioned conjugate gradient solver (`SolvePCG`).
+
+#### Numerics — Vector Fields
+
+- Extended `VectorField` with new functionality.
+
+#### Physics — Fluid Dynamics
+
+- New `KarmanVortexStreetExtensions` — Roshko Strouhal–Reynolds correlation, vortex shedding frequency, vortex street geometry (von Kármán stability ratio), regime classification, wake-drag coefficient.
+- New `IViscousFlowModel` interface and `ViscousFlowModel` implementation for pipe flow physics.
+
+#### Physics — Engineering Materials
+
+- Expanded `EngineeringLibrary` with new materials: `Titanium`, `Brass`, `StainlessSteel`, `Oil`, `Glycerin`, `Wood`, `Rubber`, `Plastic`.
+- Added `MagneticPermeability` property to `EngineeringMaterial`.
+
+#### Engines — Multiphysics
+
+New solvers:
+- `CylinderFlowSolver` — 2D incompressible Navier-Stokes (Chorin projection) around a cylinder.
+- `FluidFlow2DSolver` — 2D Navier-Stokes on rectangular domains (lid-driven cavity, channel flow).
+- `MagneticFieldSolver` — 2D magnetostatics ($\nabla^2 A = -\mu_0 \mu_r J$).
+- `PlaneStressSolver` — 2D Navier-Cauchy plane stress elasticity (SOR iterative).
+- `HeatBlock3DSolver` — 3D transient heat equation with six-face Dirichlet BCs.
+- `FluidDiffusion3DSolver` — 3D advection-diffusion scalar transport.
+- `CylinderFlow3DSolver` — 3D incompressible Navier-Stokes around a cylinder.
+
+Infrastructure:
+- New `SimulationBuilder` and `SimulationResult` for orchestrating multiphysics simulations.
+- New `MultiphysicsBinaryExporter` and `MultiphysicsJsonExporter`.
+- Extended `MultiphysicsType` enum with new physics types.
+
+#### Engines — GIS
+
+Water contamination:
+- New 2D Water Contamination simulator (`WaterContamination2DSimulator`, parameters, result, scenario builder).
+- New 3D Volumetric Contamination simulator (`VolumetricContaminationSimulator`, `DepthProfile`, parameters, result, scenario builder, `ContaminationCellState3D` enum).
+- New `DepthProfileCsvExporter`.
+
+Export & analysis:
+- Extended `GeoJsonExporter` with volumetric contamination, depth profile, and 2D contamination support.
+- Extended `CesiumExporter` with volumetric contamination CZML animation.
+- Extended `UnityBinaryExporter` with volumetric export.
+- Extended `ExposurePolygonGenerator` with new contour methods.
+
+Wildfire:
+- New `WildfireMonteCarloResult` with burn probability and area statistics.
+- Extended `WildfireScenarioResult` with fire perimeter generation.
+
+Scenario:
+- New `RiskScenario` fluent entry points: `ForWaterContamination2D()`, `ForVolumetricContamination()`.
+
+---
+
 ## [3.0.1] – 2026-04-23
 
 Patch release: robust statistics toolkit, exoplanet classification, biological materials, water contamination engine, and bug fixes.

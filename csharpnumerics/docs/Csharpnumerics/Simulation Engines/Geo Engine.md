@@ -629,7 +629,307 @@ var data = UnityBinaryExporter.ReadFire("fire.bin");
 
 ---
 
-## 🌍 GIS-RL Integration
+## �️ River Network & Channel Geometry
+
+Build hydrological connectivity from elevation data (D8 flow routing) or define rivers manually with a fluent builder. `ChannelMap` attaches hydraulic geometry (width, depth, Manning's n) to each river cell.
+
+**Automatic extraction from DEM:**
+
+```csharp
+using CSharpNumerics.Engines.GIS.Terrain;
+
+var grid = new GeoGrid(0, 1000, 0, 1000, 0, 0, 100);
+var terrain = TerrainGrid.FromFunction(grid, (x, y) => 100 - y * 0.001);
+
+// D8 flow direction → river cells above accumulation threshold
+var river = RiverNetwork.FromElevation(terrain, accumulationThreshold: 4);
+int count = river.RiverCellCount;
+(int dr, int dc)? ds = river.GetDownstream(5, 5);
+```
+
+**Manual builder:**
+
+```csharp
+var river = RiverNetwork.FromManual(grid)
+    .AddReach(new[] { (0,5), (1,5), (2,5), (3,5), (4,5) })
+    .AddTributary(parentRow: 2, parentCol: 5,
+        cells: new[] { (2,3), (2,4), (2,5) })
+    .Build();
+
+var sorted = river.TopologicalOrder();   // upstream → downstream (Kahn's algorithm)
+var reach  = river.GetReachCells(0, 5);  // all cells downstream from (0,5)
+```
+
+**ChannelMap — hydraulic geometry:**
+
+```csharp
+var channels = new ChannelMap(grid);
+channels.SetUniformChannel(width: 10, depth: 2, manningN: 0.035);
+
+// Vary geometry by Strahler stream order
+channels.SetChannelByStreamOrder(river, new Dictionary<int, (double w, double d, double n)>
+{
+    [1] = (3, 0.5, 0.04),
+    [2] = (8, 1.5, 0.035),
+    [3] = (15, 3.0, 0.03),
+});
+
+double slope = channels.GetBedSlope(terrain, 3, 5);  // from elevation difference
+double u = channels.GetVelocity(terrain, 3, 5);       // Manning velocity at cell
+```
+
+---
+
+## 🧪 Water Contamination Simulator
+
+A 1-D advection-diffusion simulator that transports dissolved or adsorbed contaminants along a river network. Implements `ISpreadSimulator` so it integrates directly with the GIS pipeline.
+
+**Governing equation:**
+
+$$R_f \frac{\partial C}{\partial t} = E_L \frac{\partial^2 C}{\partial x^2} - u \frac{\partial C}{\partial x} - \lambda C + S$$
+
+Where $R_f$ = retardation factor, $E_L$ = Fischer dispersion, $u$ = Manning velocity, $\lambda$ = first-order decay, $S$ = source term.
+
+```csharp
+using CSharpNumerics.Engines.GIS.Spread.WaterContamination;
+using CSharpNumerics.Physics.Materials.Water;
+
+var parameters = new WaterContaminationParameters(
+    sources: new List<(int row, int col, double concentrationMgL)>
+        { (0, 5, 100.0) }.AsReadOnly(),
+    contaminant: AquaticContaminant.Cs137,
+    baseDischargeM3s: 20.0,
+    bedPorosity: 0.4,
+    bedBulkDensity: 1600);
+
+var simulator = new WaterContaminationSimulator(parameters);
+var snapshots = simulator.Run(grid, terrain, river, channels,
+    new TimeFrame(0, 3600, 60));  // 1 hour, 1-minute steps
+
+var last = snapshots[^1];
+double peak = last.MaxConcentration();              // mg/L
+int affected = last.ContaminatedCellCount(1e-6);    // cells > threshold
+double reachKm = last.AffectedReachLengthKm(1e-6); // km of river contaminated
+```
+
+**SpreadSnapshot layers:**
+
+| Layer | Description |
+|-------|-------------|
+| `concentration` | Dissolved concentration (mg/L) |
+| `contaminationState` | 0 = Clean, 1 = Contaminated, 2 = Decayed, 3 = Source |
+| `velocity` | Manning velocity at cell (m/s) |
+| `exposureTime` | Seconds the cell has been above threshold |
+
+---
+
+## 💧 Water Contamination Fluent API
+
+Accessed via `RiskScenario.ForWaterContamination()`.
+
+**Deterministic run:**
+
+```csharp
+using CSharpNumerics.Engines.GIS.Scenario;
+
+var result = RiskScenario
+    .ForWaterContamination()
+    .WithRiverNetwork(river)
+    .WithChannels(channels)
+    .WithTerrain(terrain)
+    .WithSource(0, 5, 100.0)                      // row, col, mg/L
+    .WithContaminant(AquaticContaminant.Benzene)
+    .WithDischarge(20.0)                           // m³/s
+    .WithBedProperties(porosity: 0.4, bulkDensity: 1600)
+    .OverGrid(grid)
+    .OverTime(0, 3600, 60)
+    .RunSingle();
+
+double peak = result.MaxConcentration;             // mg/L
+double arrival = result.PeakArrivalTimeSeconds;    // seconds to peak
+double reachKm = result.TotalAffectedReachKm;      // contaminated river length
+var extent = result.GenerateContaminationExtent(1e-4); // polygon of affected area
+```
+
+**Monte Carlo ensemble with parameter uncertainty:**
+
+```csharp
+var mcResult = RiskScenario
+    .ForWaterContamination()
+    .WithRiverNetwork(river)
+    .WithChannels(channels)
+    .WithTerrain(terrain)
+    .WithSource(0, 5, 100.0)
+    .WithContaminant(AquaticContaminant.Cs137)
+    .WithDischarge(20.0)
+    .WithBedProperties(0.4, 1600)
+    .WithVariation(v => v
+        .Discharge(10, 40)                         // uniform [10, 40] m³/s
+        .SourceConcentration(50, 200)              // uniform [50, 200] mg/L
+        .ManningN(0.025, 0.045))                   // uniform [0.025, 0.045]
+    .OverGrid(grid)
+    .OverTime(0, 3600, 60)
+    .RunMonteCarlo(200, seed: 42);
+
+double meanPeak = mcResult.MeanPeakConcentration;
+double p95Peak  = mcResult.P95PeakConcentration;
+double[] exceedProb = mcResult.ExceedanceProbability;  // per-cell [0,1]
+```
+
+**Clustering + analysis:**
+
+```csharp
+using CSharpNumerics.ML.Clustering.Algorithms;
+using CSharpNumerics.ML.Clustering.Evaluators;
+
+var analysisResult = mcResult
+    .AnalyzeWith(
+        new KMeans { Seed = 42 },
+        new SilhouetteEvaluator(),
+        minK: 2, maxK: 5)
+    .Build();   // → WaterContaminationResult from dominant cluster
+```
+
+---
+
+## 📤 Water Contamination Export
+
+All three export formats support contamination data.
+
+**GeoJSON — contamination snapshots:**
+
+```csharp
+string json = GeoJsonExporter.ContaminationToGeoJson(snapshots[^1]);
+// Point features with: concentration, contaminationState, velocity, exposureTime
+
+// Exceedance probability heatmap
+string heatmap = GeoJsonExporter.ExceedanceProbabilityToGeoJson(
+    mcResult.ExceedanceProbability, grid);
+
+// Contamination extent as polygon
+string extent = GeoJsonExporter.ContaminationExtentToGeoJson(
+    result.GenerateContaminationExtent(1e-4), grid);
+
+// River centreline as LineString
+string centreline = GeoJsonExporter.RiverCentrelineToGeoJson(river, grid);
+```
+
+**CZML — animated contamination plume:**
+
+```csharp
+CesiumExporter.SaveContaminationCzml(snapshots, timeFrame, "contamination.czml");
+// Per-cell time-sampled colour: blue → yellow → red → purple (by concentration)
+```
+
+**Unity binary — contamination layers:**
+
+```csharp
+UnityBinaryExporter.SaveContamination(snapshots, grid, timeFrame, "water.bin");
+var data = UnityBinaryExporter.ReadContamination("water.bin");
+// data.Concentration[][], data.Velocity[][]
+```
+
+---
+
+## 🌊 2D Water Contamination Simulator
+
+Extends the 1D river model to 2D open water (lakes, estuaries, coastal areas). Implements full-grid advection-diffusion with anisotropic diffusion and a prescribed velocity field.
+
+```csharp
+using CSharpNumerics.Engines.GIS.Scenario;
+
+var result = RiskScenario
+    .ForWaterContamination2D()
+    .WithSource(50, 50, 100.0, double.MaxValue)
+    .WithContaminant(ContaminantLibrary.Get("Benzene"))
+    .WithDiffusion(1.0, 0.5)                        // Dx, Dy (anisotropic)
+    .WithCurrent(0.1, 0)                             // uniform flow
+    .WithLandMask(coastlineMask)
+    .OverGrid(grid)
+    .OverTime(0, 86400, 60)
+    .RunSingle();
+
+double peak = result.MaxConcentration;
+double area = result.AffectedAreaM2;
+var polygon = result.GenerateContaminationExtent(result.Snapshots.Count - 1, 0.01);
+```
+
+---
+
+## 🔬 Volumetric (3D) Water Contamination
+
+Full 3D advection-diffusion for contaminant transport with depth variation. Models vertical stratification ($D_v \ll D_h$), 3D current fields, and depth profiles.
+
+**Governing equation:**
+
+$$\frac{\partial c}{\partial t} = D_h\left(\frac{\partial^2 c}{\partial x^2} + \frac{\partial^2 c}{\partial y^2}\right) + D_v\frac{\partial^2 c}{\partial z^2} - \mathbf{v} \cdot \nabla c - \lambda c + S$$
+
+**Fluent API:**
+
+```csharp
+var grid = new GeoGrid(0, 1000, 0, 1000, 0, 50, 10); // 100×100×5 cells
+
+var result = RiskScenario
+    .ForVolumetricContamination()
+    .WithSource(50, 50, 3, 100.0, double.MaxValue)   // ix, iy, iz, mg/L, duration
+    .WithDiffusivity(1.0, 0.01)                        // Dh=1, Dv=0.01 (stratified)
+    .WithCurrent(0.1, 0, 0)                            // surface current
+    .WithLandMask(seabedMask)
+    .OverGrid(grid)
+    .OverTime(0, 86400, 60)
+    .RunSingle();
+
+// 3D analysis
+double peak = result.MaxConcentration;
+double[] peakField = result.PeakConcentration3D();     // per-cell peak over time
+double maxDepth = result.MaxAffectedDepth(0.01);       // deepest contaminated z
+
+// Depth profile at a point
+var profile = result.GetDepthProfile(50, 50);
+double peakDepth = profile.MaxConcentrationDepth;
+
+// Horizontal slices
+double[] surface = result.SurfaceSlice(result.Snapshots.Count - 1);
+double[] bottom  = result.BottomSlice(result.Snapshots.Count - 1);
+double[] atDepth = result.HorizontalSlice(result.Snapshots.Count - 1, iz: 2);
+
+// Surface contamination extent polygon
+var polygon = result.GenerateContaminationExtent(
+    result.Snapshots.Count - 1, 0.01);
+```
+
+**Export:**
+
+```csharp
+// GeoJSON — horizontal slice at depth layer
+string json = GeoJsonExporter.VolumetricContaminationToGeoJson(result, iz: 3);
+// Includes: concentration, contaminationState, depth, isLand properties
+
+// GeoJSON — depth profile at a point
+string profile = GeoJsonExporter.DepthProfileToGeoJson(result, ix: 50, iy: 50);
+
+// CZML — full 3D time-animated (uses cell altitude for true volumetric vis)
+CesiumExporter.SaveVolumetricContaminationCzml(result, timeFrame, "vol.czml");
+
+// Unity binary
+UnityBinaryExporter.SaveVolumetric(result, timeFrame, "vol3d.bin");
+
+// CSV depth profile
+DepthProfileCsvExporter.Save(result, 50, 50, "depth_profile.csv");
+```
+
+**SpreadSnapshot layers (same as 2D):**
+
+| Layer | Description |
+|-------|-------------|
+| `concentration` | Dissolved concentration (mg/L) |
+| `contaminationState` | 0 = Clean, 1 = Contaminated, 2 = Source, 3 = Land |
+| `velocity` | Current speed magnitude (m/s) |
+| `exposureTime` | Seconds above toxicity threshold |
+
+---
+
+## �🌍 GIS-RL Integration
 
 Bridges **GIS simulation** with the **RL framework** through `ScenarioRLAnalyzer`. Train RL agents to learn **optimal mitigation strategies** for spatial scenarios, including atmospheric plumes, floods, fires, or any GIS-based model.
 
@@ -721,3 +1021,126 @@ var result = RLExperiment
 ```
 
 > **Note:** When using `For(IGISEnvironment)` or `For(IEnvironment)`, physics configuration methods such as `WithWind` and `WithStability` are disabled. Configure those on the environment before passing it in.
+
+---
+
+## 🏗️ Architecture
+
+```
+Engines/GIS/
+├── Coordinates/
+│   ├── GeoCoordinate.cs        — WGS-84 lat/lon/alt value-type
+│   └── Projection.cs           — LTP & UTM projection (forward + inverse)
+├── Grid/
+│   ├── GeoGrid.cs              — 3-D spatial grid + FromLatLon() factory
+│   ├── GeoCell.cs              — position + value + time struct
+│   └── GridSnapshot.cs         — cell values at one time step + named layers
+├── Terrain/
+│   ├── TerrainGrid.cs          — elevation surface, slope/aspect
+│   ├── FuelMap.cs              — per-cell fuel model + moisture
+│   ├── RiverNetwork.cs         — D8 flow routing + manual builder + topo sort
+│   └── ChannelMap.cs           — per-cell width/depth/Manning's n
+├── Spread/
+│   ├── ISpreadSimulator.cs     — generic spread interface
+│   ├── SpreadSnapshot.cs       — per-step state (+ contamination helpers)
+│   ├── Wildfire/
+│   │   ├── WildfireSimulator.cs          — 8-neighbour Rothermel CA
+│   │   ├── WildfireParameters.cs         — ignition, wind, burn duration
+│   │   ├── WildfireScenarioBuilder.cs    — fluent builder
+│   │   ├── WildfireScenarioResult.cs     — deterministic result
+│   │   ├── WildfireMonteCarloResult.cs   — MC result + AnalyzeWith()
+│   │   ├── WildfireAnalysisResult.cs     — clustering + Build()
+│   │   ├── WildfireVariation.cs          — stochastic parameter ranges
+│   │   └── Enums/
+│   │       └── CellBurnState.cs          — Unburned, Burning, Burned, Firebreak
+│   ├── WaterContamination/
+│   │   ├── WaterContaminationSimulator.cs      — 1-D advection-diffusion along river
+│   │   ├── WaterContaminationParameters.cs     — sources, contaminant, discharge
+│   │   ├── WaterContaminationScenarioBuilder.cs — fluent builder
+│   │   ├── WaterContaminationResult.cs         — deterministic result
+│   │   ├── WaterContaminationMonteCarloResult.cs — MC result + AnalyzeWith()
+│   │   ├── WaterContaminationAnalysisResult.cs — clustering + Build()
+│   │   ├── WaterContaminationVariation.cs      — discharge/conc/Manning ranges
+│   │   └── Enums/
+│   │       └── CellContaminationState.cs       — Clean, Contaminated, Decayed, Source
+│   ├── WaterContamination2D/
+│   │   ├── WaterContamination2DSimulator.cs    — 2-D advection-diffusion on grid
+│   │   ├── WaterContamination2DParameters.cs   — anisotropic diffusion, velocity field
+│   │   ├── WaterContamination2DScenarioBuilder.cs — fluent builder
+│   │   └── WaterContamination2DResult.cs       — deterministic result
+│   └── VolumetricContamination/
+│       ├── VolumetricContaminationSimulator.cs  — 3-D advection-diffusion (Nx×Ny×Nz)
+│       ├── VolumetricContaminationParameters.cs — Dh/Dv, 3D velocity, land mask, decay
+│       ├── VolumetricContaminationScenarioBuilder.cs — fluent builder
+│       ├── VolumetricContaminationResult.cs    — depth profiles, slices, 3D peak
+│       ├── DepthProfile.cs                     — concentration-vs-depth at (ix,iy)
+│       └── Enums/
+│           └── ContaminationCellState3D.cs     — Clean, Contaminated, Source, Land
+├── Scenario/
+│   ├── TimeFrame.cs            — time range value-object
+│   ├── RiskScenario.cs         — fluent entry point (+ ForWildfire())
+│   ├── RiskScenarioBuilder.cs  — pipeline builder + stage results
+│   └── ScenarioResult.cs       — terminal result with export methods
+├── Simulation/
+│   ├── PlumeSimulator.cs       — single-scenario physics evaluation (+ material)
+│   ├── PlumeMonteCarloModel.cs — MC batch runner + IMonteCarloModel
+│   └── ScenarioVariation.cs    — parameter variation ranges
+├── Analysis/
+│   ├── ScenarioClusterAnalyzer.cs    — ML clustering of MC scenarios
+│   ├── ProbabilityMap.cs             — per-cell exceedance probability
+│   ├── TimeAnimator.cs               — time-animated probability maps
+│   ├── ExposurePolygon.cs            — polygon result type
+│   └── ExposurePolygonGenerator.cs   — marching squares contour extraction
+└── Export/
+    ├── GeoJsonExporter.cs      — GeoJSON (+ fire + contamination snapshots/extent/heatmap/centreline)
+    ├── UnityBinaryExporter.cs  — compact binary for Unity3D (+ GFIR fire + GWCN contamination)
+    └── CesiumExporter.cs       — CZML (+ fire + contamination time-dynamic animation)
+
+Physics/Materials/Fire/
+├── FuelModel.cs                — Rothermel fuel parameters (Anderson 13)
+├── FuelLibrary.cs              — static registry of standard fuel models
+└── Enums/
+    └── FuelModelType.cs        — ShortGrass, Chaparral, …
+
+Physics/Materials/Water/
+├── AquaticContaminant.cs       — immutable contaminant descriptor (decay, Kd, toxicity)
+├── ContaminantLibrary.cs       — static registry of 12 built-in contaminants
+└── Enums/
+    └── ContaminantType.cs      — Radioactive, Chemical, Biological, Thermal
+
+Physics/Environmental/Fire/
+└── RothermelModel.cs           — Rothermel (1972) equations (R, I_R, φw, φs)
+
+Physics/Environmental/Water/
+├── ManningEquation.cs          — open-channel velocity & discharge
+├── LongitudinalDispersion.cs   — Fischer coefficient, shear velocity, decay/retardation
+└── MixingZoneModel.cs          — tributary confluence mass-balance mixing
+```
+
+---
+
+## 📊 Status
+
+| Phase | Description | Tests | Status |
+|-------|-------------|-------|--------|
+| 0 | Grid foundation (`GeoGrid`, `GeoCell`, `GridSnapshot`, `TimeFrame`) | 25 | ✅ Done |
+| 1 | Single-scenario physics (`PlumeSimulator`, `GaussianPuff`) | 14 | ✅ Done |
+| 2 | Monte Carlo generation (`PlumeMonteCarloModel`, `ScenarioVariation`) | 10 | ✅ Done |
+| 3 | ML clustering & probability maps (`ScenarioClusterAnalyzer`, `ProbabilityMap`, `TimeAnimator`) | 19 | ✅ Done |
+| 4 | Fluent API (`RiskScenario` → `ScenarioResult`) | 14 | ✅ Done |
+| 5 | Export (GeoJSON / Unity binary / Cesium CZML) | 24 | ✅ Done |
+| 6 | GIS coordinates (WGS84, UTM, `GeoCoordinate`, `Projection`, `FromLatLon`) | 28 | ✅ Done |
+| 7 | Radioactive fallout & nuclear materials (`Isotope`, `DecayChain`, `RadiationDose`, `.WithMaterial()`) | 58 | ✅ Done |
+| 7.5 | Exposure polygons (`ExposurePolygonGenerator`, peak & time-integrated contours) | 17 | ✅ Done |
+| **W1** | **Fire physics & fuel library** (`RothermelModel`, `FuelModel`, `FuelLibrary`) | **33** | ✅ Done |
+| **W2** | **Terrain model & fuel map** (`TerrainGrid`, `FuelMap`) | **18** | ✅ Done |
+| **W3** | **Cell-automaton fire spread** (`WildfireSimulator`, `SpreadSnapshot`) | **9** | ✅ Done |
+| **W4** | **Fluent API & Monte Carlo** (`WildfireScenarioBuilder`, `AnalyzeWith`, clustering) | **13** | ✅ Done |
+| **W5** | **Fire export** (GeoJSON fire features/perimeters/heatmap, CZML animation, Unity binary) | **14** | ✅ Done |
+| **C1** | **Water physics & contaminant library** (`ManningEquation`, `LongitudinalDispersion`, `MixingZoneModel`, `AquaticContaminant`) | **31** | ✅ Done |
+| **C2** | **River network & channel geometry** (`RiverNetwork`, `ChannelMap`) | **12** | ✅ Done |
+| **C3** | **Advection-diffusion simulator** (`WaterContaminationSimulator`, `SpreadSnapshot` extensions) | **13** | ✅ Done |
+| **C4** | **Fluent API & Monte Carlo** (`WaterContaminationScenarioBuilder`, `AnalyzeWith`, clustering) | **11** | ✅ Done |
+| **C5** | **Contamination export** (GeoJSON extent/heatmap/centreline, CZML animation, Unity binary) | **7** | ✅ Done |
+
+**Total: 370 GIS + nuclear + wildfire + water contamination tests**
