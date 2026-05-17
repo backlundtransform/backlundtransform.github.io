@@ -629,7 +629,7 @@ var data = UnityBinaryExporter.ReadFire("fire.bin");
 
 ---
 
-## �️ River Network & Channel Geometry
+## 🏞️ River Network & Channel Geometry
 
 Build hydrological connectivity from elevation data (D8 flow routing) or define rivers manually with a fluent builder. `ChannelMap` attaches hydraulic geometry (width, depth, Manning's n) to each river cell.
 
@@ -929,7 +929,7 @@ DepthProfileCsvExporter.Save(result, 50, 50, "depth_profile.csv");
 
 ---
 
-## �🌍 GIS-RL Integration
+## 🌍 GIS-RL Integration
 
 Bridges **GIS simulation** with the **RL framework** through `ScenarioRLAnalyzer`. Train RL agents to learn **optimal mitigation strategies** for spatial scenarios, including atmospheric plumes, floods, fires, or any GIS-based model.
 
@@ -1022,125 +1022,3 @@ var result = RLExperiment
 
 > **Note:** When using `For(IGISEnvironment)` or `For(IEnvironment)`, physics configuration methods such as `WithWind` and `WithStability` are disabled. Configure those on the environment before passing it in.
 
----
-
-## 🏗️ Architecture
-
-```
-Engines/GIS/
-├── Coordinates/
-│   ├── GeoCoordinate.cs        — WGS-84 lat/lon/alt value-type
-│   └── Projection.cs           — LTP & UTM projection (forward + inverse)
-├── Grid/
-│   ├── GeoGrid.cs              — 3-D spatial grid + FromLatLon() factory
-│   ├── GeoCell.cs              — position + value + time struct
-│   └── GridSnapshot.cs         — cell values at one time step + named layers
-├── Terrain/
-│   ├── TerrainGrid.cs          — elevation surface, slope/aspect
-│   ├── FuelMap.cs              — per-cell fuel model + moisture
-│   ├── RiverNetwork.cs         — D8 flow routing + manual builder + topo sort
-│   └── ChannelMap.cs           — per-cell width/depth/Manning's n
-├── Spread/
-│   ├── ISpreadSimulator.cs     — generic spread interface
-│   ├── SpreadSnapshot.cs       — per-step state (+ contamination helpers)
-│   ├── Wildfire/
-│   │   ├── WildfireSimulator.cs          — 8-neighbour Rothermel CA
-│   │   ├── WildfireParameters.cs         — ignition, wind, burn duration
-│   │   ├── WildfireScenarioBuilder.cs    — fluent builder
-│   │   ├── WildfireScenarioResult.cs     — deterministic result
-│   │   ├── WildfireMonteCarloResult.cs   — MC result + AnalyzeWith()
-│   │   ├── WildfireAnalysisResult.cs     — clustering + Build()
-│   │   ├── WildfireVariation.cs          — stochastic parameter ranges
-│   │   └── Enums/
-│   │       └── CellBurnState.cs          — Unburned, Burning, Burned, Firebreak
-│   ├── WaterContamination/
-│   │   ├── WaterContaminationSimulator.cs      — 1-D advection-diffusion along river
-│   │   ├── WaterContaminationParameters.cs     — sources, contaminant, discharge
-│   │   ├── WaterContaminationScenarioBuilder.cs — fluent builder
-│   │   ├── WaterContaminationResult.cs         — deterministic result
-│   │   ├── WaterContaminationMonteCarloResult.cs — MC result + AnalyzeWith()
-│   │   ├── WaterContaminationAnalysisResult.cs — clustering + Build()
-│   │   ├── WaterContaminationVariation.cs      — discharge/conc/Manning ranges
-│   │   └── Enums/
-│   │       └── CellContaminationState.cs       — Clean, Contaminated, Decayed, Source
-│   ├── WaterContamination2D/
-│   │   ├── WaterContamination2DSimulator.cs    — 2-D advection-diffusion on grid
-│   │   ├── WaterContamination2DParameters.cs   — anisotropic diffusion, velocity field
-│   │   ├── WaterContamination2DScenarioBuilder.cs — fluent builder
-│   │   └── WaterContamination2DResult.cs       — deterministic result
-│   └── VolumetricContamination/
-│       ├── VolumetricContaminationSimulator.cs  — 3-D advection-diffusion (Nx×Ny×Nz)
-│       ├── VolumetricContaminationParameters.cs — Dh/Dv, 3D velocity, land mask, decay
-│       ├── VolumetricContaminationScenarioBuilder.cs — fluent builder
-│       ├── VolumetricContaminationResult.cs    — depth profiles, slices, 3D peak
-│       ├── DepthProfile.cs                     — concentration-vs-depth at (ix,iy)
-│       └── Enums/
-│           └── ContaminationCellState3D.cs     — Clean, Contaminated, Source, Land
-├── Scenario/
-│   ├── TimeFrame.cs            — time range value-object
-│   ├── RiskScenario.cs         — fluent entry point (+ ForWildfire())
-│   ├── RiskScenarioBuilder.cs  — pipeline builder + stage results
-│   └── ScenarioResult.cs       — terminal result with export methods
-├── Simulation/
-│   ├── PlumeSimulator.cs       — single-scenario physics evaluation (+ material)
-│   ├── PlumeMonteCarloModel.cs — MC batch runner + IMonteCarloModel
-│   └── ScenarioVariation.cs    — parameter variation ranges
-├── Analysis/
-│   ├── ScenarioClusterAnalyzer.cs    — ML clustering of MC scenarios
-│   ├── ProbabilityMap.cs             — per-cell exceedance probability
-│   ├── TimeAnimator.cs               — time-animated probability maps
-│   ├── ExposurePolygon.cs            — polygon result type
-│   └── ExposurePolygonGenerator.cs   — marching squares contour extraction
-└── Export/
-    ├── GeoJsonExporter.cs      — GeoJSON (+ fire + contamination snapshots/extent/heatmap/centreline)
-    ├── UnityBinaryExporter.cs  — compact binary for Unity3D (+ GFIR fire + GWCN contamination)
-    └── CesiumExporter.cs       — CZML (+ fire + contamination time-dynamic animation)
-
-Physics/Materials/Fire/
-├── FuelModel.cs                — Rothermel fuel parameters (Anderson 13)
-├── FuelLibrary.cs              — static registry of standard fuel models
-└── Enums/
-    └── FuelModelType.cs        — ShortGrass, Chaparral, …
-
-Physics/Materials/Water/
-├── AquaticContaminant.cs       — immutable contaminant descriptor (decay, Kd, toxicity)
-├── ContaminantLibrary.cs       — static registry of 12 built-in contaminants
-└── Enums/
-    └── ContaminantType.cs      — Radioactive, Chemical, Biological, Thermal
-
-Physics/Environmental/Fire/
-└── RothermelModel.cs           — Rothermel (1972) equations (R, I_R, φw, φs)
-
-Physics/Environmental/Water/
-├── ManningEquation.cs          — open-channel velocity & discharge
-├── LongitudinalDispersion.cs   — Fischer coefficient, shear velocity, decay/retardation
-└── MixingZoneModel.cs          — tributary confluence mass-balance mixing
-```
-
----
-
-## 📊 Status
-
-| Phase | Description | Tests | Status |
-|-------|-------------|-------|--------|
-| 0 | Grid foundation (`GeoGrid`, `GeoCell`, `GridSnapshot`, `TimeFrame`) | 25 | ✅ Done |
-| 1 | Single-scenario physics (`PlumeSimulator`, `GaussianPuff`) | 14 | ✅ Done |
-| 2 | Monte Carlo generation (`PlumeMonteCarloModel`, `ScenarioVariation`) | 10 | ✅ Done |
-| 3 | ML clustering & probability maps (`ScenarioClusterAnalyzer`, `ProbabilityMap`, `TimeAnimator`) | 19 | ✅ Done |
-| 4 | Fluent API (`RiskScenario` → `ScenarioResult`) | 14 | ✅ Done |
-| 5 | Export (GeoJSON / Unity binary / Cesium CZML) | 24 | ✅ Done |
-| 6 | GIS coordinates (WGS84, UTM, `GeoCoordinate`, `Projection`, `FromLatLon`) | 28 | ✅ Done |
-| 7 | Radioactive fallout & nuclear materials (`Isotope`, `DecayChain`, `RadiationDose`, `.WithMaterial()`) | 58 | ✅ Done |
-| 7.5 | Exposure polygons (`ExposurePolygonGenerator`, peak & time-integrated contours) | 17 | ✅ Done |
-| **W1** | **Fire physics & fuel library** (`RothermelModel`, `FuelModel`, `FuelLibrary`) | **33** | ✅ Done |
-| **W2** | **Terrain model & fuel map** (`TerrainGrid`, `FuelMap`) | **18** | ✅ Done |
-| **W3** | **Cell-automaton fire spread** (`WildfireSimulator`, `SpreadSnapshot`) | **9** | ✅ Done |
-| **W4** | **Fluent API & Monte Carlo** (`WildfireScenarioBuilder`, `AnalyzeWith`, clustering) | **13** | ✅ Done |
-| **W5** | **Fire export** (GeoJSON fire features/perimeters/heatmap, CZML animation, Unity binary) | **14** | ✅ Done |
-| **C1** | **Water physics & contaminant library** (`ManningEquation`, `LongitudinalDispersion`, `MixingZoneModel`, `AquaticContaminant`) | **31** | ✅ Done |
-| **C2** | **River network & channel geometry** (`RiverNetwork`, `ChannelMap`) | **12** | ✅ Done |
-| **C3** | **Advection-diffusion simulator** (`WaterContaminationSimulator`, `SpreadSnapshot` extensions) | **13** | ✅ Done |
-| **C4** | **Fluent API & Monte Carlo** (`WaterContaminationScenarioBuilder`, `AnalyzeWith`, clustering) | **11** | ✅ Done |
-| **C5** | **Contamination export** (GeoJSON extent/heatmap/centreline, CZML animation, Unity binary) | **7** | ✅ Done |
-
-**Total: 370 GIS + nuclear + wildfire + water contamination tests**
