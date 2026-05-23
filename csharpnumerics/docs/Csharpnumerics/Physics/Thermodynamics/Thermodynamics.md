@@ -73,6 +73,9 @@ double Rrad = 500.0.RadiativeThermalResistance(surroundingTemperature: 300, area
 
 ## 🔥 Heat Equation
 
+Robin / convection boundary correction for a boundary control volume:
+$-\dfrac{h}{\rho c_p \cdot dx}(T - T_\infty)$
+
 ```csharp
 // Thermal diffusivity: α = k / (ρ·c_p)
 double alpha = 50.0.ThermalDiffusivity(density: 7800, specificHeat: 500);
@@ -84,6 +87,12 @@ ScalarField dTdt = T.HeatEquationRate(thermalDiffusivity: alpha);
 // With volumetric source: ∂T/∂t = α∇²T + q̇/(ρc_p)
 var source = new ScalarField(r => 1e6);  // 1 MW/m³
 ScalarField dTdt2 = T.HeatEquationRate(alpha, source, density: 7800, specificHeat: 500);
+
+// Robin / convection boundary correction (used by HeatPlate / HeatBlock3D solvers)
+double correction = heat.ConvectiveBoundaryRate(
+    h: 50, density: 2700, specificHeat: 900, dx: 0.01,
+    cellTemperature: 100, ambientTemperature: 20);
+// < 0 — boundary cools towards ambient
 
 // Semi-infinite solid analytical solution: T(x,t) = T_i + (T_s − T_i)·erfc(x/(2√(αt)))
 double Tx = 20.0.SemiInfiniteTemperature(surfaceTemperature: 100, thermalDiffusivity: alpha,

@@ -18,6 +18,29 @@ This format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ---
 
+## [3.2.0] – 2026-05-23
+
+Feature release: game AI and flight systems, real-time fluid and terrain gameplay infrastructure, new RL environments, expanded aerodynamics and fluid-physics primitives, airfoil analysis tools, and richer face-based multiphysics boundary handling.
+
+### 🟢 Added
+
+- Added game AI components for training, adaptive difficulty, behavior trees, formation control, and agent orchestration.
+- Added flight simulation components for aircraft configuration, aircraft state, control input handling, and flight dynamics integration.
+- Added 2D and 3D game fluid simulation components, including emitters, obstacles, fluid-body coupling, and vorticity confinement.
+- Added gameplay and simulation infrastructure for broad-phase collision detection, continuous collision detection, particles, and terrain interaction.
+- Added performance-oriented utilities for fluid LOD, threaded fluid solving, array pooling, parallel broad-phase processing, profiling, SIMD math, and simulation recording.
+- Added Unity integration bridges for AI, flight control, fluid rendering, physics synchronization, and general engine adaptation.
+- Added reinforcement-learning environments for dogfighting, flight, and fluid navigation scenarios.
+- Added new physics and numerics primitives, including frame transforms, atmosphere modeling, airfoil modeling, control surfaces, propulsion modeling, buoyancy, free-surface tracking, SPH fluid simulation, turbulence modeling, and soft-body mechanics.
+- Added airfoil-analysis support through NACA geometry generation, panel-method solving, and an airfoil flow solver.
+- Added face-based boundary condition support for multiphysics simulations.
+
+### 🔵 Changed
+
+- Expanded the multiphysics simulation builder to support richer boundary-condition configuration.
+- Enhanced heat-transfer solvers to work with face-based boundary conditions.
+- Extended multiphysics capabilities to support airfoil-flow simulation scenarios.
+
 ## [3.1.0] – 2026-05-08
 
 Feature release: 3D finite differences, 2D finite element framework, sparse linear algebra, Kármán vortex street physics, expanded engineering materials, new multiphysics solvers (CFD, magnetostatics, plane stress, 3D heat/diffusion), and water contamination simulators (2D & volumetric 3D).

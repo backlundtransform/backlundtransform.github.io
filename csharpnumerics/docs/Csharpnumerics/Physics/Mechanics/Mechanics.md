@@ -404,6 +404,78 @@ Matrix Ib = 12.0.InertiaTensorSolidBox(width: 2, height: 3, depth: 4);
 Matrix Ic = 6.0.InertiaTensorSolidCylinder(radius: 1, height: 4);
 ```
 
+## 🧵 Soft Body Physics
+
+The `Physics.Mechanics.SoftBody` namespace provides mass-spring deformable meshes and cloth simulation using Verlet integration with constraint projection.
+
+**🕸️ DeformableMesh**
+
+Mass-spring network on a triangulated mesh. Each vertex is a point mass connected to neighbours by springs.
+
+```csharp
+using CSharpNumerics.Physics.Mechanics.SoftBody;
+using CSharpNumerics.Numerics.Objects;
+
+// Create a rectangular grid mesh
+var mesh = DeformableMesh.CreateGrid(
+    width: 2.0, height: 2.0, resX: 20, resY: 20,
+    mass: 0.1, stiffness: 0.9, origin: new Vector(0, 0, 5));
+
+// Pin corners
+mesh.Pin(0);
+mesh.Pin(19);
+
+// Step simulation
+for (int i = 0; i < 1000; i++)
+    mesh.Step(dt: 0.001);
+
+// Collision with sphere
+mesh.CollideWithSphere(center: new Vector(1, 1, 3), radius: 0.5);
+
+// Collision with ground plane
+mesh.CollideWithGround(height: 0);
+```
+
+| Property | Description |
+|----------|-------------|
+| `Gravity` | External acceleration (default (0,0,−9.81)) |
+| `Damping` | Velocity damping 0–1 (default 0.99) |
+| `Iterations` | Constraint iterations per step (default 5) |
+
+Custom mesh from triangle soup:
+
+```csharp
+var verts = new Vector[] { /* positions */ };
+var mesh = new DeformableMesh(verts, mass: 0.1);
+mesh.GenerateSpringsFromTriangles(triangleIndices, stiffness: 0.8);
+```
+
+**🪡 ClothSimulation**
+
+Built on `DeformableMesh` with wind force and optional self-collision.
+
+```csharp
+using CSharpNumerics.Physics.Mechanics.SoftBody;
+
+var cloth = new ClothSimulation(
+    width: 3, height: 2, resX: 30, resY: 20,
+    mass: 0.05, stiffness: 0.95);
+
+cloth.PinTopEdge();                   // fixed along top row
+cloth.Wind = new Vector(2, 0, 0.5);  // wind blowing in +X
+
+for (int i = 0; i < 500; i++)
+    cloth.Step(0.002);
+
+Vector pos = cloth.GetPosition(15, 10);  // query vertex position
+```
+
+| Property | Description |
+|----------|-------------|
+| `Wind` | Wind force applied to each particle |
+| `EnableSelfCollision` | Toggle self-collision (default false) |
+| `SelfCollisionRadius` | Distance threshold for self-collision |
+
 ---
 
 ## 🎵 Simple Harmonic Oscillator

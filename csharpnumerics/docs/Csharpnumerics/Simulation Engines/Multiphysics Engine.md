@@ -39,6 +39,7 @@ The engine builds on existing library capabilities:
 | `BeamStress` | $EI u'''' = q$ | Analytical (SolidExtensions) | 1D |
 | `CylinderFlow` | Incompressible Navier-Stokes | Chorin projection (FD + Poisson) | 2D |
 | `FluidFlow2D` | Incompressible Navier-Stokes (rectangular) | Chorin projection (FD + Poisson) | 2D |
+| `AirfoilFlow` | $\nabla^2 \phi = 0$ (potential flow) | Hess-Smith panel method | 2D |
 | `MagneticField` | $\nabla^2 A = -\mu J$ (magnetostatics) | Poisson solver (Gauss-Seidel) | 2D |
 | `PlaneStress` | Navier-Cauchy (plane stress elasticity) | FD (SOR iterative) | 2D |
 
@@ -251,6 +252,56 @@ CFL-limited adaptive time-stepping for stability.
 
 ---
 
+## ✈️ AirfoilFlow — 2D Potential Flow Past an Airfoil
+
+Solves inviscid, incompressible potential flow around a NACA airfoil using the Hess-Smith panel method. Computes surface pressure distribution, lift and moment coefficients, and optionally a full velocity field.
+
+$$\nabla^2 \phi = 0, \quad \mathbf{V} = \nabla\phi + \mathbf{U}_\infty$$
+
+```csharp
+using CSharpNumerics.Engines.Multiphysics;
+using CSharpNumerics.Engines.Multiphysics.Enums;
+using CSharpNumerics.Physics.Materials.Engineering;
+
+// Basic solve: NACA 0012 at 5° angle of attack
+var result = SimulationType.Create(MultiphysicsType.AirfoilFlow)
+    .WithMaterial(EngineeringLibrary.Air)
+    .WithAirfoil("0012")
+    .WithAngleOfAttack(5.0 * Math.PI / 180)
+    .WithFreestream(30.0)   // m/s
+    .Solve();
+
+double cl = result.LiftCoefficient;        // ≈ 0.55 (thin airfoil theory: 2πα)
+double cm = result.MomentCoefficient;      // about quarter-chord
+double[] cp = result.CpDistribution;       // surface Cp
+double[] vt = result.SurfaceVelocity;      // tangential velocity on panels
+
+// With velocity field grid (for flow visualization)
+var fieldResult = SimulationType.Create(MultiphysicsType.AirfoilFlow)
+    .WithMaterial(EngineeringLibrary.Air)
+    .WithAirfoil("2412", chord: 1.0, numPanels: 120)
+    .WithAngleOfAttack(3.0 * Math.PI / 180)
+    .WithFreestream(20.0)
+    .WithGeometry(4.0, 3.0, 80, 60)   // 4m × 3m domain, 80×60 grid
+    .Solve();
+
+double[,] vx = fieldResult.Vx;             // x-velocity field
+double[,] vy = fieldResult.Vy;             // y-velocity field
+double[,] pressure = fieldResult.Pressure; // pressure field
+```
+
+| Output | Description |
+|--------|-------------|
+| `LiftCoefficient` | $C_l$ integrated from panel Cp |
+| `MomentCoefficient` | $C_m$ about quarter-chord |
+| `CpDistribution` | Pressure coefficient on each panel |
+| `SurfaceVelocity` | Tangential velocity on each panel |
+| `AirfoilX`, `AirfoilY` | Panel midpoint coordinates |
+| `Circulation` | Vortex strength $\gamma$ |
+| `Vx`, `Vy`, `Pressure` | Optional 2D flow field (if `WithGeometry` is set) |
+
+---
+
 ## 🧲 MagneticField — 2D Magnetostatics
 
 Solves the magnetic vector potential Poisson equation with material permeability support:
@@ -337,6 +388,62 @@ var result = SimulationType.Create(MultiphysicsType.HeatBlock3D)
 double[,,] T = result.Field3D;           // temperature at final step
 double[,] sliceXY = result.SliceXY(5);   // horizontal cross-section at iz=5
 ```
+
+## 🌬️ Convection Boundary Conditions
+
+Both `HeatPlate` and `HeatBlock3D` support **convective boundary conditions** (Newton's law of cooling) in addition to fixed-temperature Dirichlet BCs. The Robin condition
+
+$$
+-k\,\frac{\partial T}{\partial n} = h(T - T_\infty)
+$$
+
+models realistic cooling to ambient without hard-clamping the wall temperature.
+
+**🌐 All Faces Convective**
+
+```csharp
+// 2D plate cooling from 100 K to ambient 20 K
+var result = SimulationType.Create(MultiphysicsType.HeatPlate)
+    .WithMaterial(EngineeringLibrary.Aluminum)
+    .WithGeometry(width: 0.02, height: 0.02, nx: 20, ny: 20)
+    .WithConvectionBoundary(heatTransferCoefficient: 50, ambientTemperature: 20)
+    .WithInitialCondition(100.0)
+    .Solve(dt: 0.00001, steps: 5000);
+
+// 3D block — same idea, six faces
+var result3D = SimulationType.Create(MultiphysicsType.HeatBlock3D)
+    .WithMaterial(EngineeringLibrary.Copper)
+    .WithGeometry3D(0.05, 0.05, 0.05, 10, 10, 10)
+    .WithConvectionBoundary3D(heatTransferCoefficient: 40, ambientTemperature: 25)
+    .WithInitialCondition(200.0)
+    .Solve(dt: 0.00005, steps: 2000);
+```
+
+**🔀 Mixed Dirichlet + Convection**
+
+Override individual faces after setting the default:
+
+```csharp
+// Top face fixed at 200 K (heated surface), other faces convect to ambient
+var result = SimulationType.Create(MultiphysicsType.HeatPlate)
+    .WithMaterial(EngineeringLibrary.Aluminum)
+    .WithGeometry(width: 0.02, height: 0.02, nx: 20, ny: 20)
+    .WithConvectionBoundary(25.0, 20.0)                       // default: all faces convective
+    .WithFaceBoundary("top", FaceBoundaryCondition.Dirichlet(200.0))  // override top
+    .WithInitialCondition(20.0)
+    .Solve(dt: 0.000005, steps: 5000);
+```
+
+**🧭 Face Names**
+
+| Face string | 2D faces | 3D faces |
+|-------------|----------|----------|
+| `"top"` | iy = ny−1 | iy = ny−1 |
+| `"bottom"` | iy = 0 | iy = 0 |
+| `"left"` | ix = 0 | ix = 0 |
+| `"right"` | ix = nx−1 | ix = nx−1 |
+| `"front"` | — | iz = 0 |
+| `"back"` | — | iz = nz−1 |
 
 ## 🌫️ FluidDiffusion3D — 3D Advection-Diffusion
 
