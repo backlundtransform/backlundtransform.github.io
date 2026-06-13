@@ -19,7 +19,8 @@ namespace CSharpNumerics.ML
 | 🔄 [Cross-Validation](Crossvalidation/Crossvalidation.md) | K-fold, stratified, and custom validation strategies |
 | 🏷️ [Classification](Classification/Classification.md) | Classification models, decision boundaries, and evaluation workflows |
 | 📉 [Regression](Regression/Regression.md) | Linear, polynomial, and multivariate regression models |
-| 🧠 [Sequence Models](Sequence%20Models/Sequence%20Models.md) | CNN1D, LSTM, Bi-LSTM, sequence layers, and windowed time-series workflows |
+| 🧠 [Sequence Models](Sequence%20Models/Sequence%20Models.md) | CNN1D, LSTM, Bi-LSTM, TCN, sequence layers, and windowed time-series workflows |
+| ⚖️ [Constrained Training](Constrained%20Training/Constrained%20Training.md) | Physics-informed loss terms, partition heads, and curriculum-based constrained training |
 | 🌂 [Unsupervised AutoML](Unsupervised%20AutoML/Unsupervised%20AutoML.md) | Automated unsupervised pipelines, clustering search, and experiment workflows |
 | 🫧 [Clustering](Clustering/Clustering.md) | Clustering algorithms, metrics, and evaluation tools |
 | 🎲 [Uncertainty Estimation](Uncertainty%20Estimation/Uncertainty%20Estimation.md) | Bootstrap methods, consensus analysis, and prediction stability estimation |
