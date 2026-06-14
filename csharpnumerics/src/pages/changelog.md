@@ -18,6 +18,82 @@ This format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ---
 
+## [4.0.0] – 2026-06-14
+
+Major release. **CSharpNumerics is refocused on its scientific core** — numerical analysis, statistics, machine learning, and physics — while the simulation engines move into the separate [`CSharpNumerics.Engines`](https://www.nuget.org/packages/CSharpNumerics.Engines/) NuGet package. This release also adds five new building blocks across the core domains: digital filters and wavelet transforms (Numerics), state estimation and seasonal forecasting (Statistics), temporal convolutional networks and physics-informed constrained training (Machine Learning), and the Schrödinger-equation toolkit (Physics).
+
+### 🔴 Breaking Changes
+
+#### Engine split
+
+- The simulation engines (`Audio`, `Exoplanet`, `Game`, `GIS`, `Multiphysics`, `Quantum`) move out of the `CSharpNumerics` package into the separate [`CSharpNumerics.Engines`](https://www.nuget.org/packages/CSharpNumerics.Engines/) package. The `CSharpNumerics` package now ships **only** the Numerics, Statistics, ML, and Physics layers.
+- Projects using simulation engines must install the new package (`dotnet add package CSharpNumerics.Engines`); the `CSharpNumerics.Engines.*` namespaces are otherwise unchanged.
+- The physics primitives the engines build on (gates, aerodynamics, materials, etc.) remain in the core `CSharpNumerics.Physics` package.
+
+### 🟢 Added
+
+#### Numerics — Digital Filters (`CSharpNumerics.Numerics.SignalProcessing`)
+
+- `SavitzkyGolayFilter` — local polynomial least-squares smoothing with `Apply` and `ApplyDerivative` (smoothed derivatives).
+- `ButterworthFilter` — maximally-flat IIR filter as a cascade of biquads, with `FrequencyResponse`.
+- `FIRFilter` — linear-phase finite impulse response with arbitrary taps, `Apply` and `ApplySymmetric` (mirror extension).
+- `FilterDesign` — `DesignLowpass` / `DesignHighpass` / `DesignBandpass` (Butterworth) and `DesignFIRLowpass` / `DesignFIRHighpass` (windowed-sinc).
+- `ZeroPhaseFiltFilt` — forward-backward (filtfilt) filtering for distortion-free offline analysis; complementary highpass + lowpass pair reconstructs the original signal.
+
+#### Numerics — Wavelet Transforms (`CSharpNumerics.Numerics.SignalProcessing.Wavelets`)
+
+- `WaveletFamily` — orthonormal `Haar`, `Daubechies4`, `Daubechies8`, `Symlet4`.
+- `DiscreteWaveletTransform` — `SingleLevel` and N-level `Decompose`; `InverseWaveletTransform` for exact reconstruction.
+- `WaveletDenoising` — soft/hard thresholding with VisuShrink / BayesShrink rules and robust (MAD) noise estimation.
+- `MaximalOverlapDWT` (MODWT) — undecimated, shift-invariant transform with exact inverse, for any signal length.
+
+#### Statistics — State Estimation (`CSharpNumerics.Statistics.StateEstimation`)
+
+- `KalmanFilter` — linear Predict/Update with control-input overload, exposing `State` and `Covariance`.
+- `ExtendedKalmanFilter` — Jacobian-based filtering for non-linear process/measurement models.
+- `KalmanSmoother` — Rauch–Tung–Striebel fixed-interval smoother (`KalmanSmootherResult` with smoothed/filtered states and covariances).
+
+#### Statistics — Seasonal Forecasting (`CSharpNumerics.Statistics.TimeSeriesAnalysis`)
+
+- `HoltWintersSmoothing` — triple exponential smoothing (level/trend/seasonal) with additive and multiplicative seasonality, `Fit`, `Forecast`, and fitted-component accessors.
+
+#### Machine Learning — Temporal Convolutional Networks (`CSharpNumerics.ML.Sequence`)
+
+- `TCNClassifier` / `TCNRegressor` on a shared `TCNModelBase` — dilated causal convolutions with exponentially growing receptive field.
+- New layers: `Conv1DLayer` gains **causal** padding and a **dilation** parameter (plus `ReceptiveField`); `ActivationLayer`, `DropoutLayer`, `BatchNorm1DLayer`, `ResidualBlock`, and `TCNBlock`.
+- `ConvolutionPaddingMode` extended with `Causal`.
+
+#### Machine Learning — Constrained Training (`CSharpNumerics.ML.Training`)
+
+- Physics-informed loss terms implementing `ILoss`: `NonNegativityLoss`, `ConservationLoss`, `SmoothnessLoss`, and a weighted `CompositeLoss`.
+- `SoftmaxConstraintHead` — parameter-free output layer producing a valid partition (outputs in [0, 1] summing to 1).
+- `ConstrainedTrainer` — mini-batch SGD over a data-fidelity term plus constraint loss, with curriculum ramping of the constraint weight.
+
+#### Physics — Quantum Mechanics / Schrödinger Equation (`CSharpNumerics.Physics.Quantum`)
+
+- `SolveStationaryStates` — finite-difference Hamiltonian with a dedicated symmetric (Jacobi) eigensolver returning energy levels and normalised wavefunctions (`StationaryStates`).
+- Analytic energy levels: `InfiniteSquareWellEnergy`, `HarmonicOscillatorEnergy`.
+- Wavefunction observables: `NormSquared`, `Normalize`, `ProbabilityDensity`, `ExpectationPosition`, `ExpectationMomentum`, `PositionUncertainty`, `ToComplexWaveFunction`.
+- `Evolve` — spectral (norm-conserving) time evolution of a stationary-state superposition.
+- Tunnelling: `RectangularBarrierTransmission` / `RectangularBarrierReflection`.
+- de Broglie relations: `DeBroglieWavelength`, `DeBroglieWavelengthFromEnergy`.
+- `ReducedPlanckConstant` added to `PhysicsConstants`.
+
+#### Engines — Game (`CSharpNumerics.Engines.Game.Rocket`)
+
+> Ships in the [`CSharpNumerics.Engines`](https://www.nuget.org/packages/CSharpNumerics.Engines/) package (see breaking change above).
+
+- Full 6-DOF **rocket launch simulation**: `RocketSimulationEngine`, multi-stage `RocketVehicle` / `RocketStage` / `RocketEngine` / `PropellantTank`, boosters, and `StageSeparationTrigger`.
+- Guidance, navigation & control: `GuidanceComputer` with `GravityTurnGuidance`, `PEGGuidance`, and quaternion-feedback `AttitudeController`; `ThrustVectorControl`; `NavigationFilter`; `MissionProfile`.
+- Tooling: `TelemetryRecorder`, `TelemetryStream` (60 fps HUD), `TrajectoryPredictor` (Kepler propagation + apsides), `TimeWarp` (1x–1000x), and `RocketUnityAdapter` (NED/ECI → Unity).
+- RL environments: `RocketLandingEnv` (propulsive landing) and `AscentOptimizationEnv` (ascent trajectory optimisation).
+
+### 🔧 Fixed
+
+- Fixed `ComplexNumber` scalar operators (`double * complex`, `complex * double`, `complex / double` scaled only the real part; `double − complex` had the wrong imaginary sign).
+
+---
+
 ## [3.2.0] – 2026-05-23
 
 Feature release: game AI and flight systems, real-time fluid and terrain gameplay infrastructure, new RL environments, expanded aerodynamics and fluid-physics primitives, airfoil analysis tools, and richer face-based multiphysics boundary handling.

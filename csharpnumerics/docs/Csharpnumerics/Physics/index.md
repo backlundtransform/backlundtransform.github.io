@@ -23,5 +23,5 @@ namespace CSharpNumerics.Physics
 | 🧲 [Electromagnetism](Electromagnetism/Electromagnetism.md) | Coulomb forces, Lorentz forces, Maxwell equations, potentials, and Biot-Savart fields |
 | 🌿 [Environmental](Environmental/Environmental.md) | Plume and puff dispersion, diffusion, advection-diffusion, and Rothermel fire spread |
 | 🧬 [Materials Science](Materials-Science/Materials-Science.md) | Isotopes, decay chains, radiation dose, chemical hazards, engineering materials, and fuel models |
-| 🐈 [Quantum Mechanics](Quantum-Mechanics/Quantum-Mechanics.md) | Quantum gates, Bloch vectors, fidelity metrics, noise models, and error-correction codes |
+| 🐈 [Quantum Mechanics](Quantum-Mechanics/Quantum-Mechanics.md) | Quantum gates, Bloch vectors, fidelity metrics, noise models, error-correction codes, and the Schrödinger-equation toolkit |
 | 🌌 [Astrophysics](Astrophysics/Astrophysics.md) | Astronomical coordinate systems and related spatial transformations |

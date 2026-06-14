@@ -22,5 +22,6 @@ namespace CSharpNumerics.Statistics
 | 🎯 [Monte Carlo](Monte%20Carlo/Monte%20Carlo.md) | General-purpose Monte Carlo simulation and stochastic estimation |
 | 🛡️ [Robust](Robust/Robust.md) | Outlier-resistant statistical methods |
 | ⤴️ [Curve Fitting](Fitting/Fitting.md) | Curve fitting, residual analysis, goodness-of-fit, and parameter estimation |
-| ⏳ [Time Series Analysis](Time%20Series%20Analysis/Time%20Series%20Analysis.md) | Periodic signal detection, detrending, phase folding, and peak fitting |
+| ⏳ [Time Series Analysis](Time%20Series%20Analysis/Time%20Series%20Analysis.md) | Periodic signal detection, detrending, phase folding, peak fitting, and Holt–Winters forecasting |
+| ≈ [State Estimation](State%20Estimation/State%20Estimation.md) | Kalman filter, extended Kalman filter, and Rauch–Tung–Striebel smoother |
 | 🗃️ [Data](Data/Data.md) | Indexed datasets, time-series structures, and statistical data containers |

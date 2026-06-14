@@ -27,140 +27,14 @@ Descriptive and inferential statistics, probability distributions, stochastic pr
 
 ### ⚙️ Simulation Engines
 
-Modular computational engines designed for integration with external visualization, simulation, and analysis platforms.
+Modular computational engines designed for integration with external visualization, simulation, and analysis platforms — shipped separately in the [CSharpNumerics.Engines](https://www.nuget.org/packages/CSharpNumerics.Engines/) package since v4.0.0.
 
 
-📦 Available on **NuGet**: [https://www.nuget.org/packages/CSharpNumerics/](https://www.nuget.org/packages/CSharpNumerics/)
+📦 Available on **NuGet**:
+- Core library: [CSharpNumerics](https://www.nuget.org/packages/CSharpNumerics/) — numerical analysis, statistics, ML, and physics.
+- Simulation engines: [CSharpNumerics.Engines](https://www.nuget.org/packages/CSharpNumerics.Engines/) — audio, exoplanet, game, GIS, multiphysics, and quantum engines _(split out in v4.0.0)_.
 
 
----
-
-## 🚀 Simulation Platform Roadmap
-
-### 🛰️ Phase 1 — Astronomy & Exoplanet Simulation
-
-**Goal:** Build an astronomy simulation and discovery platform combining machine learning, numerical methods, and visualization.
-
-**Core focus:** exoplanet detection, orbital mechanics, and planetary system simulations.
-
-#### Supported astronomy models
-
-**Orbital mechanics**
-
-* planetary orbits
-* multi-body gravitational systems
-* planetary system stability simulations based on Newtonian gravity
-
-**Exoplanet detection**
-
-* transit light curve analysis
-* supervised machine learning models
-* AutoGrid model selection with cross validation
-* CNN support for time-series transit detection
-
-#### Astronomical data sources
-
-Datasets from:
-
-* Kepler Space Telescope
-* Transiting Exoplanet Survey Satellite (TESS)
-* Planet Hunters
-
-#### Visualization
-
-* interactive light curve plots
-* 3D planetary system visualization using Three.js
-
-#### Example applications
-
-* exoplanet candidate detection
-* planetary system simulation
-* machine learning experiments on astronomical datasets
-* educational astronomy simulations
-
----
-
-###  🎮 Phase 2 — Advanced Simulation & Game Engine
-
-**Goal:** Build a modular real-time simulation framework for advanced physics, engineering visualization, and simulation-driven games.
-
-**Core focus:** real-time physics, scientific visualization, and domain-specific simulation systems.
-
-#### Engine architecture
-
-**Core technology**
-
-* built on CSharpNumerics
-* modular simulation architecture
-* reusable numerical solver framework
-* real-time simulation pipeline
-* extensible runtime systems
-
-**Simulation systems**
-
-* rigid body dynamics
-* fluid simulation
-* heat transfer simulation
-* field-based simulations
-* multi-domain numerical modeling
-* time-dependent simulation systems
-
-**Visualization**
-
-* real-time scalar field rendering
-* vector field visualization
-* 3D volume rendering
-* simulation timelines and playback
-* scientific debug visualization
-* runtime analysis overlays
-
-#### Domain-specific simulation modules
-
-**Flight & aerodynamics**
-
-* atmospheric simulation
-* lift and drag systems
-* turbulence and wind fields
-* aircraft dynamics
-
-**Space simulation**
-
-* orbital mechanics
-* spacecraft dynamics
-* N-body systems
-* reentry and propulsion experiments
-
-**Marine simulation**
-
-* buoyancy systems
-* ocean flow simulation
-* submarine dynamics
-* sonar visualization experiments
-
-**Vehicle dynamics**
-
-* suspension systems
-* tire and traction models
-* drivetrain simulation
-* rally and off-road physics
-
-#### Tooling & workflows
-
-* runtime parameter editing
-* modular asset pipeline
-* configurable simulation presets
-* educational and engineering demos
-* simulation recording and playback
-* scripting and API extensibility
-
-#### Example applications
-
-* flight simulators
-* scientific sandbox games
-* digital twin visualization
-* engineering education tools
-* technical prototyping
-* simulation-based gameplay systems
 
 
 

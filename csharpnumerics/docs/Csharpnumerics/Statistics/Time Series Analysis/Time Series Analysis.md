@@ -163,3 +163,34 @@ double[] median = SlidingWindowStatistics.RunningMedian(data, windowSize: 3);
 // All outputs have the same length as the input array
 // MAD × 1.4826 ≈ standard deviation for normally distributed data
 ```
+
+### 📅 Holt–Winters (Triple Exponential Smoothing)
+
+Forecasts series with a strong repeating cycle by tracking three components — **level**, **trend**, and a **seasonal** index of fixed period — each updated by exponential smoothing. Supports additive (constant-amplitude) and multiplicative (amplitude scales with level) seasonality. Initial components are estimated automatically from the first two full seasons.
+
+```csharp
+using CSharpNumerics.Statistics.TimeSeriesAnalysis;
+
+// Hourly data with a 24-sample daily cycle
+var hw = new HoltWintersSmoothing(
+    seasonLength: 24,
+    alpha: 0.3,   // level smoothing
+    beta:  0.05,  // trend smoothing
+    gamma: 0.4,   // seasonal smoothing
+    SeasonalType.Additive);
+
+hw.Fit(hourlyData);            // needs ≥ 2 full seasons
+
+double[] nextDay = hw.Forecast(horizon: 24);   // forecast 24 steps ahead
+
+double[] inSample = hw.Fitted;     // one-step-ahead fitted values
+double level      = hw.Level;       // final level
+double trend      = hw.Trend;       // per-step slope
+double[] season   = hw.Seasonal;    // latest seasonal indices
+```
+
+| Component | Additive update | Multiplicative update |
+|-----------|-----------------|-----------------------|
+| Level | $\alpha(y_t - s_{t-m}) + (1-\alpha)(\ell_{t-1}+b_{t-1})$ | $\alpha\,\frac{y_t}{s_{t-m}} + (1-\alpha)(\ell_{t-1}+b_{t-1})$ |
+| Trend | $\beta(\ell_t - \ell_{t-1}) + (1-\beta)b_{t-1}$ | same |
+| Season | $\gamma(y_t - \ell_t) + (1-\gamma)s_{t-m}$ | $\gamma\,\frac{y_t}{\ell_t} + (1-\gamma)s_{t-m}$ |

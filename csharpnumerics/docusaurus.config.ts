@@ -113,6 +113,10 @@ const config: Config = {
               href: 'https://www.nuget.org/packages/CSharpNumerics/',
             },
             {
+              label: '⚙️ NuGet (Engines)',
+              href: 'https://www.nuget.org/packages/CSharpNumerics.Engines/',
+            },
+            {
               label: '📂 GitHub',
               href: 'https://github.com/backlundtransform/CSharpNumerics',
             },
