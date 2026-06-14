@@ -11,8 +11,12 @@ Modular computational engines designed for integration with external visualizati
 namespace CSharpNumerics.Engines
 ```
 
-:::info Moving in v4.0.0
-As of **CSharpNumerics 4.0.0** the simulation engines are moving into a **separate repository and NuGet package**, so the core `CSharpNumerics` package can focus on numerical analysis, statistics, machine learning, and physics. The `CSharpNumerics.Engines.*` namespaces and APIs documented below are unchanged — projects that use them will simply add a reference to the new engines package.
+:::info Separate package since v4.0.0
+As of **CSharpNumerics 4.0.0** the simulation engines ship in their own NuGet package, [**CSharpNumerics.Engines**](https://www.nuget.org/packages/CSharpNumerics.Engines/), so the core `CSharpNumerics` package can focus on numerical analysis, statistics, machine learning, and physics. The `CSharpNumerics.Engines.*` namespaces and APIs documented below are unchanged — just add the package alongside `CSharpNumerics`:
+
+```bash
+dotnet add package CSharpNumerics.Engines
+```
 :::
 
 | Module | Description |

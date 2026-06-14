@@ -11,7 +11,7 @@
 }
 
 .featureGrid > div {
-  flex: 0 1 calc(33.333% - 1.5rem);
+  flex: 0 1 calc(25% - 1.5rem);
   max-width: 340px;
   min-width: 200px;
 }
@@ -65,10 +65,10 @@
   margin-bottom: 0;
 }
 
-/* 3 columns for medium-large screens */
+/* 2 columns for medium screens */
 @media screen and (max-width: 1200px) {
   .featureGrid > div {
-    flex: 0 1 calc(33.333% - 1.25rem);
+    flex: 0 1 calc(50% - 1.5rem);
   }
 }
 

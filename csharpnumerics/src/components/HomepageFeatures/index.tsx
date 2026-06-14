@@ -50,15 +50,6 @@ const FeatureList: FeatureItem[] = [
         Classical mechanics, electromagnetics, heat transfer, environmental modeling, quantum computing, and astrophysics.
       </>
     ),
-  }, {
-    title: 'Simulation Engines',
-    Svg: require('@site/static/img/undraw_visualization.svg').default,
-    href: '/docs/Csharpnumerics/Simulation Engines/',
-    description: (
-      <>
-        Modular computational engines designed for integration with external visualization, simulation, and analysis platforms.
-      </>
-    ),
   },
 ];
 

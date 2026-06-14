@@ -18,16 +18,16 @@ This format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ---
 
-## [4.0.0] – Unreleased
+## [4.0.0] – 2026-06-14
 
-Major release. **CSharpNumerics is refocused on its scientific core** — numerical analysis, statistics, machine learning, and physics — while the simulation engines move into a separate repository and NuGet package. This release also adds five new building blocks across the core domains: digital filters and wavelet transforms (Numerics), state estimation and seasonal forecasting (Statistics), temporal convolutional networks and physics-informed constrained training (Machine Learning), and the Schrödinger-equation toolkit (Physics).
+Major release. **CSharpNumerics is refocused on its scientific core** — numerical analysis, statistics, machine learning, and physics — while the simulation engines move into the separate [`CSharpNumerics.Engines`](https://www.nuget.org/packages/CSharpNumerics.Engines/) NuGet package. This release also adds five new building blocks across the core domains: digital filters and wavelet transforms (Numerics), state estimation and seasonal forecasting (Statistics), temporal convolutional networks and physics-informed constrained training (Machine Learning), and the Schrödinger-equation toolkit (Physics).
 
 ### 🔴 Breaking Changes
 
 #### Engine split
 
-- The simulation engines (`Audio`, `Exoplanet`, `Game`, `GIS`, `Multiphysics`, `Quantum`) move out of the `CSharpNumerics` package into a separate repository and NuGet package. The `CSharpNumerics` package now ships **only** the Numerics, Statistics, ML, and Physics layers.
-- Projects using simulation engines must add a reference to the new engines package; the `CSharpNumerics.Engines.*` namespaces are otherwise unchanged.
+- The simulation engines (`Audio`, `Exoplanet`, `Game`, `GIS`, `Multiphysics`, `Quantum`) move out of the `CSharpNumerics` package into the separate [`CSharpNumerics.Engines`](https://www.nuget.org/packages/CSharpNumerics.Engines/) package. The `CSharpNumerics` package now ships **only** the Numerics, Statistics, ML, and Physics layers.
+- Projects using simulation engines must install the new package (`dotnet add package CSharpNumerics.Engines`); the `CSharpNumerics.Engines.*` namespaces are otherwise unchanged.
 - The physics primitives the engines build on (gates, aerodynamics, materials, etc.) remain in the core `CSharpNumerics.Physics` package.
 
 ### 🟢 Added
@@ -81,7 +81,7 @@ Major release. **CSharpNumerics is refocused on its scientific core** — numeri
 
 #### Engines — Game (`CSharpNumerics.Engines.Game.Rocket`)
 
-> Ships in the new engines package (see breaking change above).
+> Ships in the [`CSharpNumerics.Engines`](https://www.nuget.org/packages/CSharpNumerics.Engines/) package (see breaking change above).
 
 - Full 6-DOF **rocket launch simulation**: `RocketSimulationEngine`, multi-stage `RocketVehicle` / `RocketStage` / `RocketEngine` / `PropellantTank`, boosters, and `StageSeparationTrigger`.
 - Guidance, navigation & control: `GuidanceComputer` with `GravityTurnGuidance`, `PEGGuidance`, and quaternion-feedback `AttitudeController`; `ThrustVectorControl`; `NavigationFilter`; `MissionProfile`.
