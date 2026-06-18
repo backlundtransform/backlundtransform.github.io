@@ -83,11 +83,11 @@ var filtered = input.LowPassFilter(output, alpha: 0.25);
 
 ---
 
-### 🧹 Filtering
+## 🧹 Filtering
 
 Digital filters for smoothing, de-noising, and frequency separation, in `CSharpNumerics.Numerics.SignalProcessing`. Every filter exposes `Apply(double[] signal)` and returns an output of the same length. Design helpers in `FilterDesign` build IIR/FIR filters from cutoff frequencies; `ZeroPhaseFiltFilt` runs any filter forward + backward for distortion-free offline analysis.
 
-### 〰️ Savitzky–Golay
+## 〰️ Savitzky–Golay
 
 Local polynomial least-squares smoothing that preserves peak shape and higher moments far better than a moving average. Order 0 reduces to a moving average; order ≥ 1 preserves polynomial trends of that degree exactly.
 
@@ -103,7 +103,7 @@ double[] dydt = sg.ApplyDerivative(noisySignal, spacing: 0.1);
 double[] coeffs = sg.Coefficients;   // convolution kernel
 ```
 
-### 🎚️ Butterworth (IIR)
+## 🎚️ Butterworth (IIR)
 
 Maximally flat passband, implemented as a cascade of second-order sections (biquads, Direct Form II Transposed). Design via `FilterDesign`; cutoffs are in Hz relative to `sampleRate`.
 
@@ -125,7 +125,7 @@ double[] mag = lp.FrequencyResponse(new[] { 0.05, 0.1, 0.2, 0.5 });
 int order    = lp.Order;
 ```
 
-### 🎛️ FIR
+## 🎛️ FIR
 
 Finite impulse response via linear convolution; inherently stable with exact linear phase. Supply arbitrary taps directly, or design a windowed-sinc (Hamming) lowpass/highpass.
 
@@ -140,7 +140,7 @@ FIRFilter firLp = FilterDesign.DesignFIRLowpass(numTaps: 51, cutoffFrequency: 5.
 FIRFilter firHp = FilterDesign.DesignFIRHighpass(numTaps: 51, cutoffFrequency: 0.5, sampleRate);
 ```
 
-### ↔️ Zero-phase (filtfilt)
+## ↔️ Zero-phase (filtfilt)
 
 Eliminates phase distortion by filtering forward then backward, so peak positions are preserved (effective order is doubled). Offline use only. Works with both Butterworth and FIR filters.
 
@@ -154,13 +154,13 @@ double[] zeroPhaseFir = ZeroPhaseFiltFilt.Apply(firLp, signal); // FIRFilter ove
 
 ---
 
-### 🌊 Wavelets
+## 🌊 Wavelets
 
 The `CSharpNumerics.Numerics.SignalProcessing.Wavelets` namespace provides orthonormal wavelet transforms for multi-resolution time–frequency decomposition: a signal is split across scales into a coarse **approximation** and per-level **detail** bands. Because the periodic filter bank is orthonormal, reconstruction is exact (machine precision).
 
 **Wavelet families** — `WaveletFamily.Haar`, `Daubechies4`, `Daubechies8`, `Symlet4`. Each exposes its decomposition low-pass (scaling) and high-pass (wavelet) filters.
 
-### 🪜 Discrete Wavelet Transform (DWT)
+## 🪜 Discrete Wavelet Transform (DWT)
 
 Critically sampled, halving the length at each level. Signal length must be divisible by 2^levels.
 
@@ -184,7 +184,7 @@ double[] reconstructed = idwt.Reconstruct(decomposition);
 
 By Parseval's theorem the orthonormal transform preserves energy: `Σx² = Σapprox² + Σ(all details)²`, so a low-frequency signal concentrates its energy in the approximation band.
 
-### 🧼 Wavelet De-noising
+## 🧼 Wavelet De-noising
 
 Decompose, threshold the detail coefficients (noise spreads thinly across coefficients; signal concentrates into a few large ones), and reconstruct. The noise level is estimated robustly from the finest detail band (MAD).
 
@@ -195,7 +195,7 @@ double[] clean = WaveletDenoising.Denoise(
     rule: ThresholdRule.VisuShrink);   // or BayesShrink
 ```
 
-### 🔁 MODWT (Maximal Overlap DWT)
+## 🔁 MODWT (Maximal Overlap DWT)
 
 An undecimated, **shift-invariant** variant: no downsampling, so every band keeps the full signal length and a circular shift of the input produces the same shift of every coefficient. Works for any signal length and is well suited to time-series alignment.
 
