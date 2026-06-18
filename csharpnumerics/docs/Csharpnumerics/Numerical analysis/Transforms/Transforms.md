@@ -83,7 +83,7 @@ var filtered = input.LowPassFilter(output, alpha: 0.25);
 
 ---
 
-## 🧹 Filtering
+### 🧹 Filtering
 
 Digital filters for smoothing, de-noising, and frequency separation, in `CSharpNumerics.Numerics.SignalProcessing`. Every filter exposes `Apply(double[] signal)` and returns an output of the same length. Design helpers in `FilterDesign` build IIR/FIR filters from cutoff frequencies; `ZeroPhaseFiltFilt` runs any filter forward + backward for distortion-free offline analysis.
 
@@ -154,7 +154,7 @@ double[] zeroPhaseFir = ZeroPhaseFiltFilt.Apply(firLp, signal); // FIRFilter ove
 
 ---
 
-## 🌊 Wavelets
+### 🌊 Wavelets
 
 The `CSharpNumerics.Numerics.SignalProcessing.Wavelets` namespace provides orthonormal wavelet transforms for multi-resolution time–frequency decomposition: a signal is split across scales into a coarse **approximation** and per-level **detail** bands. Because the periodic filter bank is orthonormal, reconstruction is exact (machine precision).
 
