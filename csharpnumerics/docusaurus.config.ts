@@ -148,6 +148,10 @@ const config: Config = {
           title: 'Connect',
           items: [
             {
+              label: '🌐 Portfolio',
+              href: 'https://goranbacklund.gbanm06.workers.dev/',
+            },
+            {
               label: '💜 Sponsor',
               href: 'https://github.com/sponsors/backlundtransform',
             },
