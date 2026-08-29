@@ -175,12 +175,79 @@ var eigenVector = A.EigenVector(eigenValue);
 var dominant = A.DominantEigenVector();
 ```
 
+> Since **4.1.0**, `LinearSystemSolver` and `Matrix.Inverse()` solve via LU decomposition internally — same API, O(n³) instead of cofactor expansion.
+
 **Gauss Elimination**
 
 ```csharp
 var matrix = new Matrix(new double[,] { { 1, -2, 3 }, { -1, 1, -2 }, { 2, -1, -1 } });
 var vector = new VectorN(new double[] { 7, -5, 4 });
 var solution = matrix.GaussElimination(vector);
+```
+
+---
+
+## 🧩 Matrix Decompositions
+
+Factorizations live in `CSharpNumerics.Numerics.LinearAlgebra` and are **cached** — factor once, solve for many right-hand sides.
+
+**LU decomposition** — partial pivoting, $PA = LU$:
+
+```csharp
+using CSharpNumerics.Numerics.LinearAlgebra;
+
+var A = new Matrix(new double[,] { { 2, 1, -1 }, { -3, -1, 2 }, { -2, 1, 2 } });
+var lu = A.Lu();
+
+var x = lu.Solve(new VectorN(new double[] { 8, -11, -3 }));  // (2, 3, -1)
+var det = lu.Determinant();
+var inv = lu.Inverse();
+
+var L = lu.Lower;          // unit lower triangular
+var U = lu.Upper;          // upper triangular
+var P = lu.PermutationMatrix;
+bool singular = lu.IsSingular;
+```
+
+**Cholesky decomposition** — $A = LL^T$ for symmetric positive definite matrices (≈2× faster than LU):
+
+```csharp
+var spd = new Matrix(new double[,] { { 4, 12, -16 }, { 12, 37, -43 }, { -16, -43, 98 } });
+var chol = spd.Cholesky();
+
+bool ok = chol.IsPositiveDefinite;   // symmetry + positive pivots
+var y = chol.Solve(new VectorN(new double[] { 1, 2, 3 }));
+var L = chol.Lower;                  // { {2,0,0}, {6,1,0}, {-8,5,3} }
+```
+
+**QR decomposition** — Householder reflections, $A = QR$. For overdetermined systems `Solve` returns the **least squares** solution $\min \lVert A\mathbf{x} - \mathbf{b} \rVert$:
+
+```csharp
+// Fit a line through (1,6), (2,0), (3,0) — no normal equations needed
+var A = new Matrix(new double[,] { { 1, 1 }, { 1, 2 }, { 1, 3 } });
+var qr = A.Qr();
+
+var coeffs = qr.Solve(new VectorN(new double[] { 6, 0, 0 }));  // intercept 8, slope -3
+var Q = qr.Q;              // orthonormal columns
+var R = qr.R;              // upper triangular
+bool fullRank = qr.IsFullRank;
+```
+
+**Eigenvalue decomposition** — $AV = VD$:
+
+```csharp
+var eigen = spd.Eigen();
+
+// Symmetric: real eigenvalues in ascending order, orthonormal eigenvectors
+double[] values = eigen.RealEigenvalues;
+Matrix V = eigen.EigenVectors;       // eigenvector k in column k
+Matrix D = eigen.DiagonalMatrix;
+
+// Non-symmetric: complex conjugate pairs
+var rotation = new Matrix(new double[,] { { 0, -1 }, { 1, 0 } });
+var e = rotation.Eigen();
+double[] re = e.RealEigenvalues;      // { 0, 0 }
+double[] im = e.ImaginaryEigenvalues; // { +1, -1 }
 ```
 
 

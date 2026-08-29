@@ -18,6 +18,34 @@ This format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ---
 
+## [4.1.0] – 2026-08-29
+
+Feature release: a proper **linear algebra foundation** — cached matrix decompositions (LU, Cholesky, QR, eigenvalue) that also speed up the existing solvers — plus a **planetary ephemeris** for approximate positions of the major planets.
+
+### 🟢 Added
+
+#### Numerics — Matrix Decompositions (`CSharpNumerics.Numerics.LinearAlgebra`)
+
+All factorizations are cached objects — factor once, solve for many right-hand sides. Exposed via the extension facade `matrix.Lu()` / `.Cholesky()` / `.Qr()` / `.Eigen()`.
+
+- `LuDecomposition` — LU with partial pivoting (P·A = L·U): `Solve` for `VectorN`/`List<double>`/multi-column `Matrix`, `Determinant`, `Inverse`, `IsSingular`, and the `Lower`/`Upper`/`PermutationMatrix` factors.
+- `CholeskyDecomposition` — A = L·Lᵀ for symmetric positive definite matrices (≈2× faster than LU), with `IsPositiveDefinite`, `Solve`, `Determinant`, `Inverse`.
+- `QrDecomposition` — Householder reflections (A = Q·R) with economy `Q`/`R`, tolerance-based `IsFullRank`, and least squares `Solve` for overdetermined systems — stable curve fitting without normal equations.
+- `EigenDecomposition` — full eigenvalue decomposition A·V = V·D (EISPACK-based). Symmetric matrices: real eigenvalues in ascending order with orthonormal eigenvectors (tridiagonalization + implicit QL). Non-symmetric matrices: Hessenberg reduction + shifted QR iteration with complex conjugate pairs via `RealEigenvalues`/`ImaginaryEigenvalues` and a block-diagonal `DiagonalMatrix`.
+
+#### Physics — Planetary Ephemeris (`CSharpNumerics.Physics.Astro`)
+
+- `PlanetaryEphemeris` — approximate positions of the major planets from the Standish (JPL) low-precision Keplerian element set, valid ~1800–2050 AD to a few arc-minutes: `HeliocentricEcliptic` (J2000 ecliptic frame, AU) and `GeocentricEquatorial` (right ascension/declination in the J2000 equatorial frame + Earth–planet distance).
+- `Planet` enum (Mercury–Neptune).
+
+### 🔵 Changed
+
+- `Matrix.Inverse()` now solves via LU decomposition instead of cofactor/adjugate expansion — same public API and error behaviour, but O(n³) instead of O(n!), which makes inversion of larger matrices (Kalman filters, FEM, iterative solvers) dramatically faster.
+- `LinearSystemSolver` (all overloads) now solves via LU substitution instead of computing the full inverse.
+- `SolveStationaryStates` (Schrödinger) now diagonalises the Hamiltonian with the new general `EigenDecomposition`; the internal Jacobi solver has been removed. Same results, shared implementation.
+
+---
+
 ## [4.0.0] – 2026-06-14
 
 Major release. **CSharpNumerics is refocused on its scientific core** — numerical analysis, statistics, machine learning, and physics — while the simulation engines move into the separate [`CSharpNumerics.Engines`](https://www.nuget.org/packages/CSharpNumerics.Engines/) NuGet package. This release also adds five new building blocks across the core domains: digital filters and wavelet transforms (Numerics), state estimation and seasonal forecasting (Statistics), temporal convolutional networks and physics-informed constrained training (Machine Learning), and the Schrödinger-equation toolkit (Physics).

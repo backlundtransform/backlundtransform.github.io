@@ -105,6 +105,39 @@ double dec = AstronomyExtensions.DeclinationToDegrees(-16, 42, 58);   // → -16
 
 ---
 
+## 🌍 Planetary Ephemeris
+
+Approximate positions of the major planets from the low-precision Keplerian element set published by **E. M. Standish (JPL Solar System Dynamics)**. Valid roughly **1800–2050 AD** with an accuracy of a few arc-minutes — plenty for pointing a telescope or driving a sky chart.
+
+```csharp
+using CSharpNumerics.Physics.Astro;
+using CSharpNumerics.Physics.Astro.Enums;
+
+var utc = new DateTime(2026, 8, 29, 22, 0, 0, DateTimeKind.Utc);
+
+// Heliocentric position, J2000 ecliptic frame (astronomical units)
+Vector mars = PlanetaryEphemeris.HeliocentricEcliptic(Planet.Mars, utc);
+
+// Geocentric apparent position: RA/Dec (degrees, J2000 equatorial) + distance (AU)
+var (ra, dec, distanceAU) = PlanetaryEphemeris.GeocentricEquatorial(Planet.Jupiter, utc);
+```
+
+Combine with the coordinate transforms above to get altitude/azimuth for an observer:
+
+```csharp
+// Where is Jupiter in the sky from Stockholm right now?
+var (alt, az) = AstronomyExtensions.EquatorialToHorizontal(
+    rightAscensionDegrees: ra,
+    declinationDegrees: dec,
+    latitudeDegrees: 59.33,
+    longitudeDegrees: 18.07,
+    utc: utc);
+```
+
+The `Planet` enum covers Mercury–Neptune. `GeocentricEquatorial` throws for `Planet.Earth` (a geocentric position of Earth is undefined); `HeliocentricEcliptic(Planet.Earth, …)` returns the Earth–Moon barycentre.
+
+---
+
 ## 🪐 Transit Geometry
 
 Compute geometric properties of planetary transits:
