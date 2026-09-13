@@ -18,6 +18,32 @@ This format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ---
 
+## [4.2.0] – 2026-09-13
+
+Feature release: **compartment fire physics** — the published correlations fire safety engineering rests on: t-squared design fires, the Heskestad plume, Purser's tenability model, and transient conduction through structure. Plus two correctness fixes in CSV-loaded cross-validation and seeded Monte Carlo clustering.
+
+### 🟢 Added
+
+#### Physics — Compartment Fire (`CSharpNumerics.Physics.Environmental.Fire`)
+
+All pure functions in the physics layer, tested against their published reduced forms.
+
+- `HeatReleaseRate` — t-squared design fires: `Growth` (Q = α·t²), `GrowthCoefficient`/`TimeToReference` for the four standard classes of the new `FireGrowthRate` enum (Slow/Medium/Fast/UltraFast per NFPA 72 / EN 1991-1-2), `TimeToReach`, the full growth–steady–decay design `Curve`, and the `Convective` split that plume correlations consume.
+- `FirePlume` — Heskestad's axisymmetric plume: `FlameHeight`, `VirtualOrigin`, `CentrelineTemperatureRise`, `CentrelineVelocity`, and `MassFlowRate` (entrainment — almost all of a plume's mass flow is room air, which is why a compartment fills far faster than the fire produces smoke).
+- `FractionalEffectiveDose` — Purser / ISO 13571 tenability: `CarbonMonoxideRate`, `HydrogenCyanideRate`, `OxygenDepletionRate`, the `HyperventilationFactor` by which CO₂ accelerates every other uptake, `ConvectiveHeatRate` for hot air, combined `Rate` / `TimeToIncapacitation` / `Accumulate`, and smoke `Visibility`. A dose of 1.0 marks incapacitation of a susceptible fraction of a population — a statistic with real scatter, not a countdown for an individual.
+
+#### Physics — Thermodynamics (`CSharpNumerics.Physics.Thermodynamics`)
+
+- `HeatSlab` — one-dimensional transient conduction through the thickness of a plate with convective exchange on both faces. Explicit finite differences with internal sub-stepping, so any caller time step is stable; `Step` returns the energy taken from the hot-side gas so a coupled gas model can stay two-way. Validated against the series-resistance steady state, the lumped-capacitance limit, and an exact energy balance.
+
+### 🔧 Fixed
+
+- `Series.FromCsv` returned column names shifted one step left of the data: `Cols` was built as `header.Skip(1)`, an idiom copied from `TimeSeries.FromCsv` where column 0 is the time axis and genuinely is excluded from `Data`. Any name-based lookup — `Array.IndexOf(df.Cols, "Target")` — therefore pointed at the wrong data column, and cross-validation on a CSV-loaded `Series` trained with the target leaked into the features while validating against a feature column. ⚠️ Code that compensated for the shift with hard-coded column indices must drop the compensation.
+- Seeded `MonteCarloClustering` runs are now deterministic end to end: each model clone receives a per-iteration seed derived from the run's own generator, so an unseeded `KMeans` no longer re-randomises its initialisation between what should be identical runs. Exact numbers from previously seeded runs will differ — the old values were not reproducible, which was the bug.
+- `StratifiedKFoldCrossValidator` now reports an empty fold with the sample count, class count and smallest class size instead of failing with an opaque `VectorN` error.
+
+---
+
 ## [4.1.0] – 2026-08-29
 
 Feature release: a proper **linear algebra foundation** — cached matrix decompositions (LU, Cholesky, QR, eigenvalue) that also speed up the existing solvers — plus a **planetary ephemeris** for approximate positions of the major planets.

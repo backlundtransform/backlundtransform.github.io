@@ -161,3 +161,42 @@ double Qfin = 400.0.InsulatedTipFinHeatRate(ambientTemperature: 300,
 // Fin efficiency: η = tanh(mL) / (mL)
 double eta = m.InsulatedTipFinEfficiency(finLength: 0.05);
 ```
+
+
+---
+
+## 🧱 Transient Slab Conduction
+
+The `HeatSlab` class resolves **one-dimensional transient conduction through the thickness of a plate** — a deck, a bulkhead, a wall — with convective exchange on both faces. This is the standard fire-engineering treatment of thin structure: conduction along the plate is ignored, conduction through it is resolved on its own fine grid.
+
+$$\rho c_p \frac{\partial T}{\partial t} = k \frac{\partial^2 T}{\partial x^2}, \qquad -k \frac{\partial T}{\partial x}\Big|_{surface} = h\,(T_{gas} - T_{surface})$$
+
+The slab holds its temperature profile between calls and sub-steps internally, so any caller time step is stable. `Step` returns the energy taken from the hot-side gas (J/m²), so a coupled gas model can remove it and keep the exchange two-way. Radiation is not included — near flames it dominates, so these results are a floor on heating rate, not a ceiling.
+
+```csharp
+using CSharpNumerics.Physics.Thermodynamics;
+
+// A bare 10 mm steel deck plate at 20 °C
+var slab = new HeatSlab(
+    thickness: 0.010,
+    conductivity: 45,      // W/(m·K)
+    density: 7850,         // kg/m³
+    specificHeat: 490);    // J/(kg·K)
+
+// Fire compartment below (800 K, h ≈ 25), still air above (h ≈ 8)
+double t = 0;
+while (slab.ColdSideTemperature < 293.15 + 140 && t < 3600)
+{
+    slab.Step(1.0,
+        hotGasTemperature: 800, hotHeatTransferCoefficient: 25,
+        coldGasTemperature: 293.15, coldHeatTransferCoefficient: 8);
+    t += 1.0;
+}
+// t ≈ 9 minutes: bare steel blows through the A-class 140 K
+// unexposed-side rise criterion — which is why A-60 divisions
+// carry insulation.
+
+double hot  = slab.HotSideTemperature;    // exposed face (K)
+double cold = slab.ColdSideTemperature;   // unexposed face (K)
+double mean = slab.AverageTemperature;
+```
