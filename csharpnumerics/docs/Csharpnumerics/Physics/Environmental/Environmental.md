@@ -207,6 +207,108 @@ double fl = RothermelModel.FlameLength(IR, ros);  // metres
 
 ---
 
+## 📈 t² Design Fires
+
+The `HeatReleaseRate` static class implements the **t-squared design fire** that underpins NFPA 72, NFPA 92 and EN 1991-1-2 — heat release rate is the single most important descriptor of a fire, and plume behaviour, hot gas layers and flashover all follow from it.
+
+**Namespace:** `CSharpNumerics.Physics.Environmental.Fire`
+
+$$Q(t) = \alpha \cdot t^2$$
+
+```csharp
+using CSharpNumerics.Physics.Environmental.Enums;
+using CSharpNumerics.Physics.Environmental.Fire;
+
+// The four standard growth classes, defined by time to reach 1055 kW
+double alpha = HeatReleaseRate.GrowthCoefficient(FireGrowthRate.Medium);
+// 0.01172 kW/s² — cabins, offices, shop displays
+
+double q120 = HeatReleaseRate.Growth(alpha, timeSeconds: 120);   // ≈ 169 kW
+double tRef = HeatReleaseRate.TimeToReach(alpha, targetKw: 1055); // 300 s
+
+// A full design fire: t² growth to the peak, steady burning, linear decay
+double q = HeatReleaseRate.Curve(
+    alpha, peakKw: 2000,
+    steadyDurationSeconds: 600,
+    decayDurationSeconds: 600,
+    timeSeconds: 900);
+
+// The convective share — what actually drives the plume (the rest radiates)
+double qc = HeatReleaseRate.Convective(1000);   // 700 kW at the default 0.7
+```
+
+| Class | Time to 1055 kW | α (kW/s²) | Typical of |
+|-------|-----------------|-----------|------------|
+| `Slow` | 600 s | 0.00293 | densely packed paper |
+| `Medium` | 300 s | 0.01172 | cabins, offices |
+| `Fast` | 150 s | 0.0469 | upholstered furniture |
+| `UltraFast` | 75 s | 0.1876 | pool fires, foam plastics |
+
+---
+
+## 🌪️ Heskestad Fire Plume
+
+The `FirePlume` static class implements **Heskestad's axisymmetric plume correlations** (SFPE Handbook) — flame height, the virtual origin, centreline temperature and velocity, and entrainment. Valid above the flame tip in an unconfined space; a plume striking a ceiling or filling a compartment is a separate problem.
+
+**Namespace:** `CSharpNumerics.Physics.Environmental.Fire`
+
+$$\Delta T_0 = 9.1 \left( \frac{T_\infty}{g \, c_p^2 \, \rho_\infty^2} \right)^{1/3} \dot{Q}_c^{2/3} \, (z - z_0)^{-5/3}$$
+
+```csharp
+using CSharpNumerics.Physics.Environmental.Fire;
+
+// A 1 MW fire, 1 m across
+double L  = FirePlume.FlameHeight(totalKw: 1000, fireDiameter: 1.0);   // ≈ 2.70 m
+double z0 = FirePlume.VirtualOrigin(totalKw: 1000, fireDiameter: 1.0); // ≈ 0.30 m
+
+double qc = HeatReleaseRate.Convective(1000);   // 700 kW
+
+// Centreline conditions 3 m above the fuel surface
+double dT = FirePlume.CentrelineTemperatureRise(qc, height: 3.0, virtualOrigin: z0);
+double u  = FirePlume.CentrelineVelocity(qc, height: 3.0, virtualOrigin: z0);
+// ≈ 25·Qc^(2/3)·z^(−5/3) K and ≈ 1.03·(Qc/z)^(1/3) m/s in standard air
+
+// Entrainment: the plume mass flow is almost all room air, which is why a
+// compartment fills with smoke far faster than the fire produces it
+double mdot = FirePlume.MassFlowRate(qc, height: 3.0, virtualOrigin: z0); // kg/s
+```
+
+---
+
+## 🫁 Tenability — Fractional Effective Dose
+
+The `FractionalEffectiveDose` static class implements **Purser's FED model** (SFPE Handbook; ISO 13571) — what turns a concentration field into an answer someone can act on. Fire rarely kills by flame: it incapacitates through carbon monoxide, hydrogen cyanide and oxygen depletion, and it stops escape by destroying visibility long before that.
+
+**Namespace:** `CSharpNumerics.Physics.Environmental.Fire`
+
+Methods return a dose **rate per minute** of exposure; integrate along a time history. A cumulative dose of **1.0** marks incapacitation of a *susceptible fraction of a population* — a statistic with real scatter, never a countdown for an individual.
+
+```csharp
+using CSharpNumerics.Physics.Environmental.Fire;
+
+// Individual pathways (ppm; CO₂ and O₂ in volume percent)
+double co   = FractionalEffectiveDose.CarbonMonoxideRate(1000);   // ≈ 1/30 per min
+double hcn  = FractionalEffectiveDose.HydrogenCyanideRate(200);   // minutes, not hours
+double heat = FractionalEffectiveDose.ConvectiveHeatRate(100);    // ≈ 1/12 per min at 100 °C
+
+// CO₂ does not poison at fire concentrations — it makes you breathe
+// everything else faster
+double vco2 = FractionalEffectiveDose.HyperventilationFactor(5.0);  // ≈ 2.7×
+
+// Combined dose rate and time to incapacitation at constant exposure
+double rate = FractionalEffectiveDose.Rate(coPpm: 1000, hcnPpm: 0, co2Percent: 3.0);
+double tInc = FractionalEffectiveDose.TimeToIncapacitation(coPpm: 1000);  // ≈ 28 min
+
+// Dose along a time history
+double dose = FractionalEffectiveDose.Accumulate(ratesPerMinute, stepSeconds: 1.0);
+
+// Visibility through smoke — usually what stops escape first
+double S = FractionalEffectiveDose.Visibility(sootConcentrationKgPerM3: 4e-5);
+// ≈ 10 m: lost at soot levels where the toxic dose is still negligible
+```
+
+---
+
 ## 💧 Water Hydraulics & Contaminant Data
 
 The `Physics.Environmental.Water` namespace provides open-channel hydraulics (Manning's equation) and longitudinal dispersion for river transport modelling. The `Physics.Materials.Water` namespace defines aquatic contaminant descriptors with decay, adsorption, and toxicity properties.
