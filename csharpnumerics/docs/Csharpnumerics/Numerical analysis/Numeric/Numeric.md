@@ -17,6 +17,8 @@ Func<double, double> func = x => Math.Pow(x, 2) - 4;
 double root = func.NewtonRaphson(); // 2
 ```
 
+See [Root Finding](../Root%20finding/Root%20finding.md) for Brent, bisection and the secant method, and for checking whether a solve actually converged.
+
 ---
 
 ## 🔢 Number Theory

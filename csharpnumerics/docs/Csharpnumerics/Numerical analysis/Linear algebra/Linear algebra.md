@@ -207,6 +207,7 @@ var L = lu.Lower;          // unit lower triangular
 var U = lu.Upper;          // upper triangular
 var P = lu.PermutationMatrix;
 bool singular = lu.IsSingular;
+double minPivot = lu.SmallestPivotMagnitude;  // conditioning indicator (4.3)
 ```
 
 **Cholesky decomposition** — $A = LL^T$ for symmetric positive definite matrices (≈2× faster than LU):
@@ -218,6 +219,13 @@ var chol = spd.Cholesky();
 bool ok = chol.IsPositiveDefinite;   // symmetry + positive pivots
 var y = chol.Solve(new VectorN(new double[] { 1, 2, 3 }));
 var L = chol.Lower;                  // { {2,0,0}, {6,1,0}, {-8,5,3} }
+```
+
+Several right-hand sides against one factorization — Cholesky, falling back to LU when the matrix is not positive definite (since **4.3.0**):
+
+```csharp
+var B = new Matrix(new double[,] { { 1, 0 }, { 2, 1 }, { 3, 0 } });
+Matrix X = spd.SolveSymmetricPositiveDefinite(B);  // solves spd · X = B column by column
 ```
 
 **QR decomposition** — Householder reflections, $A = QR$. For overdetermined systems `Solve` returns the **least squares** solution $\min \lVert A\mathbf{x} - \mathbf{b} \rVert$:

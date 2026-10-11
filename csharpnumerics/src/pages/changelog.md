@@ -18,6 +18,47 @@ This format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ---
 
+## [4.3.0] – 2026-10-11
+
+Minor release. **The decomposition foundation from v4.1 now pays off**: the hand-written elimination and eigen-solvers scattered across the codebase are routed onto `LuDecomposition`, `QrDecomposition`, `CholeskyDecomposition` and `EigenDecomposition` — better numerics, less code, same public API. This release also adds a proper root-finding module and a benchmark baseline ahead of the performance work in v4.4. No breaking changes.
+
+### 🟢 Added
+
+#### Numerics — Root Finding (`CSharpNumerics.Numerics.RootFinding`)
+
+- `RootFinder.Brent` — bracketed Brent's method (bisection + secant + inverse quadratic interpolation); the recommended default.
+- `RootFinder.Bisection` — guaranteed, linearly convergent bracketed solver.
+- `RootFinder.Secant` — derivative-free solver from two starting points.
+- `RootFinder.Newton` — Newton's method with tolerance, iteration budget and protection against a vanishing derivative; overload taking an analytic derivative.
+- `RootResult` — `Value`, `Converged`, `Iterations`, `Residual`, `Method`, plus `EnsureConverged()` to turn a failed run into an exception.
+- `FindRoot` extension — `Func<double, double>.FindRoot(lower, upper)` facade over Brent's method.
+
+#### Numerics — Linear Algebra
+
+- `Matrix.SolveSymmetricPositiveDefinite(Matrix)` — solves several right-hand sides against one Cholesky factorisation, falling back to LU when the matrix is not positive definite.
+- `LuDecomposition.SmallestPivotMagnitude` — exposes the smallest pivot as a conditioning indicator (`IsSingular` is now derived from it).
+
+#### Tooling
+
+- `Numerics.Benchmarks` project (BenchmarkDotNet) covering dense and sparse linear algebra and an MLP training epoch. Not part of the NuGet package — the core library stays dependency-free.
+
+### 🔵 Changed
+
+- **Curve fitting solves by QR instead of the normal equations.** `LeastSquaresFitter`, `WeightedLeastSquaresFitter`, `RobustFitter` and `ParameterEstimation` no longer form XᵀX, which squared the condition number. On a degree-5 polynomial fit over [1, 2] the coefficient error drops from 5.6e-5 to 7.2e-11. Standard errors now come from the triangular factor. The Levenberg–Marquardt iteration in `NonlinearLeastSquaresFitter` still uses the damped normal equations; only its covariance estimate moved to QR.
+- **Kalman gain via Cholesky.** `KalmanFilter`, `ExtendedKalmanFilter` and `KalmanSmoother` solve against the innovation covariance instead of inverting it — fewer flops and a covariance update that stays symmetric.
+- **`PCA` uses `EigenDecomposition`** instead of power iteration with deflation — deterministic and exact. The dual-PCA path for n < d is kept. `MaxIterations`, `Tolerance` and `Seed` are retained for compatibility but no longer affect the result.
+- **`CoupledOscillators`** uses `EigenDecomposition` instead of a private Jacobi solver.
+- Dense solves in `MultivariateInterpolation` (RBF), `Assembler1D`, the `CubicSplineInterpolation` dense fallback, `InferentialStatisticsExtensions` and `DifferentialEquationExtensions` now go through `LuDecomposition`. The spline's O(n) Thomas algorithm for tridiagonal systems is kept.
+- `NewtonRaphson` is now a wrapper over `RootFinder.Newton` with an unchanged signature — it exits as soon as it converges instead of always running 100 iterations, and no longer allocates a Pascal matrix per iteration.
+- `KeplerOrbit` and `LagrangePoints` use the new root finders instead of their own Newton loops.
+
+### 🔧 Fixed
+
+- `NaiveBayes.NumClasses` threw `NotImplementedException`; it is now set in `Fit` like the other classifiers.
+- Removed the unused `SARSA._pendingNextAction` field (CS0169 warning) and a stale temp-file reference in the project file.
+
+---
+
 ## [4.2.0] – 2026-09-13
 
 Feature release: **compartment fire physics** — the published correlations fire safety engineering rests on: t-squared design fires, the Heskestad plume, Purser's tenability model, and transient conduction through structure. Plus two correctness fixes in CSV-loaded cross-validation and seeded Monte Carlo clustering.

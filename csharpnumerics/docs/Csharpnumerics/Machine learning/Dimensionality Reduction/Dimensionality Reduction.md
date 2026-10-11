@@ -25,14 +25,13 @@ using CSharpNumerics.ML;
 Class: `PCA`
 
 Projects data onto the top eigenvectors of the covariance matrix.
-Uses power iteration with deflation for eigendecomposition.
+Eigenpairs are computed with `EigenDecomposition` — direct and deterministic. When there are fewer samples than features (n < d) it works on the n × n Gram matrix (dual PCA) instead of the d × d covariance matrix.
 
 Hyperparameters:
 
 * `NComponents` — number of output dimensions
-* `MaxIterations` — power iteration limit (default 1000)
-* `Tolerance` — convergence threshold (default 1e-8)
-* `Seed` — optional random seed
+
+> `MaxIterations`, `Tolerance` and `Seed` no longer affect the result (since v4.3). They are retained so existing calls and grid-search parameter dictionaries keep working.
 
 Exposes after fit: `Components`, `ExplainedVariance`, `ExplainedVarianceRatio`, `Mean`
 
@@ -92,7 +91,7 @@ var result = SupervisedExperiment
 ## 📌 Key Points
 
 * Reducers are **optional** — existing pipelines work unchanged
-* PCA uses power iteration — no external dependencies
+* PCA uses the library's own `EigenDecomposition` — no external dependencies
 * `ExplainedVarianceRatio` shows how much variance each component captures
 * Grid search over `NComponents` finds the optimal dimensionality automatically
 * Works with both supervised and clustering pipelines

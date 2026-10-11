@@ -16,6 +16,7 @@ namespace CSharpNumerics.Numerics
 |--------|-------------|
 | 📘 [Numeric](Numeric/Numeric.md) | Core numeric utilities, constants, and helper functions |
 | 🔗 [Interpolation](Interpolation/Interpolation.md) | Polynomial, spline, and piecewise interpolation methods |
+| 🫚 [Root Finding](Root%20finding/Root%20finding.md) | Brent, bisection, secant, and Newton solvers with convergence reporting |
 | ∂ [Calculus](Calculus/Calculus.md) | Derivatives, limits, series, and differential calculus tools |
 | 🧮 [Linear Algebra](Linear%20algebra/Linear%20algebra.md) | Matrix operations, decompositions, eigenproblems, and solvers |
 | ∫ [Integrals](Integrals/Integrals.md) | Numerical quadrature, integration rules, and accumulation methods |
