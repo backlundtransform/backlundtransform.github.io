@@ -22,6 +22,18 @@ var timeDomain = freqDomain.InverseFastFourierTransform();
 var timeDomain2 = freqDomain.InverseDiscreteFourierTransform();
 ```
 
+**Number Theoretic Transform (exact integer convolution)**
+
+The Fourier transform over GF(p): exact integer arithmetic, so convolutions have no rounding error.
+
+```csharp
+long[] spectrum = new long[] { 1, 2, 3, 4 }.NumberTheoreticTransform();          // mod 998244353
+long[] back     = spectrum.InverseNumberTheoreticTransform();                    // 1, 2, 3, 4
+long[] product  = new long[] { 1, 2, 3 }.ExactConvolution(new long[] { 4, 5 });  // 4, 13, 22, 15
+```
+
+See [Number Theory](../Number%20theory/Number%20theory.md#-number-theoretic-transform) for moduli, length limits and how exact convolution works.
+
 ---
 
 ## 🎵 Fourier Series
