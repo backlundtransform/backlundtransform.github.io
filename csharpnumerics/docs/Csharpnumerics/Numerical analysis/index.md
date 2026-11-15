@@ -27,3 +27,4 @@ namespace CSharpNumerics.Numerics
 | 🌀 [Complex Analysis](Complex%20analysis/Complex%20analysis.md) | Complex numbers, analytic functions, and contour-based tools |
 | 📡 [Transforms](Transforms/Transforms.md) | Fourier, Laplace, digital filters, and wavelet transform methods |
 | 🔋 [Optimization](Optimization/Optimization.md) | Gradient methods, schedules, Pareto optimisation, and NSGA-II |
+| 🔢 [Number Theory](Number%20theory/Number%20theory.md) | Modular arithmetic, primality, factorisation, continued fractions, finite fields, and the NTT |

@@ -31,6 +31,8 @@ bool perfect = 6.IsPerfectNumber();         // true
 int decimals = 0.01.GetDecimalPlaces();     // 2
 ```
 
+`IsPrime` and `GetPrimeFactors` use deterministic Miller–Rabin and Pollard–Brent rho. See [Number Theory](../Number%20theory/Number%20theory.md) for modular arithmetic, `long` and `BigInteger` primality, factorisation, continued fractions and finite fields.
+
 ---
 
 ## 📐 Trigonometry

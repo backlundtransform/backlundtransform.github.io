@@ -18,6 +18,61 @@ This format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ---
 
+## [4.4.0] – 2026-11-15
+
+Minor release: **number theory**. A new `CSharpNumerics.Numerics.NumberTheory` sub-section covers integer and modular arithmetic, primality and factorisation, continued fractions, finite fields GF(p) and GF(pⁿ), and the number theoretic transform with exact integer convolution. On top of it, `Physics.Quantum` gains a quantum Fourier transform and a simulated Shor's algorithm. No breaking changes to existing APIs.
+
+The module is for numerical work, simulation and teaching. It is **not constant-time and not for cryptographic use**.
+
+### 🟢 Added
+
+#### Numerics — Number Theory (`CSharpNumerics.Numerics.NumberTheory`)
+
+- `EuclideanAlgorithm` — `Gcd`, binary GCD, `Lcm` and `ExtendedGcd` (Bézout coefficients), for `long`, `BigInteger` and sequences.
+- `ModularArithmetic`:
+  - Basic operations: `Mod` (always non-negative), `AddMod`, `SubtractMod`, and an overflow-safe `MulMod` for any `long` modulus (`UInt128` on .NET 8+, double-and-add on netstandard2.1).
+  - Powers and inverses: `Pow` (negative exponents via the inverse), `Inverse` and `TryInverse`.
+  - Group functions: Euler's `Totient`, `CarmichaelLambda`, `MultiplicativeOrder` and `PrimitiveRoot`.
+  - Residues: `Legendre` and `Jacobi` symbols, and the modular `SquareRoot` (Tonelli–Shanks).
+- `ChineseRemainderTheorem` — `Solve` for pairwise coprime moduli; `TrySolve` for the general case, reporting when no solution exists.
+- `ModInt` — residue value type with `+ − × ÷`, `Pow`, `Inverse`; mixing moduli throws.
+- `NumberTheoryExtensions` — `Gcd`, `Lcm`, `ModPow`, `ModInverse`, `IsPrime` on `long`.
+- `PrimalityTesting` — deterministic Miller–Rabin for every `long`, probabilistic Miller–Rabin for `BigInteger`, `NextPrime`, `PreviousPrime`.
+- `PrimeSieve` — sieve of Eratosthenes (`PrimesUpTo`) and a segmented sieve (`PrimesInRange`) up to `long.MaxValue`.
+- `IntegerFactorization` — trial division plus Pollard–Brent rho (`Factor`, `PrimeFactors`), and the divisor functions `Divisors`, `DivisorCount`, `DivisorSum`, `Mobius`.
+- `ContinuedFractions` — `Expand` (rationals, and doubles expanded exactly), `Convergents`, and `BestRationalApproximation` with a bounded denominator (semiconvergents included).
+- Finite fields:
+  - `IFiniteField<TElement>` interface.
+  - `PrimeField` — GF(p) over `ModInt`.
+  - `PrimeFieldPolynomial` — polynomials over GF(p): ring operations, `DivRem`, `Gcd`, `ExtendedGcd`, `PowMod`, Rabin irreducibility, `IsPrimitive`, `FindIrreducible`, `FindPrimitive`.
+  - `ExtensionField` / `ExtensionFieldElement` — GF(pⁿ), with log/antilog tables for fields of up to 2¹⁶ elements. Verified against the AES GF(2⁸) products in FIPS 197.
+- `NumberTheoreticTransform` — `Forward`, `Inverse` and `Convolution` modulo an NTT-friendly prime (default 998244353), and `ExactConvolution` of arbitrary `long` sequences via several primes and Garner's CRT.
+
+#### Numerics — Transforms
+
+- `TransformExtensions.NumberTheoreticTransform`, `InverseNumberTheoreticTransform` and `ExactConvolution` extensions next to the FFT.
+
+#### Physics — Quantum (`CSharpNumerics.Physics.Quantum`)
+
+- `QuantumFourierTransform` — QFT gate (and its inverse) with a dense matrix and an `ApplyAsCircuit` H/CPhase/SWAP decomposition.
+- `ShorAlgorithm` and `ShorResult` — Shor's factoring on a simulated state vector:
+  - Classical shortcuts first: even N, perfect powers, and a lucky gcd.
+  - The quantum step is period finding: `ModularMultiplyGate` followed by the inverse QFT.
+  - Classical post-processing recovers the period from the continued-fraction convergents.
+  - Factors N ≤ 64 (up to 18 simulated qubits).
+
+### 🔵 Changed
+
+- `NumericExtensions.IsPrime(int)` and `GetPrimeFactors(int)` keep their signatures and output, but now use deterministic Miller–Rabin and Pollard–Brent rho instead of trial division.
+- `ModularMultiplyGate` uses `EuclideanAlgorithm.Gcd` instead of a private copy.
+- Releases are published with nuget.org Trusted Publishing (OIDC) instead of a stored API key.
+
+### ⚠️ Upgrade note
+
+A project that imports both `CSharpNumerics.Physics.Quantum` and `CSharpNumerics.Engines.Quantum.Algorithms` now sees two types named `ShorAlgorithm` (and `ShorResult`) and gets CS0104. Add a using alias for the one you mean, for example `using ShorAlgorithm = CSharpNumerics.Engines.Quantum.Algorithms.ShorAlgorithm;`.
+
+---
+
 ## [4.3.0] – 2026-10-11
 
 Minor release. **The decomposition foundation from v4.1 now pays off**: the hand-written elimination and eigen-solvers scattered across the codebase are routed onto `LuDecomposition`, `QrDecomposition`, `CholeskyDecomposition` and `EigenDecomposition` — better numerics, less code, same public API. This release also adds a proper root-finding module and a benchmark baseline ahead of the performance work in v4.4. No breaking changes.
