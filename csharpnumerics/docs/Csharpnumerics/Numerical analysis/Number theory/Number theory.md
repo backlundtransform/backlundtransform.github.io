@@ -1,5 +1,5 @@
 ---
-sidebar_label: "🔢 Number Theory"
+sidebar_label: "🔐 Number Theory"
 ---
 
 ## 🔢 Number Theory
